@@ -12,6 +12,7 @@ on:
       - src/lib/local-ai-engine.ts
       - public/_headers
       - scripts/check_bundle_budget.mjs
+      - tests/security-boundary.test.mjs
   workflow_dispatch:
 
 permissions:
