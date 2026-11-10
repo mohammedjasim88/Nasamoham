@@ -1,0 +1,32 @@
+name: Scientific readiness v39
+on:
+  push:
+    branches: [engineering/scientific-readiness-v39]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run qa
+      - run: node scripts/case_study_v39.mjs
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npx playwright test e2e/v39-inference.spec.mjs e2e/v38-local-open-source-ai.spec.mjs e2e/v37-assistant.spec.mjs
+      - run: node scripts/package_release_v39.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scientific-readiness-v39
+          path: |
+            release/
+            test-results/
+            playwright-report/
+          if-no-files-found: error

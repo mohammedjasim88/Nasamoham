@@ -4,6 +4,7 @@ import type {YearValue} from '../lib/evidence';
 // @ts-ignore - pure shared ESM analytical diagnostics, tested directly with Node.
 import {trendDiagnostics} from '../lib/robustness.mjs';
 import './ScientificAudit.css';
+import TrendInference from './TrendInference';
 
 type Props={series:YearValue[];metric:'T2M'|'RH2M'|'PRECTOTCORR_SUM';unit:string;lang:'ar'|'en'};
 const n=(v:number|null|undefined,d=3)=>v==null||!Number.isFinite(v)?'—':v.toFixed(d);
@@ -23,6 +24,7 @@ export default function ScientificAudit({series,metric,unit,lang}:Props){
    {(result.possibleSerialCorrelation||result.sensitivityWarning)&&<p className="sensitivity-warning"><AlertTriangle size={17}/>{ar?'تنبيه: النتائج حساسة لاستبعاد سنة واحدة أو قد تتأثر بالارتباط الزمني. لا تعتمد على p-value وحدها.':'Caution: one-year sensitivity or residual correlation may affect inference. Do not rely on the unadjusted OLS p-value alone.'}</p>}
    <p className="audit-explain"><Info size={16}/>{ar?'هذه مؤشرات إضافية لشرح النتائج ولا تعيد حساب بيانات NASA أو تغير قيمة الانحدار الأصلية. Theil–Sen لا يصحح تلقائيًا الارتباط الذاتي.':'These checks do not modify NASA observations or replace the original OLS result. Theil–Sen is a descriptive robustness check, not an autocorrelation-corrected significance test.'}</p>
    {metric==='PRECTOTCORR_SUM'&&<p className="audit-explain"><ShieldCheck size={16}/>{ar?'قيم الأمطار المعروضة تأتي من المصدر كما هي. راجع وحدة NASA الأصلية وقيمة 2024 الشاذة قبل الاستنتاج.':'Precipitation source values are preserved. Check the original NASA unit and the 2024 outlier before drawing conclusions.'}</p>}
+   {metric!=='PRECTOTCORR_SUM'&&<TrendInference series={series} unit={unit} lang={lang}/>}
   </>}
  </section>;
 }

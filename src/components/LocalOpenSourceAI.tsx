@@ -31,13 +31,14 @@ export default function LocalOpenSourceAI({question,lang,answer,siteInfo,isLoadi
   const [generated,setGenerated]=useState('');
   const [problem,setProblem]=useState('');
   const runToken=useRef(0);
+  const loadToken=useRef(0);
   const alive=useRef(true);
   useEffect(()=>{
     alive.current=true;
     void checkLocalGPU().then(ok=>{if(alive.current)setHardware(ok?'available':'unsupported');});
-    return ()=>{alive.current=false;runToken.current++;unloadLocalAI();};
+    return ()=>{alive.current=false;runToken.current++;loadToken.current++;unloadLocalAI();};
   },[]);
-  useEffect(()=>{runToken.current++;setGenerated('');setProblem('');stopLocalGeneration();},[question,answer,siteInfo,lang]);
+  useEffect(()=>{runToken.current++;setGenerated('');setProblem('');setBusy(false);stopLocalGeneration();},[question,answer,siteInfo,lang]);
   const model=OPEN_MODELS.find(x=>x.id===selectedModel)!;
   const prepared=buildLocalAIMessages({question,lang,answer,siteInfo});
   const canGenerate=prepared.ok && modelReady && !modelLoading && !busy && !isLoadingEvidence;
@@ -47,16 +48,16 @@ export default function LocalOpenSourceAI({question,lang,answer,siteInfo,isLoadi
   };
   const startModel=async()=>{
     if(hardware!=='available'||modelLoading||busy)return;
-    const op=++runToken.current;
+    const op=++loadToken.current;
     setProblem('');setGenerated('');setModelReady(false);setProgress(0);setProgressText('');setModelLoading(true);
     try{
       await loadLocalAI(selectedModel,(fraction,message)=>{
-        if(alive.current&&op===runToken.current){setProgress(Math.round(fraction*100));setProgressText(message.slice(0,180));}
+        if(alive.current&&op===loadToken.current){setProgress(Math.round(fraction*100));setProgressText(message.slice(0,180));}
       });
-      if(alive.current&&op===runToken.current){setModelReady(true);setProgress(100);}
+      if(alive.current&&op===loadToken.current){setModelReady(true);setProgress(100);}
     }catch{
-      if(alive.current&&op===runToken.current){setProblem(ar?'تعذّر تحميل النموذج. تحقق من الإنترنت وWebGPU وذاكرة الجهاز، أو جرّب النموذج الأخف.':'Model download failed. Check your network, WebGPU, and GPU memory, or try the lighter model.');}
-    }finally{if(alive.current&&op===runToken.current)setModelLoading(false);}
+      if(alive.current&&op===loadToken.current){setProblem(ar?'تعذّر تحميل النموذج. تحقق من الإنترنت وWebGPU وذاكرة الجهاز، أو جرّب النموذج الأخف.':'Model download failed. Check your network, WebGPU, and GPU memory, or try the lighter model.');}
+    }finally{if(alive.current&&op===loadToken.current)setModelLoading(false);}
   };
   const generate=async()=>{
     const safe=buildLocalAIMessages({question,lang,answer,siteInfo});
@@ -77,7 +78,7 @@ export default function LocalOpenSourceAI({question,lang,answer,siteInfo,isLoadi
     setBusy(false);
     setProblem(ar?'تم طلب إيقاف التوليد.':'Generation stop requested.');
   };
-  const release=()=>{runToken.current++;unloadLocalAI();setBusy(false);setModelReady(false);setModelLoading(false);setGenerated('');setProgress(0);setProgressText('');setProblem('');};
+  const release=()=>{runToken.current++;loadToken.current++;unloadLocalAI();setBusy(false);setModelReady(false);setModelLoading(false);setGenerated('');setProgress(0);setProgressText('');setProblem('');};
   return <section className="assistant-local-open" aria-label={ar?'الذكاء الاصطناعي المحلي المفتوح المصدر':'Local open-source AI'}>
     <div className="assistant-local-head"><span className="assistant-local-icon"><Cpu size={21}/></span><div><h3>{ar?'ذكاء اصطناعي محلي ومجاني':'Free, open-source AI in your browser'}</h3><p>{ar?'WebLLM · يعمل في جهاز الزائر · بلا API Key أو نموذج Cloudflare':'WebLLM · runs on your device · no API key or Cloudflare AI'}</p></div></div>
     <p className="assistant-local-desc">{ar?'اختياري: اختر نموذجاً، ثم حمّله عند الحاجة فقط. يكتب شرحاً عن المشروع أو يفسّر النتائج الموثقة، لكنه لا ينشئ قياسات NASA جديدة.':'Optional: choose a model and download it only when needed. It explains the project or your verified results; it never supplies official NASA measurements.'}</p>
@@ -91,6 +92,7 @@ export default function LocalOpenSourceAI({question,lang,answer,siteInfo,isLoadi
     <div className="assistant-local-buttons">
       <button type="button" className="outline-button" disabled={hardware!=='available'||modelLoading||busy||modelReady} onClick={()=>{void startModel();}}>{modelLoading?<LoaderCircle size={16} className="assistant-spinner"/>:<Cpu size={16}/>} {modelLoading?(ar?'جار تحميل النموذج…':'Loading model…'):modelReady?(ar?'النموذج جاهز':'Model ready'):(ar?'حمّل وشغّل AI محلياً':'Download & start local AI')}</button>
       <button type="button" className="outline-button" disabled={!canGenerate} onClick={()=>{void generate();}}>{busy?<LoaderCircle size={16} className="assistant-spinner"/>:<Send size={16}/>} {busy?(ar?'يكتب الرد…':'Generating…'):(ar?'اسأل النموذج المحلي':'Ask local AI')}</button>
+      {modelLoading&&<button type="button" className="outline-button" onClick={release}>{ar?'إلغاء التحميل':'Cancel download'}</button>}
       {busy?<button type="button" className="outline-button" onClick={stop}><Square size={15}/>{ar?'إيقاف':'Stop'}</button>:modelReady?<button type="button" className="outline-button" onClick={release}>{ar?'تحرير الذاكرة':'Unload model'}</button>:null}
     </div>
     {modelLoading&&<div className="assistant-local-progress" role="status"><progress max={100} value={progress} aria-label={ar?'تقدم تحميل النموذج':'Model download progress'}/><span>{progress}% · {progressText|| (ar?'تحميل ملفات النموذج من المصدر المفتوح…':'Downloading model from the public repository…')}</span></div>}
