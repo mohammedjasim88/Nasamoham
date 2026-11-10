@@ -1,0 +1,91 @@
+name: Build Cloudflare deployment ZIP
+
+on:
+  push:
+    branches:
+      - engineering/import-2026-11-10
+    paths:
+      - .github/workflows/package-cloudflare-zip.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out latest engineering branch
+        uses: actions/checkout@v4
+
+      - name: Node 22 and npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Verify source, scientific integrity, and production build
+        run: |
+          npm run audit:repo
+          npm run qa
+
+      - name: Prepare isolated Cloudflare Workers deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p cloudflare_deploy
+          cp -R dist worker src cloudflare_deploy/
+          cp wrangler.jsonc package.json package-lock.json cloudflare_deploy/
+          cat > cloudflare_deploy/DEPLOY_WINDOWS.cmd <<'BAT'
+          @echo off
+          setlocal
+          cd /d "%~dp0"
+          where node >nul 2>nul || (echo Install Node.js LTS first & pause & exit /b 1)
+          call npm ci --no-audit --no-fund
+          if errorlevel 1 (echo npm install failed & pause & exit /b 1)
+          call npx wrangler login
+          if errorlevel 1 (echo Cloudflare login failed & pause & exit /b 1)
+          call npx wrangler deploy --name oman-earth-intelligence-preview
+          if errorlevel 1 (echo Cloudflare deployment failed & pause & exit /b 1)
+          echo Deployment completed. Review the URL printed above.
+          pause
+          BAT
+          cat > cloudflare_deploy/READ_ME_FIRST.txt <<'TXT'
+          OMAN EARTH INTELLIGENCE - CLOUDFLARE WORKERS DEPLOYMENT
+          
+          This ZIP includes prebuilt Vite frontend (dist) AND the Worker API backend.
+          It is not a Cloudflare Pages Direct Upload archive; Pages alone will not run the NASA API endpoints.
+          
+          Windows:
+          1. Extract all files to one folder.
+          2. Install free Node.js LTS if needed.
+          3. Double-click DEPLOY_WINDOWS.cmd and sign in to your Cloudflare account.
+          4. The command publishes an ISOLATED Worker named oman-earth-intelligence-preview.
+          5. The existing oman-earth-intelligence-practice Worker is NOT overwritten.
+          
+          Preview URL (only AFTER deployment succeeds):
+          https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/
+          
+          Alternative PowerShell:
+          npm ci --no-audit --no-fund
+          npx wrangler login
+          npx wrangler deploy --name oman-earth-intelligence-preview
+          
+          IMPORTANT:
+          - Do not upload this full ZIP to Cloudflare Pages.
+          - This archive contains no Cloudflare API token or secret.
+          - Optional AI capability requires separate configuration; no paid AI is enabled by this archive.
+          - Verify /api/status and inspect map, NASA data and mobile responsiveness after deployment.
+          TXT
+
+      - name: Upload portable Cloudflare build ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Oman_Earth_Intelligence_Cloudflare_Workers_Ready
+          path: cloudflare_deploy/
+          retention-days: 7
+          if-no-files-found: error
