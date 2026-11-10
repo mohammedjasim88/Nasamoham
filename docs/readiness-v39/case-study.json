@@ -1,6 +1,6 @@
 {
   "schema": "oei/readiness-case/v39",
-  "generatedAt": "2026-11-10T21:12:31.554Z",
+  "generatedAt": "2026-11-10T21:18:09.120Z",
   "sourceCommitBase": "e461633ce1bb58b05007197dccfe33e18f5673cf",
   "metric": "T2M",
   "unit": "C",
@@ -16,7 +16,7 @@
       "url": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M%2CRH2M%2CPRECTOTCORR_SUM&community=AG&longitude=58.7351&latitude=23.5946&format=JSON&start=2000&end=2025",
       "sha256": "02e938c610e15c5fb323ba6ad0d1001d334ef814d4fb30abe9db50a10ff04a34",
       "preservedFile": "muscat-nasa-response.json",
-      "downloadFileTimeUTC": "2026-11-10T21:10:54.584Z",
+      "retrievedAt": "2026-11-10T21:10:54.584223+00:00",
       "returnedGeometry": {
         "type": "Point",
         "coordinates": [
@@ -423,7 +423,7 @@
       "url": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M%2CRH2M%2CPRECTOTCORR_SUM&community=AG&longitude=55.7931&latitude=24.2486&format=JSON&start=2000&end=2025",
       "sha256": "20590d6082bba33c6bfcec21f6d3b7004cd914b6969847d585a67ca96781e6a4",
       "preservedFile": "buraimi-nasa-response.json",
-      "downloadFileTimeUTC": "2026-11-10T21:10:54.625Z",
+      "retrievedAt": "2026-11-10T21:10:54.625479+00:00",
       "returnedGeometry": {
         "type": "Point",
         "coordinates": [

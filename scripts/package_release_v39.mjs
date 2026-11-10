@@ -1,9 +1,9 @@
 /** Complete rebuildable Workers package, unlike the previous dist-only ZIP. */
-import {mkdir,cp,writeFile,readFile,readdir} from 'node:fs/promises';
+import {mkdir,cp,writeFile,readFile,readdir,rm} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-const out='release/Oman_Earth_Intelligence_v39';await mkdir(out,{recursive:true});
-for(const p of ['src','worker','public','sources','tests','e2e','scripts','index.html','package.json','package-lock.json','tsconfig.json','vite.config.ts','playwright.config.mjs','wrangler.jsonc','README.md','dist'])await cp(p,`${out}/${p}`,{recursive:true});
+const out='release/Oman_Earth_Intelligence_v39';await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
+for(const p of ['src','worker','public','sources','tests','e2e','scripts','index.html','package.json','package-lock.json','tsconfig.json','vite.config.ts','playwright.config.mjs','wrangler.jsonc','README.md','dist','start_windows.bat','start_cloudflare_dev.bat'])await cp(p,`${out}/${p}`,{recursive:true});
 await mkdir(`${out}/docs`,{recursive:true});
 for(const p of await readdir('docs'))if(p.endsWith('.json')||p.endsWith('.md'))await cp(`docs/${p}`,`${out}/docs/${p}`);
 await cp('docs/readiness-v39',`${out}/docs/readiness-v39`,{recursive:true});

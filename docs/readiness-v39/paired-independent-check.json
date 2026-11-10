@@ -1,0 +1,8 @@
+{
+  "reference": "statsmodels cov_hac; scipy.stats.t.sf",
+  "slope": 0.006006837606837616,
+  "standardError": 0.00452308210992332,
+  "pValue": 0.19665715180288373,
+  "tolerance": 1e-10,
+  "passed": true
+}
