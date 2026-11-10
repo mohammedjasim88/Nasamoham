@@ -19,7 +19,7 @@ export default function ScientificAssistant({lang,point,metric,start,end,onVerif
  const answerLang:'ar'|'en'=/[\u0621-\u064a]/.test(question)?'ar':lang;
  const info=siteAnswer(question,answerLang) as {id:string;answer:string;url:string}|null;
  const examples=ar?['من أين تأتي بيانات NASA وكيف أتحقق منها؟','قارن درجة الحرارة في مسقط من 2000 إلى 2005','قارن درجة الحرارة في مسقط عامي 2000 و2010','حلل الرطوبة في صلالة من 2000 إلى 2005','قارن حرارة مسقط وصحار من 2000 إلى 2010']:['Where do the NASA data come from and how are they verified?','Compare Muscat temperature from 2000 to 2005','Compare Muscat temperature in 2000 and 2010','Analyse Salalah humidity from 2000 to 2005','Compare Muscat and Sohar temperature from 2000 to 2010'];
- const clear=()=>{generation.current++;request.current?.abort();generativeRequest.current?.abort();setAnswer(null);setSiteInfo(null);setError('');setBusy(false);setCopied(false);};
+ const clear=()=>{generation.current++;request.current?.abort();setAnswer(null);setSiteInfo(null);setError('');setBusy(false);setCopied(false);};
  useEffect(()=>{clear();return()=>{generation.current++;request.current?.abort();};},[lang,point.id,metric,start,end]);
  const edit=(value:string)=>{clear();setQuestion(value);};
  const submit=async()=>{
