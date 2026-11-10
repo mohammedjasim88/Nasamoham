@@ -1,0 +1,84 @@
+name: Verify and package NASA UX v3.6
+
+on:
+  push:
+    branches:
+      - engineering/ux-globe-assistant-v36
+    paths:
+      - .github/workflows/ux-v36-build.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Security, scientific regression, TypeScript and production build
+        run: |
+          npm run audit:repo
+          npm run qa
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Desktop and iPhone WebKit smoke checks
+        run: npx playwright test e2e/v36.spec.mjs --project=desktop-chromium --project=mobile-webkit
+      - name: Save diagnostics when browser checks fail
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nasa-v36-browser-failure
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Prepare ready-to-deploy Worker and Vite assets
+        run: |
+          set -eu
+          mkdir -p cloudflare_deploy
+          cp -R dist worker src cloudflare_deploy/
+          cp package.json package-lock.json wrangler.jsonc cloudflare_deploy/
+          cat > cloudflare_deploy/DEPLOY_WINDOWS.cmd <<'BAT'
+          @echo off
+          setlocal
+          cd /d "%~dp0"
+          where node >nul 2>nul || (echo Install Node.js LTS then retry & pause & exit /b 1)
+          call npm ci --no-audit --no-fund
+          if errorlevel 1 (echo NPM failed & pause & exit /b 1)
+          call npx wrangler login
+          if errorlevel 1 (echo Cloudflare login failed & pause & exit /b 1)
+          call npx wrangler deploy --name oman-earth-intelligence-preview
+          if errorlevel 1 (echo Deploy failed & pause & exit /b 1)
+          echo Deployed separately from the original production Worker.
+          echo Open: https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/
+          pause
+          BAT
+          cat > cloudflare_deploy/READ_ME_FIRST.txt <<'TXT'
+          Oman Earth Intelligence UX patch v3.6
+          Built and verified from the GitHub development branch.
+          
+          This ZIP is for CLOUDFLARE WORKERS, NOT Pages direct-upload.
+          Extract the folder; run DEPLOY_WINDOWS.cmd on Windows with Node.js.
+          Signs in to Cloudflare via Wrangler; token is NOT embedded.
+          It will replace only the isolated Worker named
+          oman-earth-intelligence-preview, not the older practice Worker.
+          Website URL after successful deployment:
+          https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/
+          NASA POWER: public endpoint, no NASA developer key required for this route.
+          Optional Workers AI is NOT activated, to avoid unapproved billing.
+          TXT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Oman_Earth_Intelligence_v36_Cloudflare_Ready
+          path: cloudflare_deploy/
+          retention-days: 7
+          if-no-files-found: error
