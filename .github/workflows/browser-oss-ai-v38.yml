@@ -6,6 +6,8 @@ on:
       - engineering/browser-open-source-ai-v38
     paths:
       - .github/workflows/browser-oss-ai-v38.yml
+      - src/lib/local-ai-knowledge.mjs
+      - src/components/ScientificAssistant.tsx
   workflow_dispatch:
 
 permissions:
