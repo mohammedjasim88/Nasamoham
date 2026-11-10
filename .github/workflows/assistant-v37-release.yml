@@ -1,0 +1,83 @@
+name: Verify assistant v3.7 and package Cloudflare release
+
+on:
+  push:
+    branches:
+      - engineering/assistant-reliability-v37
+    paths:
+      - .github/workflows/assistant-v37-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Security, NASA science, tests, TypeScript and production build
+        run: |
+          npm run audit:repo
+          npm run qa
+      - name: Install desktop Chromium and mobile WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Test globe and assistant in desktop and iPhone browsers
+        run: npx playwright test e2e/v36.spec.mjs e2e/v37-assistant.spec.mjs --project=desktop-chromium --project=mobile-webkit
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oei-v37-failure-logs
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Prepare isolated Workers ZIP (not Pages Direct Upload)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p cloudflare_deploy
+          cp -R dist worker src cloudflare_deploy/
+          cp package.json package-lock.json wrangler.jsonc cloudflare_deploy/
+          cat > cloudflare_deploy/DEPLOY_WINDOWS.cmd <<'BAT'
+          @echo off
+          setlocal
+          cd /d "%~dp0"
+          where node >nul 2>nul || (echo Install Node.js LTS first & pause & exit /b 1)
+          call npm ci --no-audit --no-fund
+          if errorlevel 1 (echo npm install failed & pause & exit /b 1)
+          call npx wrangler login
+          if errorlevel 1 (echo Cloudflare login failed & pause & exit /b 1)
+          call npx wrangler deploy --name oman-earth-intelligence-preview
+          if errorlevel 1 (echo Deployment failed & pause & exit /b 1)
+          echo Deployed updated preview. URL:
+          echo https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/
+          pause
+          BAT
+          cat > cloudflare_deploy/READ_ME_FIRST.txt <<'TXT'
+          Oman Earth Intelligence v3.7 (NASA assistant reliability)
+          - Requires Cloudflare Workers, NOT Pages Direct Upload.
+          - Run DEPLOY_WINDOWS.cmd on Windows with Node.js installed.
+          - Logs in to YOUR account using Wrangler, no token is stored here.
+          - Deploys ONLY oman-earth-intelligence-preview, never the practice Worker.
+          - Visit /api/status after deployment for AI state.
+          - NASA POWER API used here does NOT need a NASA API key.
+          - Generative AI is optional, DISABLED until an explicit AI binding
+            is configured, and may be subject to Cloudflare plan/usage limits.
+          - Numeric analysis remains source-calculated even when AI is unavailable.
+          - No NASA source scientific files have been changed.
+          TXT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Oman_Earth_Intelligence_v37_Fixed_Cloudflare
+          path: cloudflare_deploy/
+          retention-days: 7
+          if-no-files-found: error
