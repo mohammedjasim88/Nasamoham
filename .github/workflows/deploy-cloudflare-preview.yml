@@ -1,0 +1,67 @@
+name: Deploy NASA preview to Cloudflare Workers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nasa-cloudflare-preview
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Verify and deploy isolated preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out approved NASA project branch
+        uses: actions/checkout@v4
+        with:
+          ref: engineering/import-2026-11-10
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Check scientific integrity, security, tests, TypeScript and bundle
+        run: |
+          npm run audit:repo
+          npm run qa
+
+      - name: Require Cloudflare deployment token
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Add CLOUDFLARE_API_TOKEN under repository Settings > Secrets and variables > Actions before deploying."
+            exit 1
+          fi
+
+      - name: Deploy to separate preview Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 76d1d202a5f8be418992a549a40c41b8
+        run: npx wrangler deploy --name oman-earth-intelligence-preview
+
+      - name: Verify preview website is responding
+        run: |
+          set -e
+          URL="https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev"
+          for attempt in 1 2 3 4 5; do
+            if curl --fail --silent --show-error --max-time 25 "$URL/" --output /tmp/nasa-preview-index.html; then
+              if grep -qi '<html' /tmp/nasa-preview-index.html; then
+                echo "Preview home page available: $URL"
+                exit 0
+              fi
+            fi
+            sleep 3
+          done
+          echo "::error::Cloudflare did not return a valid preview HTML page."
+          exit 1
