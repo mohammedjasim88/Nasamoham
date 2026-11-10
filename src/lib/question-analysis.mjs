@@ -46,7 +46,7 @@ export function siteAnswer(question, lang='en') {
    url:'https://developers.cloudflare.com/workers-ai/'},
  ];
  // Interpret specific intents before broad source wording, to avoid routing all NASA queries to source.
- const preferred=['realtime','accuracy','usage','source','geometry','assistant','variables'];
+ const preferred=['realtime','geometry','accuracy','usage','source','assistant','variables'];
  for(const id of preferred){
   const e=entries.find(item=>item.id===id);
   if(e.test.test(q)){
