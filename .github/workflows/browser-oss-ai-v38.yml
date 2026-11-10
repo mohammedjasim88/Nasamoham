@@ -1,0 +1,113 @@
+name: Install and verify browser open-source AI v3.8
+
+on:
+  push:
+    branches:
+      - engineering/browser-open-source-ai-v38
+    paths:
+      - .github/workflows/browser-oss-ai-v38.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: browser-oss-ai-v38-install
+  cancel-in-progress: false
+
+jobs:
+  browser-llm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout reviewed development branch
+        uses: actions/checkout@v4
+        with:
+          ref: engineering/browser-open-source-ai-v38
+          persist-credentials: true
+      - name: Node 22 with npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned, Apache-2.0 WebLLM package
+        run: npm install @mlc-ai/web-llm@0.2.87 --save-exact --no-audit --no-fund
+      - name: Commit dependency manifests to development branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet -- package.json package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package.json package-lock.json
+            git commit -m "build: pin browser-only WebLLM engine 0.2.87"
+            git push origin HEAD:engineering/browser-open-source-ai-v38
+          fi
+      - name: Locked dependency install (reproducibility)
+        run: npm ci --no-audit --no-fund
+      - name: Scientific, code-security, TypeScript, production build and bundle budget
+        run: |
+          npm run audit:repo
+          npm run qa
+      - name: Install desktop Chromium and iPhone WebKit
+        run: npx playwright install --with-deps chromium webkit
+      - name: Browser smoke tests (WebGPU fallback + source-based QA)
+        run: npx playwright test e2e/v38-local-open-source-ai.spec.mjs e2e/v37-assistant.spec.mjs --project=desktop-chromium --project=mobile-webkit
+      - name: Package independent Cloudflare Workers ZIP (no local model weights)
+        run: |
+          set -eu
+          mkdir -p cloudflare_deploy
+          cp -R dist worker src cloudflare_deploy/
+          cp package.json package-lock.json wrangler.jsonc cloudflare_deploy/
+          cat > cloudflare_deploy/DEPLOY_WINDOWS.cmd <<'BAT'
+          @echo off
+          setlocal
+          cd /d "%~dp0"
+          where node >nul 2>nul || (echo Install Node.js LTS then retry & pause & exit /b 1)
+          call npm ci --no-audit --no-fund
+          if errorlevel 1 (echo npm install failed & pause & exit /b 1)
+          call npx wrangler login
+          if errorlevel 1 (echo Cloudflare login failed & pause & exit /b 1)
+          call npx wrangler deploy --name oman-earth-intelligence-preview
+          if errorlevel 1 (echo Cloudflare deploy failed & pause & exit /b 1)
+          echo Published isolated preview. Open:
+          echo https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/#ask
+          pause
+          BAT
+          cat > cloudflare_deploy/READ_ME_FIRST.txt <<'TXT'
+          Oman Earth Intelligence v3.8 - free GitHub open-source browser AI
+          
+          This is a Workers app (Vite SPA + NASA API Worker), NOT a Pages direct upload.
+          Windows: unzip, install free Node.js LTS, run DEPLOY_WINDOWS.cmd.
+          The script deploys only oman-earth-intelligence-preview, not the practice site.
+          
+          After publishing:
+          https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/#ask
+          
+          Optional language models run on the visitor's browser WebGPU.
+          Choose Qwen2.5-0.5B (Arabic+English) or SmolLM2-360M (lighter).
+          Download occurs ONLY after visitor clicks the model-load button.
+          First-time download may be hundreds of MB. No secret or AI key needed.
+          Browser compatibility, memory and real inference must be tested on actual devices.
+          No Cloudflare Workers AI or paid AI endpoint is used in this UI.
+          
+          Existing /api/ask server route is legacy, NOT called from the browser AI UI.
+          NASA numbers remain the original deterministic NASA evidence path.
+          TXT
+      - name: Publish verified ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Oman_Earth_Intelligence_v38_Free_GitHub_Browser_AI
+          path: cloudflare_deploy/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Save diagnostics if something fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oei-v38-failure-evidence
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+          if-no-files-found: ignore
