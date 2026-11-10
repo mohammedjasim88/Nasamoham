@@ -1,0 +1,67 @@
+name: Release validated NASA UX v3.6 to isolated Cloudflare preview
+
+on:
+  push:
+    branches:
+      - engineering/ux-globe-assistant-v36
+    paths:
+      - .github/workflows/deploy-ux-v36.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isolated-nasa-v36-release
+  cancel-in-progress: false
+
+jobs:
+  deploy-if-authorized:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: 76d1d202a5f8be418992a549a40c41b8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Verify credentials are available without revealing them
+        id: credentials
+        shell: bash
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "authorized=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CLOUDFLARE_API_TOKEN is not configured. No deployment was attempted."
+          else
+            echo "authorized=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install locked dependencies
+        if: steps.credentials.outputs.authorized == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Recheck source and production build
+        if: steps.credentials.outputs.authorized == 'true'
+        run: |
+          npm run audit:repo
+          npm run qa
+      - name: Publish isolated preview only
+        if: steps.credentials.outputs.authorized == 'true'
+        run: npx wrangler deploy --name oman-earth-intelligence-preview
+      - name: Check Cloudflare HTML and API health
+        if: steps.credentials.outputs.authorized == 'true'
+        shell: bash
+        run: |
+          set -eu
+          url="https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev"
+          for i in 1 2 3 4 5 6; do
+            if curl -fsS --max-time 20 "$url/api/status" > /tmp/status.json && grep -q '"ready":true' /tmp/status.json && curl -fsS --max-time 20 "$url/" > /tmp/home.html && grep -iq '<html' /tmp/home.html; then
+              echo "Verified Cloudflare preview at $url"
+              echo "Preview: $url" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Deployment completed but app/API smoke checks did not pass."
+          exit 1
