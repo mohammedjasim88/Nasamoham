@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/",
+    "curlExit": 0,
+    "http": [
+      "HTTP/1.1 200 OK",
+      "HTTP/2 200 "
+    ],
+    "securityHeaders": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.openfreemap.org https://*.openstreetmap.org https://*.maptiler.com https://*.cartocdn.com; connect-src 'self' https://*.openfreemap.org https://*.maptiler.com https://*.openstreetmap.org https://*.cartocdn.com; font-src 'self' data: https://fonts.gstatic.com https://*.openfreemap.org https://*.maptiler.com; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+      "permissions-policy": "camera=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY"
+    }
+  },
+  {
+    "path": "/api/status",
+    "curlExit": 0,
+    "http": [
+      "HTTP/1.1 200 OK",
+      "HTTP/2 200 "
+    ],
+    "securityHeaders": {
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff"
+    }
+  }
+]

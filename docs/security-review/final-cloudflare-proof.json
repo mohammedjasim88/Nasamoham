@@ -1,0 +1,30 @@
+{
+  "productionVersion": [
+    {
+      "version_id": "f8fdcfd3-c93c-46dd-98ee-e0fced689e73",
+      "percentage": 100
+    }
+  ],
+  "productionDeployment": "4d491349-a728-4663-920a-9a1328ec5e0d",
+  "previewVersion": "0bb77cc4-311a-4a14-a4a0-a59932559ee9",
+  "previewOnly": true,
+  "bindingsPreserved": true,
+  "compatibilityPreserved": true,
+  "staticRoutingPreserved": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "redact_query_string": false,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
+  }
+}

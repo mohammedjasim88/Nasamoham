@@ -1,0 +1,53 @@
+{
+  "schema": "oei/scientific-analysis/v1",
+  "question": "Compare Muscat temperature in 2000 and 2010",
+  "plan": {
+    "ok": true,
+    "metric": "T2M",
+    "start": 2000,
+    "end": 2010,
+    "mode": "pair",
+    "locations": [
+      "muscat-east"
+    ],
+    "usedContextYears": false,
+    "usedContextMetric": false,
+    "usedContextLocation": false,
+    "genericMuscat": true
+  },
+  "paragraphs": [
+    {
+      "location": {
+        "id": "muscat-east",
+        "ar": "مسقط — عينة NASA (شرق)",
+        "en": "Muscat — NASA sample East",
+        "governorate": "Muscat",
+        "lat": 23.5946,
+        "lon": 58.7351,
+        "sample": "/data/muscat-east.json",
+        "sampleNote": "NASA monthly CSV originally supplied by the user"
+      },
+      "paragraph": "Using the supplied historical NASA POWER snapshot for Muscat — NASA sample East (23.5946°N, 58.7351°E), this analysis concerns air temperature (T2M). The annual value was 28.14 °C in 2000 and 28.20 °C in 2010. The later-minus-earlier difference is 0.06 °C (increase). This compares two individual years only; it does not establish a climate trend or statistical significance. These are grid values near the point, not a city/governorate average or independent station measurement. This answer did not run a new independent verification; use the NASA Verification Lab to check the source.",
+      "annualEvidence": [
+        {
+          "year": 2000,
+          "value": 28.14
+        },
+        {
+          "year": 2010,
+          "value": 28.2
+        }
+      ],
+      "source": "NASA POWER (uploaded historical CSV)",
+      "sourceUrl": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M&community=AG&longitude=58.7351&latitude=23.5946&format=JSON&start=2000&end=2010",
+      "isSnapshot": true,
+      "reportedUnits": {
+        "T2M": "°C",
+        "RH2M": "%",
+        "PRECTOTCORR_SUM": "mm/day (source header; verify aggregation)"
+      }
+    }
+  ],
+  "locationComparison": "",
+  "independentVerificationPerformed": false
+}

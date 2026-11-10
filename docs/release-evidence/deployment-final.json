@@ -1,0 +1,17 @@
+{
+  "id": "4d491349-a728-4663-920a-9a1328ec5e0d",
+  "source": "api",
+  "strategy": "percentage",
+  "author_email": "muhammed.10alajmi@gmail.com",
+  "annotations": {
+    "workers/message": "Final preview navigation test passes without native transition errors; science 11/11, unit tests 90/90, TypeScript/build/bundle budget pass. Desktop browser and NASA downloads checked; automated mobile browser blocked by runtime.",
+    "workers/triggered_by": "deployment"
+  },
+  "versions": [
+    {
+      "version_id": "f8fdcfd3-c93c-46dd-98ee-e0fced689e73",
+      "percentage": 100
+    }
+  ],
+  "created_on": "2026-11-03T20:24:06.856413Z"
+}

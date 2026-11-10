@@ -1,0 +1,28 @@
+{
+  "schema": "oei/device-check/v1",
+  "recordedAt": "2026-11-04T05:44:43.823Z",
+  "physicalPhoneConfirmedByUser": false,
+  "dragRotationConfirmedByUser": false,
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "dpr": 1
+  },
+  "touchPoints": 1,
+  "rendererState": "ready",
+  "renderEvidence": {
+    "frames": 3,
+    "drawCalls": 7,
+    "textureWidth": 3072,
+    "canvasWidth": 358,
+    "canvasHeight": 350,
+    "centerPixel": [
+      236,
+      255,
+      255,
+      255
+    ],
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+  }
+}

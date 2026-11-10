@@ -1,0 +1,60 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience build
+> tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1614 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                   1.53 kB │ gzip:   0.75 kB
+dist/assets/maplibre-gl-worker-Bi68raVw.js      517.15 kB
+dist/assets/DeviceCheck-B393auMr.css              1.05 kB │ gzip:   0.49 kB
+dist/assets/ScientificAudit-BhagC6tR.css          1.17 kB │ gzip:   0.49 kB
+dist/assets/ScientificAssistant-6KOnoDYr.css      4.45 kB │ gzip:   1.17 kB
+dist/assets/VerificationLab-CvS6JswV.css         19.12 kB │ gzip:   4.45 kB
+dist/assets/OmanMap--S9olhOP.css                 71.51 kB │ gzip:  10.18 kB
+dist/assets/index-C8h3dcEf.css                   83.80 kB │ gzip:  18.66 kB
+dist/assets/loader-circle-gg2N3_Dx.js             0.14 kB │ gzip:   0.15 kB
+dist/assets/DeviceCheck-CmZsnt18.js               2.66 kB │ gzip:   1.42 kB
+dist/assets/ScientificAudit-BWjIFuYf.js           5.21 kB │ gzip:   2.30 kB
+dist/assets/ClimateInsights-Bb9cZJKj.js           8.04 kB │ gzip:   3.70 kB
+dist/assets/ScientificAssistant-6wcofGNr.js      24.82 kB │ gzip:  10.16 kB
+dist/assets/VerificationLab-0QXsKf6e.js          40.27 kB │ gzip:  14.25 kB
+dist/assets/index-Uq0VR-og.js                   297.58 kB │ gzip:  94.23 kB
+dist/assets/EarthGlobe-OXeaTOzG.js              506.30 kB │ gzip: 132.38 kB
+dist/assets/OmanMap-BLlcyQ9W.js               1,100.90 kB │ gzip: 302.73 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.39s
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience audit:bundle
+> node scripts/check_bundle_budget.mjs
+
+┌─────────┬────────────────────────────────────┬──────┐
+│ (index) │ file                               │ kb   │
+├─────────┼────────────────────────────────────┼──────┤
+│ 0       │ 'ClimateInsights-Bb9cZJKj.js'      │ 8    │
+│ 1       │ 'DeviceCheck-B393auMr.css'         │ 1    │
+│ 2       │ 'DeviceCheck-CmZsnt18.js'          │ 3    │
+│ 3       │ 'EarthGlobe-OXeaTOzG.js'           │ 494  │
+│ 4       │ 'OmanMap--S9olhOP.css'             │ 70   │
+│ 5       │ 'OmanMap-BLlcyQ9W.js'              │ 1075 │
+│ 6       │ 'ScientificAssistant-6KOnoDYr.css' │ 4    │
+│ 7       │ 'ScientificAssistant-6wcofGNr.js'  │ 24   │
+│ 8       │ 'ScientificAudit-BWjIFuYf.js'      │ 5    │
+│ 9       │ 'ScientificAudit-BhagC6tR.css'     │ 1    │
+│ 10      │ 'VerificationLab-0QXsKf6e.js'      │ 39   │
+│ 11      │ 'VerificationLab-CvS6JswV.css'     │ 19   │
+│ 12      │ 'index-C8h3dcEf.css'               │ 82   │
+│ 13      │ 'index-Uq0VR-og.js'                │ 291  │
+│ 14      │ 'loader-circle-gg2N3_Dx.js'        │ 0    │
+│ 15      │ 'maplibre-gl-worker-Bi68raVw.js'   │ 505  │
+└─────────┴────────────────────────────────────┴──────┘
+PASS: JS chunk guardrails met (main <=450KiB, each chunk <=1350KiB).
+This is a source-asset budget, not a measured load time, LCP, INP or CLS.

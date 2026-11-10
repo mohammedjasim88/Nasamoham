@@ -1,0 +1,208 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience qa
+> npm run audit:science && npm run test && npm run build && npm run audit:bundle
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience audit:science
+> node scripts/audit_scientific_files_v35.mjs
+
+UNCHANGED public/data/muscat-east.json
+UNCHANGED public/data/muscat-west.json
+UNCHANGED public/data/salalah-rh.json
+UNCHANGED sources/muscat-east-original.csv
+UNCHANGED sources/muscat-west-original.csv
+UNCHANGED sources/salalah-rh-original.csv
+UNCHANGED src/lib/statistics.mjs
+UNCHANGED src/lib/evidence.ts
+UNCHANGED worker/nasa.mjs
+UNCHANGED worker/verification.mjs
+UNCHANGED src/lib/verification.mjs
+Scientific source integrity: 11/11 unchanged.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience test
+> node --test tests/*.test.mjs
+
+✔ MapLibre v6 imports do not use removed default export and event type is explicit (3.340596ms)
+✔ Vite ImportMetaEnv type is provided (1.125393ms)
+✔ TrendChart checks the active record exists before plotting (0.451021ms)
+✔ a dedicated home route is linked to all existing scientific features (3.420487ms)
+✔ real WebGL Earth uses a local NASA texture and properly fetched official geometry (1.382477ms)
+✔ motion, keyboard and accessibility fallbacks are implemented (1.614155ms)
+✔ intro is instant and navigation never waits for WebGL or a mandatory timer (1.46785ms)
+✔ DataSet declares an optional sourceRaw label for raw NASA provenance (4.952596ms)
+✔ MapLibre city-marker node uses absolute screen positioning rather than relative (3.038896ms)
+✔ markers are positioned using true longitude latitude coordinates (2.054332ms)
+✔ country overview hides labels at low zoom and preserves selected label (0.563261ms)
+✔ mobile accidental map rotation is disabled (0.366099ms)
+✔ Scientific sensitivity calculations retain NASA original values (28.130484ms)
+✔ Theil-Sen uses median pairwise slope and returns null for insufficient points (2.303001ms)
+✔ Sensitivities detect a synthetic exaggerated point without deleting it (3.429678ms)
+✔ Verification engine negative self-test catches altered and missing years (0.985135ms)
+✔ Geospatial validation rejects out-of-region and open empty geometries (2.413156ms)
+✔ Rate limiter enforces 429, retry-after, and does not block status (5.261738ms)
+✔ Worker rejects over-budget independent NASA verification before upstream request (10.085118ms)
+✔ Front-end exposes accessible sensitivity review and no source CSV mutation (1.529425ms)
+✔ Node preview serves assets and Worker API routes without workerd (358.071854ms)
+✔ governorate layer comes from NCSI AdminBoundEn MapServer polygon layer 1 (2.004389ms)
+✔ NCSI WilayatB layer 3 is separate from governorate source (0.290811ms)
+✔ initial map shows full Oman without flying to default selected Muscat on ready (0.344557ms)
+✔ wilayats requested after checkbox is turned on (0.275249ms)
+✔ 3D Earth uses mobile GPU geometry adaptation without changing NASA texture (1.978445ms)
+✔ deployment has browser regression and asset budgets (1.112377ms)
+✔ missing whole year is retained and counted in annual series (3.66421ms)
+✔ NASA empty-string records are missing, not zero (1.790022ms)
+✔ v3.5 preserves the complete authoritative source and scientific calculation baseline (3.855876ms)
+✔ live source label distinguishes not-loaded, pending and failed states (0.637848ms)
+✔ global palette exposes the eight routes and supports accessible keyboard commands (0.39315ms)
+✔ home content is immediately visible before WebGL and does not block navigation (0.387028ms)
+✔ non-geographic pages do not instantiate MapLibre; user can explicitly return to map (0.227575ms)
+✔ v3.5 layout has narrow-phone breakpoints, focus and reduced-motion support (0.775621ms)
+✔ NASA query boundaries and annual source verification still reject invalid requests (0.610992ms)
+✔ Vite emits explicit MapLibre v6 worker asset (2.463581ms)
+✔ no misleading unverified rainfall unit (1.101081ms)
+✔ no infinite blank map: backup and coordinate fallback exist (0.752251ms)
+✔ CSP permits backup raster domain and MapLibre ESM worker (0.44068ms)
+✔ confidence interval and hash route are present (0.586947ms)
+✔ evidence excludes invalid annual data from trend (0.587342ms)
+✔ real user NASA CSV converted to 26 complete years (2.084452ms)
+✔ all 3 variables in Muscat snapshot (1.01413ms)
+✔ 2000 T2M matches uploaded file (0.147138ms)
+✔ 2025 T2M matches uploaded file (0.143847ms)
+✔ 2024 rainfall warning not erased (0.153683ms)
+✔ nearby points report identical gridded series (0.811231ms)
+✔ trend regression includes 26 years (8.781652ms)
+✔ humidity range valid and model flags absent annual values (1.631398ms)
+✔ Salalah RH2M-only source is explicitly unverified (0.91296ms)
+✔ no fake Salalah temperature (0.34506ms)
+✔ NASA query rejects invalid lat or decade interval (0.743117ms)
+✔ NASA query uses original monthly API endpoint (0.47494ms)
+✔ NASA missing annual value remains null instead of invented (0.568188ms)
+✔ governorate layers must contain exactly 11 genuine polygons (0.697436ms)
+▶ API boundary rejects malformed, ambiguous and unsupported queries before upstream I/O
+  ✔ /api/status?debug=true (12.094669ms)
+  ✔ /api/status (2.809606ms)
+  ✔ /api/power?lat=23.5946&lon=58.7351&start=2000&end=2025&lat=24 (1.106152ms)
+  ✔ /api/power?lat=23.5946&lon=58.7351&start=2000&end=2025&url=https://127.0.0.1 (2.622757ms)
+  ✔ /api/power?lat=2.3e1&lon=58 (1.177458ms)
+  ✔ /api/power?lat=%2023&lon=58 (1.560846ms)
+  ✔ /api/power?lat=23&lon=58&start=2000.0 (0.918284ms)
+  ✔ /api/power?lat=23&lon=58&end=2026 (1.578631ms)
+  ✔ /api/power?lat=23&lon=58&start=2025&end=2000 (2.968609ms)
+  ✔ /api/power?lat=NaN&lon=58 (1.733096ms)
+  ✔ /api/power?lat=23&lon=61.1 (13.626138ms)
+  ✔ /api/power?lat=23&lon=58&x=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa (2.050551ms)
+  ✔ /api/boundaries?level=unknown (0.746222ms)
+  ✔ /api/boundaries?level=wilayats&level=governorates (0.768142ms)
+  ✔ /api/verification?lat=23.5946&lon=58.7351&start=2000&end=2025&metric=UNKNOWN (5.185827ms)
+  ✔ /api/not-a-route (2.54869ms)
+✔ API boundary rejects malformed, ambiguous and unsupported queries before upstream I/O (64.164773ms)
+✔ same-origin policy rejects foreign, null and suffix-confusable origins; status is still public (5.722322ms)
+✔ all API responses, including errors and throttling, receive browser security headers (8.837846ms)
+✔ JSON body is stopped at the byte budget, without a Content-Length header (5.391628ms)
+✔ AI payload schema validates types, unknown keys, encoding and question length (8.648709ms)
+✔ outbound allowlist blocks private hosts, alternate ports, credentials, paths and schemes (0.803578ms)
+{"event":"api_security","route":"/api/power","status":502,"requestId":"9741c5f4-453d-45ad-b3eb-161117870881"}
+{"event":"api_security","route":"/api/ask","status":502,"requestId":"39643fd2-50dd-4b1f-be97-0fbd697a4d13"}
+✔ upstream redirects are never followed; oversized and slow response bodies are bounded (31.524779ms)
+✔ independent evidence and original CSV bytes remain unchanged through transport hardening (3.491072ms)
+✔ public upstream failures contain no raw diagnostic details or stack traces (1.709498ms)
+✔ cache uses a canonical validated point key; independent checks never use cached values (9.894077ms)
+✔ costly NASA routes share one budget and limiter outages fail closed (1.452988ms)
+✔ AI request has no tools or credentials, evidence is data, and output size is capped (24.982684ms)
+✔ security logs exclude query, body, IP and error details (0.980157ms)
+✔ static CSP retains MapLibre providers and inline style support, without unsafe script execution (0.748814ms)
+✔ invalid AI bodies do not consume quotas; enabled AI consumes the shared NASA budget before fetching (1.389479ms)
+{"event":"api_security","route":"/api/ask","status":501,"requestId":"9d67b1bf-67aa-47aa-bd4e-dbcfff4c519d"}
+✔ all TS/TSX modules parse with TypeScript (syntax-only) (411.758828ms)
+✔ the app uses React, MapLibre, separate data controls and reduced-motion CSS (1.36015ms)
+✔ Cloudflare asset routing isolates API and preserves SPA (0.251916ms)
+✔ Worker returns usable status JSON (16.829191ms)
+✔ Worker rejects unknown API path (6.114295ms)
+✔ Worker rejects invalid NASA query without network calls (1.186558ms)
+✔ AI endpoint returns explicit not configured status (2.094854ms)
+✔ NASA data not loaded when intro is the current page (7.655241ms)
+✔ Three.js globe east-positive equirectangular orientation uses proper longitudes (0.727782ms)
+✔ WebGL renderer throttled and context loss fallback provided (0.915419ms)
+✔ mobile CTA prioritised (0.406904ms)
+✔ independent NASA response retains exact original upstream JSON text for audit (9.218228ms)
+✔ evidence ZIP packages same-response NASA JSON, website values, comparison, manifest and README (26.427478ms)
+✔ evidence does not claim success for a changed annual value (4.442308ms)
+✔ missing source JSON or manipulated NASA values prevent evidence issuance (2.934079ms)
+✔ uploaded website CSV is included only as local source evidence, never sent upstream (6.117697ms)
+✔ one archive can include two source responses and per-site results (4.625582ms)
+✔ ZIP writer forbids entry traversal, duplicate names and excessive files (117.450946ms)
+✔ UI integrates evidence button with accurate status and reset on upload changes (0.94217ms)
+✔ standalone Node archive integrity auditor validates SHA-256 and CRC32 (13.312924ms)
+✔ independent verification URL targets NASA monthly JSON for a single metric (1.991202ms)
+✔ invalid coordinates and unsupported metric are blocked before outbound fetch (0.890039ms)
+✔ annual values come exclusively from NASA YYYY13, not estimated from months (11.423239ms)
+✔ NASA empty annual values are missing rather than zero (1.205771ms)
+✔ NASA missing annual series is rejected (1.007501ms)
+✔ tolerance comparison counts missing, mismatches and matches separately (0.557124ms)
+✔ all numeric annual values within tolerance pass (4.251986ms)
+✔ CSV quote parser supports commas and escaped quotes (0.375892ms)
+✔ website CSV coordinates must match selected NASA point (1.76429ms)
+✔ raw official NASA CSV passes through unaltered and HTML errors are rejected (3.853845ms)
+✔ Worker verification route returns no-store independent JSON and accepts valid coordinate (11.862883ms)
+✔ Worker rejects bogus verification query without NASA outbound calls (4.584711ms)
+✔ Worker original NASA CSV download is an attachment from official upstream (2.112859ms)
+✔ lab has a dedicated route and allows contextual verification of location comparisons (0.97147ms)
+ℹ tests 121
+ℹ suites 0
+ℹ pass 121
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1319.145831
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience build
+> tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1603 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 1.53 kB │ gzip:   0.75 kB
+dist/assets/maplibre-gl-worker-Bi68raVw.js    517.15 kB
+dist/assets/ScientificAudit-BhagC6tR.css        1.17 kB │ gzip:   0.49 kB
+dist/assets/VerificationLab-CvS6JswV.css       19.12 kB │ gzip:   4.45 kB
+dist/assets/index-C_hVpMo-.css                 69.30 kB │ gzip:  16.03 kB
+dist/assets/OmanMap--S9olhOP.css               71.51 kB │ gzip:  10.18 kB
+dist/assets/ScientificAudit-CQ3KCRT1.js         5.25 kB │ gzip:   2.30 kB
+dist/assets/VerificationLab-mNin5yzw.js        40.30 kB │ gzip:  14.26 kB
+dist/assets/index-Du2NCqYb.js                 299.30 kB │ gzip:  94.93 kB
+dist/assets/EarthGlobe-BtyEc-ZG.js            505.60 kB │ gzip: 132.07 kB
+dist/assets/OmanMap-DbHzzoWD.js             1,095.21 kB │ gzip: 300.81 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 11.17s
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> oman-earth-intelligence@3.5.0-pro-experience audit:bundle
+> node scripts/check_bundle_budget.mjs
+
+┌─────────┬──────────────────────────────────┬──────┐
+│ (index) │ file                             │ kb   │
+├─────────┼──────────────────────────────────┼──────┤
+│ 0       │ 'EarthGlobe-BtyEc-ZG.js'         │ 494  │
+│ 1       │ 'OmanMap--S9olhOP.css'           │ 70   │
+│ 2       │ 'OmanMap-DbHzzoWD.js'            │ 1070 │
+│ 3       │ 'ScientificAudit-BhagC6tR.css'   │ 1    │
+│ 4       │ 'ScientificAudit-CQ3KCRT1.js'    │ 5    │
+│ 5       │ 'VerificationLab-CvS6JswV.css'   │ 19   │
+│ 6       │ 'VerificationLab-mNin5yzw.js'    │ 39   │
+│ 7       │ 'index-C_hVpMo-.css'             │ 68   │
+│ 8       │ 'index-Du2NCqYb.js'              │ 292  │
+│ 9       │ 'maplibre-gl-worker-Bi68raVw.js' │ 505  │
+└─────────┴──────────────────────────────────┴──────┘
+PASS: JS chunk guardrails met (main <=450KiB, each chunk <=1350KiB).
+This is a source-asset budget, not a measured load time, LCP, INP or CLS.

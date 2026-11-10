@@ -1,0 +1,65 @@
+{
+  "version": "3.5.0-pro-experience",
+  "sourceTests": {
+    "run": "npm test",
+    "passed": 90,
+    "failed": 0,
+    "verifiedLog": "v35_release_tests.log"
+  },
+  "scientificIntegrity": {
+    "files": 11,
+    "unchanged": 11,
+    "algorithmOrDataModified": false,
+    "verifiedVia": "SHA-256 original v3.4 manifest"
+  },
+  "syntax": {
+    "typescriptAndTsxFiles": 13,
+    "parseErrors": 0,
+    "css": [
+      {
+        "file": "src/styles.css",
+        "topLevelSyntaxErrors": 0
+      },
+      {
+        "file": "src/components/PremiumHome.css",
+        "topLevelSyntaxErrors": 0
+      },
+      {
+        "file": "src/components/CommandPalette.css",
+        "topLevelSyntaxErrors": 0
+      },
+      {
+        "file": "src/components/ScientificAudit.css",
+        "topLevelSyntaxErrors": 0
+      },
+      {
+        "file": "src/components/VerificationLab.css",
+        "topLevelSyntaxErrors": 0
+      }
+    ]
+  },
+  "build": {
+    "verified": false,
+    "reason": "Local environment has no npm dependencies installed; full Vite/TS typecheck not completed"
+  },
+  "browserE2E": {
+    "implemented": true,
+    "executed": false
+  },
+  "iphoneDevice": {
+    "executed": false
+  },
+  "cloudflareDeploy": {
+    "performed": false
+  },
+  "lighthouse": {
+    "measured": false
+  },
+  "knownExternalDependencies": [
+    "NASA POWER API",
+    "Oman NCSI ArcGIS",
+    "OpenFreeMap tiles",
+    "optional Google Fonts"
+  ],
+  "note": "No full-production quality or scientific accuracy claim is made beyond the specified checks."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "name": "vite",
+    "version": "7.3.7",
+    "license": "MIT"
+  },
+  {
+    "name": "three",
+    "version": "0.181.2",
+    "license": "MIT"
+  },
+  {
+    "name": "maplibre-gl",
+    "version": "6.16.0",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "name": "lucide-react",
+    "version": "0.468.0",
+    "license": "ISC"
+  }
+]

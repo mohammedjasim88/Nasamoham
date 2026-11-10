@@ -1,0 +1,32 @@
+[
+  {
+    "path": "worker/index.mjs",
+    "status": "modified",
+    "sha256": "c03274c44e25fb70999848ce461ca6759b91123981b153a05a39bf0566313038"
+  },
+  {
+    "path": "worker/rate-control.mjs",
+    "status": "modified",
+    "sha256": "3bac22968429f16c63351bca14e4ebb465667d6be69c9ba011b85cac8a4ac282"
+  },
+  {
+    "path": "public/_headers",
+    "status": "modified",
+    "sha256": "37d424d0181de854240ffe50e814a625adb660685e451148247ff5d2d5880d28"
+  },
+  {
+    "path": "worker/security.mjs",
+    "status": "added",
+    "sha256": "0eec6d0dca1153d943339b6de64fef9c067ef324fc66f3b8d00088cecf344156"
+  },
+  {
+    "path": "tests/security-boundary.test.mjs",
+    "status": "added",
+    "sha256": "c0e1f177eec03299478449ca5a88f8b2a0d9216735cef4f63f72cf5284f2f98c"
+  },
+  {
+    "path": "scripts/security_http_smoke.py",
+    "status": "added",
+    "sha256": "4340bea86b60c0e0c222cd32f3527c710b4b134752878720b30fb5a1bb7b4d38"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "mapState": "map-state-ready",
+  "mapHeading": true,
+  "hasScientificResults": true,
+  "hasRealMapCanvas": true,
+  "hasSvgReference": false
+}

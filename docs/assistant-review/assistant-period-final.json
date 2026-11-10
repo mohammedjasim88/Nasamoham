@@ -1,0 +1,69 @@
+{
+  "schema": "oei/scientific-analysis/v1",
+  "question": "قارن درجة الحرارة في مسقط من 2000 إلى 2005",
+  "plan": {
+    "ok": true,
+    "metric": "T2M",
+    "start": 2000,
+    "end": 2005,
+    "mode": "period",
+    "locations": [
+      "muscat-east"
+    ],
+    "usedContextYears": false,
+    "usedContextMetric": false,
+    "usedContextLocation": false,
+    "genericMuscat": true
+  },
+  "paragraphs": [
+    {
+      "location": {
+        "id": "muscat-east",
+        "ar": "مسقط — عينة NASA (شرق)",
+        "en": "Muscat — NASA sample East",
+        "governorate": "Muscat",
+        "lat": 23.5946,
+        "lon": 58.7351,
+        "sample": "/data/muscat-east.json",
+        "sampleNote": "NASA monthly CSV originally supplied by the user"
+      },
+      "paragraph": "وفق الملف التاريخي المرفق والموسوم بأنه NASA POWER عند النقطة المرجعية مسقط — عينة NASA (شرق) (23.5946°N, 58.7351°E)، يتعلق هذا التحليل بـدرجة الحرارة (T2M). بلغت القيمة السنوية في 2000 28.14 °C، وفي 2005 28.19 °C. الفرق بين العام الأخير والأول 0.05 °C (زيادة). خلال الفترة الشاملة 2000–2005، تتوفر 6 من 6 قيمة سنوية صالحة، بمتوسط حسابي للقيم السنوية 28.24 °C، وحد أدنى 28.04 وحد أعلى 28.42 °C. الانحدار الخطي الوصفي OLS يساوي 0.049 °C لكل عقد؛ p-value 0.904، ولا يبلغ حد الدلالة 0.05 وفق اختبار OLS الأولي. هذا الاختبار غير مصحح للارتباط الذاتي ولا يثبت سبب التغير. الفترة القصيرة وحدها لا تكفي لإثبات تغير مناخي طويل الأمد. هذه قيمة خلية شبكية قرب النقطة، وليست متوسط المدينة أو المحافظة ولا قياس محطة أرضية مستقلة. لم يُجر هذا الجواب تحققاً مستقلاً جديداً؛ يمكن فحص المصدر في مختبر NASA.",
+      "annualEvidence": [
+        {
+          "year": 2000,
+          "value": 28.14
+        },
+        {
+          "year": 2001,
+          "value": 28.26
+        },
+        {
+          "year": 2002,
+          "value": 28.42
+        },
+        {
+          "year": 2003,
+          "value": 28.04
+        },
+        {
+          "year": 2004,
+          "value": 28.36
+        },
+        {
+          "year": 2005,
+          "value": 28.19
+        }
+      ],
+      "source": "NASA POWER (uploaded historical CSV)",
+      "sourceUrl": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M&community=AG&longitude=58.7351&latitude=23.5946&format=JSON&start=2000&end=2005",
+      "isSnapshot": true,
+      "reportedUnits": {
+        "T2M": "°C",
+        "RH2M": "%",
+        "PRECTOTCORR_SUM": "mm/day (source header; verify aggregation)"
+      }
+    }
+  ],
+  "locationComparison": "",
+  "independentVerificationPerformed": false
+}

@@ -1,0 +1,196 @@
+{
+  "rows": [
+    {
+      "year": 2000,
+      "site": 29.14,
+      "nasa": 28.14,
+      "difference": 1,
+      "status": "different"
+    },
+    {
+      "year": 2001,
+      "site": 28.26,
+      "nasa": 28.26,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2002,
+      "site": 28.42,
+      "nasa": 28.42,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2003,
+      "site": 28.04,
+      "nasa": 28.04,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2004,
+      "site": 28.36,
+      "nasa": 28.36,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2005,
+      "site": 28.19,
+      "nasa": 28.19,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2006,
+      "site": 28.25,
+      "nasa": 28.25,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2007,
+      "site": 28.05,
+      "nasa": 28.05,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2008,
+      "site": 27.99,
+      "nasa": 27.99,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2009,
+      "site": 28.6,
+      "nasa": 28.6,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2010,
+      "site": 28.2,
+      "nasa": 28.2,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2011,
+      "site": 28.34,
+      "nasa": 28.34,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2012,
+      "site": 28.58,
+      "nasa": 28.58,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2013,
+      "site": 27.89,
+      "nasa": 27.89,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2014,
+      "site": 27.88,
+      "nasa": 27.88,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2015,
+      "site": 28.81,
+      "nasa": 28.81,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2016,
+      "site": 28.42,
+      "nasa": 28.42,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2017,
+      "site": 28.66,
+      "nasa": 28.66,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2018,
+      "site": 28.83,
+      "nasa": 28.83,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2019,
+      "site": 28.36,
+      "nasa": 28.36,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2020,
+      "site": 28.01,
+      "nasa": 28.01,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2021,
+      "site": 29.05,
+      "nasa": 29.05,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2022,
+      "site": 29.08,
+      "nasa": 29.08,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2023,
+      "site": 29.16,
+      "nasa": 29.16,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2024,
+      "site": 28.62,
+      "nasa": 28.62,
+      "difference": 0,
+      "status": "matched"
+    },
+    {
+      "year": 2025,
+      "site": 28.89,
+      "nasa": 28.89,
+      "difference": 0,
+      "status": "matched"
+    }
+  ],
+  "summary": {
+    "matched": 25,
+    "different": 1,
+    "missingSite": 0,
+    "missingNasa": 0,
+    "missingBoth": 0,
+    "total": 26
+  },
+  "passed": false,
+  "tolerance": 0.01
+}
