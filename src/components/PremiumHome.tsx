@@ -22,7 +22,7 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
  const launchTimer=useRef<number|undefined>(undefined);
  // The NASA Earth still is immediately visible; WebGL starts only after the first paint.
  useEffect(()=>{
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  // Reduced-motion users still receive the interactive static WebGL globe when supported.
   let cancelled=false;
   let id:number|undefined;
   const start=()=>{if(!cancelled)setLoadGlobe(true);};
