@@ -55,6 +55,7 @@ function numericRows(items) {
  * Only verified per-year values may enter a request for numeric interpretation.
  * The LLM never selects NASA measurements, performs official verification, or revises the table.
  */
+/** @param {{question:string,lang?:string,siteInfo?:{answer:string,url:string}|null,answer?:any}} input */
 export function buildLocalAIMessages({question,lang='en',siteInfo=null,answer=null}) {
   const q = String(question || '').trim().slice(0, 600);
   if (!isClimateSiteTopic(q)) return {ok:false,code:'OUT_OF_SCOPE'};
