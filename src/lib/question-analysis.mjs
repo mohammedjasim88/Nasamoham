@@ -8,6 +8,13 @@ const problem=(code,ar,en)=>({ok:false,code,message:{ar,en}});
 export function siteAnswer(question, lang='en') {
  const q=normaliseQuestion(question).trim();
  if(!q||q.length>600||/(?<!\d)(?:19|20)\d{2}(?!\d)/.test(q))return null;
+ // Questions requesting climate values, comparisons or trends belong to the
+ // numerical evidence pipeline even when they omit the year (use selected years).
+ // Do not intercept them merely because they mention a variable or NASA.
+ const metricWords=/temperature|humidity|precipitation|rainfall|\bt2m\b|\brh2m\b|prectotcorr|حرار|رطوب|هطول|امطار|مطر/;
+ const numberIntent=/\b(?:what (?:is|was|were) (?:humidity|temperature|rainfall|precipitation) (?:in|at) |how (?:was|were) |what (?:is|was|were) the |how (?:hot|humid|much) |give me|show me|compare|analyse|analyze|trend|difference|average of|value of|average|mean)\b|كم (?:بلغ|كانت|كان|مقدار)|ما (?:هي|هو|كانت|كان) |اعطني|اعرض|قارن|حلل|قيمه|متوسط/;
+ const informationIntent=/مصدر|من اين|من وين|كيف.*تحقق|كيف.*استخدم|ما معني|ما هو.*(?:t2m|rh2m)|\bsource\b|\bapi key\b|\bwhere.*\bdata\b|\bverify\b|\baccuracy\b|\bhow to\b|\bwhat is (?:t2m|rh2m|prectotcorr)/;
+ if(metricWords.test(q)&&numberIntent.test(q)&&!informationIntent.test(q))return null;
  const entries=[
   {id:'source',test:/ناسا|nasa|مصدر|من وين|من اين|المعلومات|source|api key|مفتاح.*api|بيانات.*جات|data.*from/,
    ar:'تأتي القراءات التاريخية من خدمة NASA POWER العامة لبيانات المناخ، ويطلب الخادم القيم بحسب خط العرض وخط الطول والفترة. لا يحتاج هذا المسار إلى NASA API key في إعدادات المشروع الحالية. البيانات تقديرات شبكية تاريخية وليست قياسات محطة أرضية أو طقساً مباشراً. يمكنك فحص طلب المصدر الأصلي من التحليل أو مختبر التحقق.',
@@ -39,7 +46,7 @@ export function siteAnswer(question, lang='en') {
    url:'https://developers.cloudflare.com/workers-ai/'},
  ];
  // Interpret specific intents before broad source wording, to avoid routing all NASA queries to source.
- const preferred=['realtime','geometry','variables','assistant','accuracy','usage','source'];
+ const preferred=['realtime','accuracy','usage','source','geometry','assistant','variables'];
  for(const id of preferred){
   const e=entries.find(item=>item.id===id);
   if(e.test.test(q)){
@@ -80,6 +87,7 @@ export function planQuestion(question,context,points){
  for(const [id,re]of aliases)if(re.test(q))locations.push(id);
  const genericMuscat=/مسقط|muscat/.test(q)&&!locations.some(id=>id.startsWith('muscat'));
  if(genericMuscat)locations.unshift(context.pointId?.startsWith('muscat')?context.pointId:'muscat-east');
+ if(!locations.length&&/(?:\boman\b|عمان|السلطنه)/.test(q))return problem('POINT_ONLY','لا يمكن اعتبار نقطة واحدة متوسط سلطنة عُمان. اختر مدينة أو نقطة عينة محددة.','A single reference point is not an Oman-wide average. Choose a supported city or sample point.');
  if(/دبي|باريس|لندن|dubai|paris|london/.test(q))return problem('UNSUPPORTED_LOCATION','هذا الموقع غير متاح ضمن نقاط عُمان المدعومة.','That place is outside the supported Oman reference locations.');
  const explicitPlace=q.match(/(?:^|\s)(?:في|in)\s+([^\s،,.]+)/)?.[1];
  const scopeWords=/^(?:عام|سنه|الفتره|البيانات|الموقع|النقطه|درجه|بدايه|نهايه|the|year|period|temperature|\d+)$/;
