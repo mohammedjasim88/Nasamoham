@@ -8,6 +8,10 @@ on:
       - .github/workflows/browser-oss-ai-v38.yml
       - src/lib/local-ai-knowledge.mjs
       - src/components/ScientificAssistant.tsx
+      - src/lib/local-ai.worker.ts
+      - src/lib/local-ai-engine.ts
+      - public/_headers
+      - scripts/check_bundle_budget.mjs
   workflow_dispatch:
 
 permissions:
