@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import * as THREE from 'three';
 import {globeCoordinates} from '../lib/globe-coordinates.mjs';
+import {shortestTurn, dampMomentum, dragVelocity} from '../lib/globe-motion.mjs';
 
 /** NASA Blue Marble surface projected on an actual spherical WebGL mesh.
  * Outline is fetched from the same NCSI-validated service as the Explorer.
@@ -29,7 +30,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
   const compactGpu=window.matchMedia('(max-width: 790px)').matches;
   // Mobile renders fewer geometry triangles and frames; surface texture remains unchanged.
   const minFrameMs=1000/(compactGpu?30:45);
-  let lastX=0,lastY=0,focusTime=-1,focusOriginY=0,focusOriginX=0;
+  let lastX=0,lastY=0,lastMoveAt=0,velocityX=0,velocityY=0,focusTime=-1,focusOriginY=0,focusOriginX=0,focusOriginZ=6.35;
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let renderer:THREE.WebGLRenderer;
   try{renderer=new THREE.WebGLRenderer({canvas,context:gl,antialias:true,alpha:true,powerPreference:'high-performance'});}catch{setStatus('fallback');return;}
@@ -124,7 +125,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
    const p=world.clone().project(camera);
    const w=canvas.clientWidth,h=canvas.clientHeight;
    label.style.left=`${(p.x*.5+.5)*w}px`;label.style.top=`${(-p.y*.5+.5)*h}px`;
-   label.style.opacity=world.z<.0||Math.abs(p.x)>1||Math.abs(p.y)>1?'0':'1';
+   label.style.opacity=world.z<radius*.35||Math.abs(p.x)>1||Math.abs(p.y)>1?'0':'1';
   };
   let renderedFrames=0,evidenceSent=false;
   const renderStill=()=>{placeLabel();renderer.render(scene,camera);renderedFrames++;
@@ -142,41 +143,60 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
    const dt=last?Math.min(.06,(now-last)/1000):0;
    last=now;lastRender=now;
    if(focusTime>=0){
-    const p=Math.min(1,(now-focusTime)/440),ease=1-Math.pow(1-p,3);
-    globe.rotation.y=focusOriginY+(HOME_Y-focusOriginY)*ease;
+    const p=Math.min(1,(now-focusTime)/680),ease=1-Math.pow(1-p,3);
+    globe.rotation.y=focusOriginY+shortestTurn(focusOriginY,HOME_Y)*ease;
     globe.rotation.x=focusOriginX+(HOME_X-focusOriginX)*ease;
-    camera.position.z=6.35-.7*ease;
+    camera.position.z=focusOriginZ+(5.65-focusOriginZ)*ease;
     if(p>=1)focusTime=-1;
-   }else if(!dragging&&!hovering&&now>pausedUntil&&!reducedMotion){
-    globe.rotation.y-=dt*Math.PI*2/120;
-    clouds.rotation.y+=dt*.0014;
+   }else if(!dragging&&!reducedMotion){
+    if(Math.abs(velocityX)+Math.abs(velocityY)>.008){
+     globe.rotation.y+=velocityY*dt;
+     globe.rotation.x=THREE.MathUtils.clamp(globe.rotation.x+velocityX*dt,-.6,.65);
+     velocityY=dampMomentum(velocityY,dt);velocityX=dampMomentum(velocityX,dt);
+    }else{
+     velocityX=0;velocityY=0;
+     if(!hovering&&now>pausedUntil)globe.rotation.y-=dt*Math.PI*2/120;
+    }
    }
+   if(!reducedMotion)clouds.rotation.y+=dt*.0014;
    if(!reducedMotion)ring.material.opacity=.56+.28*Math.sin(now*.0016);
    renderStill();
   };
   const handleDown=(event:PointerEvent)=>{
    if(event.button!==0)return;
-   focusTime=-1;dragging=true;hovering=false;lastX=event.clientX;lastY=event.clientY;
-   canvas.setPointerCapture(event.pointerId);pausedUntil=performance.now()+9000;
+   focusTime=-1;dragging=true;hovering=false;lastX=event.clientX;lastY=event.clientY;lastMoveAt=performance.now();velocityX=0;velocityY=0;
+   canvas.setPointerCapture(event.pointerId);pausedUntil=performance.now()+6000;
   };
   const handleMove=(event:PointerEvent)=>{
    if(!dragging)return;
    const dx=event.clientX-lastX,dy=event.clientY-lastY;
    lastX=event.clientX;lastY=event.clientY;
-   globe.rotation.y+=dx*.0046;
-   globe.rotation.x=THREE.MathUtils.clamp(globe.rotation.x+dy*.0028,-.6,.65);
+   const now=performance.now(),elapsed=Math.max(8,Math.min(70,now-lastMoveAt));lastMoveAt=now;
+   const sensitivity=event.pointerType==='touch'?.0042:.0038;
+   globe.rotation.y+=dx*sensitivity;
+   globe.rotation.x=THREE.MathUtils.clamp(globe.rotation.x+dy*sensitivity*.66,-.6,.65);
+   // Smoothed angular velocity gives a physical, slowly settling release rather than an abrupt stop.
+   const blend=.35;
+   velocityY=(1-blend)*velocityY+blend*dragVelocity(dx,elapsed,sensitivity);
+   velocityX=(1-blend)*velocityX+blend*dragVelocity(dy,elapsed,sensitivity*.66);
    if(reducedMotion)renderStill();
   };
-  const handleUp=()=>{dragging=false;pausedUntil=performance.now()+9000;};
+  const handleUp=()=>{dragging=false;pausedUntil=performance.now()+7000;if(reducedMotion){velocityX=0;velocityY=0;}else if(performance.now()-lastMoveAt>95){velocityX=0;velocityY=0;}};
   const handleKeyboard=(event:KeyboardEvent)=>{
    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(event.key))return;
-   event.preventDefault();pausedUntil=performance.now()+12000;
+   event.preventDefault();velocityX=0;velocityY=0;focusTime=-1;pausedUntil=performance.now()+12000;
    if(event.key==='Home'){globe.rotation.y=HOME_Y;globe.rotation.x=HOME_X;camera.position.z=6.35;}
    if(event.key==='ArrowLeft')globe.rotation.y-=.14;
    if(event.key==='ArrowRight')globe.rotation.y+=.14;
    if(event.key==='ArrowUp')globe.rotation.x=Math.min(.65,globe.rotation.x+.10);
    if(event.key==='ArrowDown')globe.rotation.x=Math.max(-.6,globe.rotation.x-.10);
    if(reducedMotion)renderStill();
+  };
+  const handleWheel=(event:WheelEvent)=>{
+   if(!event.isTrusted)return;
+   event.preventDefault();focusTime=-1;velocityX=0;velocityY=0;
+   camera.position.z=THREE.MathUtils.clamp(camera.position.z+Math.sign(event.deltaY)*.32,5.2,8);
+   pausedUntil=performance.now()+5000;if(reducedMotion)renderStill();
   };
   const handleContextLost=(event:Event)=>{event.preventDefault();setStatus('fallback');active=false;cancelAnimationFrame(frame);};
   const handleEnter=()=>{hovering=true;};
@@ -188,7 +208,8 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
   canvas.addEventListener('pointerup',handleUp);canvas.addEventListener('pointercancel',handleUp);
   canvas.addEventListener('pointerenter',handleEnter);canvas.addEventListener('pointerleave',handleLeave);
   canvas.addEventListener('keydown',handleKeyboard);
-  controllerRef.current={focus:()=>{if(reducedMotion){globe.rotation.y=HOME_Y;globe.rotation.x=HOME_X;camera.position.z=5.65;renderStill();}else{focusOriginY=HOME_Y+THREE.MathUtils.euclideanModulo(globe.rotation.y-HOME_Y+Math.PI,Math.PI*2)-Math.PI;focusOriginX=globe.rotation.x;focusTime=performance.now();}}};
+  canvas.addEventListener('wheel',handleWheel,{passive:false});
+  controllerRef.current={focus:()=>{velocityX=0;velocityY=0;if(reducedMotion){globe.rotation.y=HOME_Y;globe.rotation.x=HOME_X;camera.position.z=5.65;renderStill();}else{focusOriginY=globe.rotation.y;focusOriginX=globe.rotation.x;focusOriginZ=camera.position.z;focusTime=performance.now();}}};
   resize();if(reducedMotion){renderStill();}else frame=requestAnimationFrame(animate);
   return ()=>{
    disposed=true;abort.abort();controllerRef.current=null;
@@ -198,6 +219,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
    canvas.removeEventListener('pointerup',handleUp);canvas.removeEventListener('pointercancel',handleUp);
    canvas.removeEventListener('pointerenter',handleEnter);canvas.removeEventListener('pointerleave',handleLeave);
    canvas.removeEventListener('keydown',handleKeyboard);
+   canvas.removeEventListener('wheel',handleWheel);
    outlineLines.forEach(line=>line.geometry.dispose());outlineMaterial.dispose();
    sphere.dispose();earthMat.dispose();texture.dispose();clouds.geometry.dispose();cloudsMat.dispose();cloudsTex.dispose();
    atmosphere.geometry.dispose();(atmosphere.material as THREE.Material).dispose();
@@ -207,7 +229,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
  },[]);
  return <div className={`earth-globe-mount ${status==='ready'?'is-ready':''}`} data-render-state={status} >
    <div className="earth-first-frame" aria-hidden="true"/>
-   <canvas ref={canvasRef} className="earth-globe-canvas" style={status==='fallback'?{visibility:'hidden'}:undefined} tabIndex={status==='fallback'?-1:0} aria-hidden={status==='fallback'} aria-label={lang==='ar'?'كرة أرضية ثلاثية الأبعاد؛ اسحب لتدويرها واستخدم الأسهم لتحريكها':'Interactive 3D Earth. Drag to rotate; use arrow keys to adjust, Home to reset.'}/>
+   <canvas ref={canvasRef} className="earth-globe-canvas" style={status==='fallback'?{visibility:'hidden'}:undefined} tabIndex={status==='fallback'?-1:0} aria-hidden={status==='fallback'} aria-label={lang==='ar'?'كرة أرضية ثلاثية الأبعاد؛ اسحب لتدويرها واستخدم الأسهم لتحريكها':'Interactive 3D Earth. Drag to rotate, scroll over the globe to zoom; use arrow keys and Home to reset.'}/>
    <div className="globe-coordinate-tag" ref={labelRef} aria-hidden="true" style={status!=='ready'?{display:'none'}:undefined}><span className="globe-coord-dot"/><strong>{lang==='ar'?'سلطنة عُمان':'Oman'}</strong><small>21.5°N · 57.5°E</small></div>
 
    {status==='fallback'&&<span className="globe-static-indicator">{lang==='ar'?'عرض الأرض الثابت':'Static Earth view'}</span>}

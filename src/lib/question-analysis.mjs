@@ -2,6 +2,55 @@
 import {metricSeries,checkQuality,linearTrend,mean} from './statistics.mjs';
 export const normaliseQuestion=s=>String(s).replace(/[٠-٩]/g,c=>String(c.charCodeAt(0)-0x660)).replace(/[۰-۹]/g,c=>String(c.charCodeAt(0)-0x6f0)).normalize('NFKC').replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase();
 const problem=(code,ar,en)=>({ok:false,code,message:{ar,en}});
+/** Verified site knowledge, served locally without API fees or fabricated NASA values.
+ * Return null for numeric climate questions so the ordinary evidence pipeline handles them.
+ */
+export function siteAnswer(question, lang='en') {
+ const q=normaliseQuestion(question).trim();
+ if(!q||q.length>600||/(?<!\d)(?:19|20)\d{2}(?!\d)/.test(q))return null;
+ const entries=[
+  {id:'source',test:/ناسا|nasa|مصدر|من وين|من اين|المعلومات|source|api key|مفتاح.*api|بيانات.*جات|data.*from/,
+   ar:'تأتي القراءات التاريخية من خدمة NASA POWER العامة لبيانات المناخ، ويطلب الخادم القيم بحسب خط العرض وخط الطول والفترة. لا يحتاج هذا المسار إلى NASA API key في إعدادات المشروع الحالية. البيانات تقديرات شبكية تاريخية وليست قياسات محطة أرضية أو طقساً مباشراً. يمكنك فحص طلب المصدر الأصلي من التحليل أو مختبر التحقق.',
+   en:'Historical values are retrieved from the public NASA POWER climate-data service by latitude, longitude and time period. This project does not need a NASA API key for its current POWER requests. The values are historical gridded estimates, not direct weather-station readings or live weather. Source requests are accessible from analyses and the verification lab.',
+   url:'https://power.larc.nasa.gov/'},
+  {id:'accuracy',test:/دقه|صحه|تحقق|موثوق|مؤكد|صفر.*خطا|accuracy|accurate|verification|verify|reliable|validate|trust/,
+   ar:'يفحص الموقع بنية الاستجابة والقيم المفقودة والحدود الرقمية، ويوفر مختبر NASA للمقارنة مع ملف CSV من المصدر. تطابق القيم يثبت اتفاق النقل والمعالجة، لكنه لا يثبت دقة كل خلية مقابل قياس أرضي أو حدوداً إدارية معتمدة قانونياً. لا يمكن ضمان خطأ يساوي صفراً.',
+   en:'The website checks response structure, missing values and numeric bounds. Its NASA verification lab can compare downloaded source CSV data with the displayed records. Matching records establish consistency, not independent ground-truth accuracy for a grid cell or legally certified boundary geometry. Zero error cannot be guaranteed.',
+   url:'https://power.larc.nasa.gov/'},
+  {id:'geometry',test:/الخريط|حدود|ولايات|محافظات|موقع|احداثيات|map|boundar|location|coordinate|wilayat|governorate|satellite/,
+   ar:'الخريطة تستخدم MapLibre مع مصادر خرائط مفتوحة. تقع العلامات عند إحداثيات جغرافية حقيقية، وتُحمَّل حدود المحافظات والولايات من خدمة NCSI عند توافرها. لا تُرسَم حدود تخمينية عندما تفشل الخدمة، ولا تعني نقطة العينة متوسط الولاية أو المحافظة.',
+   en:'The map uses MapLibre with open map tile providers. Markers use geographic coordinates, and governorate/wilayat outlines are requested from Oman NCSI when available. The app does not invent missing borders; a sample location is not a whole governorate or wilayat average.',
+   url:'https://maplibre.org/'},
+  {id:'variables',test:/متغيرات|t2m|rh2m|prectotcorr|درجه حرار|رطوب|هطول|امطار|ماذا.*يقيس|parameters|metrics|variables|humidity|temperature|rainfall|precipitation/,
+   ar:'يعرض المشروع T2M لدرجة حرارة الهواء عند ارتفاع مترين، وRH2M للرطوبة النسبية عند مترين، وPRECTOTCORR_SUM للهطول من NASA POWER. يجب التحقق من وحدات تجميع الهطول قبل وصف قيمه بأنها مليمترات سنوية. استخدم المستكشف والاتجاهات للمقارنة الزمنية.',
+   en:'The project supports T2M (air temperature at 2 m), RH2M (relative humidity at 2 m), and PRECTOTCORR_SUM (precipitation from NASA POWER). Verify rainfall aggregation units before treating annual totals as millimetres. Use the Explorer and Trends views for temporal comparisons.',
+   url:'https://power.larc.nasa.gov/'},
+  {id:'realtime',test:/اليوم|الان|طقس|بكره|غدا|مباشر|توقع|live|real.time|current weather|forecast|today|tomorrow/,
+   ar:'الموقع ليس خدمة توقعات طقس ولا يعرض قياسات آنية. تحليلاته مخصصة للسجلات المناخية التاريخية. لتقييم طقس اليوم أو التوقعات استخدم جهة أرصاد رسمية مستقلة.',
+   en:'This is a historical climate-data explorer, not a live weather or forecasting service. For current conditions or forecasts, consult an official meteorological provider.',
+   url:'https://power.larc.nasa.gov/'},
+  {id:'usage',test:/كيف.*استخدم|شرح.*الموقع|مساعده|طريقة|اقسام|how to|use the site|help|navigation|features/,
+   ar:'ابدأ من المستكشف لاختيار نقطة وقياس وسنوات، ثم افتح اتجاهات المناخ أو المقارنة. افتح مختبر التحقق لتطابق ملفات NASA الأصلية مع القيم المعروضة، واستخدم مساعد البيانات لطرح سؤال محدد يتضمن الموقع والمتغير والسنة أو الفترة.',
+   en:'Use Explorer to choose a sample point, climate variable and years. Review Trends or Compare, then open NASA Verification Lab to check source CSV values. Ask the evidence assistant a question containing a location, variable and year or annual period.',
+   url:'https://power.larc.nasa.gov/'},
+  {id:'assistant',test:/ذكاء اصطناعي|المساعد|النموذج|ai assistant|chatgpt|language model|model|artificial intelligence/,
+   ar:'يستطيع مساعد البيانات الحالي تفسير الأسئلة السنوية وحساب المقارنات مع إظهار مصدر كل رقم، من دون API مدفوع. لا يعمل كنموذج محادثة عامًا ولا يجيب عن كل موضوع. خيار Workers AI التوليدي لا يعمل إلا بعد تهيئة ربط AI في Cloudflare والتحقق من حدود الاستخدام.',
+   en:'The current evidence assistant parses annual climate questions and computes source-linked comparisons without a paid API. It is not a general-purpose chat model. Generative Workers AI requires a separately configured Cloudflare AI binding and quota verification.',
+   url:'https://developers.cloudflare.com/workers-ai/'},
+ ];
+ // Interpret specific intents before broad source wording, to avoid routing all NASA queries to source.
+ const preferred=['realtime','geometry','variables','assistant','accuracy','usage','source'];
+ for(const id of preferred){
+  const e=entries.find(item=>item.id===id);
+  if(e.test.test(q)){
+   const both=id==='accuracy'&&entries[0].test.test(q);
+   const answer=lang==='ar'?e.ar:e.en;
+   return {id,answer:both?(lang==='ar'?entries[0].ar+' '+answer:entries[0].en+' '+answer):answer,url:e.url};
+  }
+ }
+ return null;
+}
+
 export function planQuestion(question,context,points){
  const q=normaliseQuestion(question).trim();
  if(!q||q.length>600)return problem('QUESTION_LENGTH','اكتب سؤالاً من 1 إلى 600 حرف.','Enter a question of 1–600 characters.');
