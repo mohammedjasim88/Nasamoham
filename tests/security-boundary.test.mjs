@@ -118,7 +118,7 @@ test('security logs exclude query, body, IP and error details',()=>{
 });
 test('static CSP retains MapLibre providers and inline style support, without unsafe script execution',()=>{
  const headers=readFileSync(new URL('../public/_headers',import.meta.url),'utf8');
- assert.match(headers,/Strict-Transport-Security: max-age=31536000/);assert.match(headers,/script-src 'self';/);assert.doesNotMatch(headers,/unsafe-eval|script-src[^;]*unsafe-inline/);
+ assert.match(headers,/Strict-Transport-Security: max-age=31536000/);const script=(headers.match(/script-src ([^;]+);/)?.[1]||'').split(/\s+/);assert.ok(script.includes("'self'"));assert.ok(script.includes("'wasm-unsafe-eval'"));assert.ok(!script.includes("'unsafe-eval'"));assert.ok(!script.includes("'unsafe-inline'"));
  for(const provider of ['openfreemap.org','maptiler.com','cartocdn.com'])assert.ok(headers.includes(provider));assert.match(headers,/worker-src 'self' blob:/);assert.match(headers,/style-src 'self' 'unsafe-inline'/);
 });
 

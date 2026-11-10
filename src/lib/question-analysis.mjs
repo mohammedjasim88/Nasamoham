@@ -41,9 +41,9 @@ export function siteAnswer(question, lang='en') {
    en:'Use Explorer to choose a sample point, climate variable and years. Review Trends or Compare, then open NASA Verification Lab to check source CSV values. Ask the evidence assistant a question containing a location, variable and year or annual period.',
    url:'https://power.larc.nasa.gov/'},
   {id:'assistant',test:/ذكاء اصطناعي|المساعد|النموذج|ai assistant|chatgpt|language model|model|artificial intelligence/,
-   ar:'يستطيع مساعد البيانات الحالي تفسير الأسئلة السنوية وحساب المقارنات مع إظهار مصدر كل رقم، من دون API مدفوع. لا يعمل كنموذج محادثة عامًا ولا يجيب عن كل موضوع. خيار Workers AI التوليدي لا يعمل إلا بعد تهيئة ربط AI في Cloudflare والتحقق من حدود الاستخدام.',
-   en:'The current evidence assistant parses annual climate questions and computes source-linked comparisons without a paid API. It is not a general-purpose chat model. Generative Workers AI requires a separately configured Cloudflare AI binding and quota verification.',
-   url:'https://developers.cloudflare.com/workers-ai/'},
+   ar:'يستطيع مساعد البيانات الحالي تفسير الأسئلة السنوية وحساب المقارنات مع إظهار مصدر كل رقم، من دون API مدفوع. لا يعمل كنموذج محادثة عامًا ولا يجيب عن كل موضوع. يوجد نموذج لغة اختياري من GitHub يعمل داخل متصفح الزائر باستخدام WebGPU؛ يحتاج تنزيل ملفات النموذج أول مرة، ولا يحتاج Cloudflare Workers AI أو API مدفوعاً.',
+   en:'The current evidence assistant parses annual climate questions and computes source-linked comparisons without a paid API. It is not a general-purpose chat model. An optional open-source WebLLM model can run on the visitor device with WebGPU after an explicit model download; no Cloudflare Workers AI or paid model API is used.',
+   url:'https://github.com/mlc-ai/web-llm'},
  ];
  // Interpret specific intents before broad source wording, to avoid routing all NASA queries to source.
  const preferred=['realtime','geometry','accuracy','usage','source','assistant','variables'];
