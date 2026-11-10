@@ -1,0 +1,132 @@
+[
+  {
+    "repo": "maplibre/maplibre-gl-js",
+    "latestRelease": "v6.17.0",
+    "published": "2026-11-07T22:58:55Z",
+    "url": "https://github.com/maplibre/maplibre-gl-js/releases/tag/v6.17.0"
+  },
+  {
+    "repo": "Leaflet/Leaflet",
+    "latestRelease": "v1.9.4",
+    "published": "2023-05-18T11:12:03Z",
+    "url": "https://github.com/Leaflet/Leaflet/releases/tag/v1.9.4"
+  },
+  {
+    "repo": "openlayers/openlayers",
+    "latestRelease": "v10.11.0",
+    "published": "2026-10-04T19:55:20Z",
+    "url": "https://github.com/openlayers/openlayers/releases/tag/v10.11.0"
+  },
+  {
+    "repo": "mrdoob/three.js",
+    "latestRelease": "r187",
+    "published": "2026-10-30T08:03:18Z",
+    "url": "https://github.com/mrdoob/three.js/releases/tag/r187"
+  },
+  {
+    "repo": "CesiumGS/cesium",
+    "latestRelease": "1.147",
+    "published": "2026-11-02T19:09:10Z",
+    "url": "https://github.com/CesiumGS/cesium/releases/tag/1.147"
+  },
+  {
+    "repo": "vasturiano/globe.gl",
+    "latestRelease": "unverified",
+    "error": "SyntaxError: \"undefined\" is not valid JSON"
+  },
+  {
+    "repo": "apache/echarts",
+    "latestRelease": "6.1.0",
+    "published": "2026-05-19T17:38:29Z",
+    "url": "https://github.com/apache/echarts/releases/tag/6.1.0"
+  },
+  {
+    "repo": "vega/vega-lite",
+    "latestRelease": "v6.5.0",
+    "published": "2026-10-08T14:27:59Z",
+    "url": "https://github.com/vega/vega-lite/releases/tag/v6.5.0"
+  },
+  {
+    "repo": "recharts/recharts",
+    "latestRelease": "v3.10.1",
+    "published": "2026-07-25T15:19:52Z",
+    "url": "https://github.com/recharts/recharts/releases/tag/v3.10.1"
+  },
+  {
+    "repo": "mlc-ai/web-llm",
+    "latestRelease": "v0.2.88",
+    "published": "2026-11-10T09:20:02Z",
+    "url": "https://github.com/mlc-ai/web-llm/releases/tag/v0.2.88"
+  },
+  {
+    "repo": "huggingface/transformers.js",
+    "latestRelease": "4.3.2",
+    "published": "2026-10-28T02:23:09Z",
+    "url": "https://github.com/huggingface/transformers.js/releases/tag/4.3.2"
+  },
+  {
+    "repo": "ggml-org/llama.cpp",
+    "latestRelease": "v0.9.0",
+    "published": "2026-11-04T13:08:06Z",
+    "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0"
+  },
+  {
+    "repo": "ollama/ollama",
+    "latestRelease": "v0.40.16",
+    "published": "2026-11-09T18:21:19Z",
+    "url": "https://github.com/ollama/ollama/releases/tag/v0.40.16"
+  },
+  {
+    "repo": "simple-statistics/simple-statistics",
+    "latestRelease": "simple-statistics@8.0.0",
+    "published": "2026-10-28T18:05:57Z",
+    "url": "https://github.com/simple-statistics/simple-statistics/releases/tag/simple-statistics%408.0.0"
+  },
+  {
+    "repo": "scipy/scipy",
+    "latestRelease": "v1.18.1",
+    "published": "2026-08-21T23:52:53Z",
+    "url": "https://github.com/scipy/scipy/releases/tag/v1.18.1"
+  },
+  {
+    "repo": "statsmodels/statsmodels",
+    "latestRelease": "v0.15.0",
+    "published": "2026-08-27T06:44:51Z",
+    "url": "https://github.com/statsmodels/statsmodels/releases/tag/v0.15.0"
+  },
+  {
+    "repo": "radix-ui/primitives",
+    "latestRelease": "unverified",
+    "error": "SyntaxError: \"undefined\" is not valid JSON"
+  },
+  {
+    "repo": "adobe/react-spectrum",
+    "latestRelease": "react-aria-components@1.22.0",
+    "published": "2026-10-09T03:06:51Z",
+    "url": "https://github.com/adobe/react-spectrum/releases/tag/react-aria-components%401.22.0"
+  },
+  {
+    "repo": "tailwindlabs/headlessui",
+    "latestRelease": "@headlessui/react@v2.2.10",
+    "published": "2026-04-07T17:11:30Z",
+    "url": "https://github.com/tailwindlabs/headlessui/releases/tag/%40headlessui/react%40v2.2.10"
+  },
+  {
+    "repo": "microsoft/playwright",
+    "latestRelease": "v1.65.0",
+    "published": "2026-11-05T18:25:45Z",
+    "url": "https://github.com/microsoft/playwright/releases/tag/v1.65.0"
+  },
+  {
+    "repo": "cypress-io/cypress",
+    "latestRelease": "v16.3.0",
+    "published": "2026-11-10T20:03:59Z",
+    "url": "https://github.com/cypress-io/cypress/releases/tag/v16.3.0"
+  },
+  {
+    "repo": "puppeteer/puppeteer",
+    "latestRelease": "browsers-v3.2.7",
+    "published": "2026-11-10T14:02:50Z",
+    "url": "https://github.com/puppeteer/puppeteer/releases/tag/browsers-v3.2.7"
+  }
+]

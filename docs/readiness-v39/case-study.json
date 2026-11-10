@@ -1,0 +1,1539 @@
+{
+  "schema": "oei/readiness-case/v39",
+  "generatedAt": "2026-11-10T21:18:09.120Z",
+  "sourceCommitBase": "e461633ce1bb58b05007197dccfe33e18f5673cf",
+  "metric": "T2M",
+  "unit": "C",
+  "records": [
+    {
+      "point": {
+        "id": "muscat",
+        "lat": 23.5946,
+        "lon": 58.7351,
+        "start": 2000,
+        "end": 2025
+      },
+      "url": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M%2CRH2M%2CPRECTOTCORR_SUM&community=AG&longitude=58.7351&latitude=23.5946&format=JSON&start=2000&end=2025",
+      "sha256": "02e938c610e15c5fb323ba6ad0d1001d334ef814d4fb30abe9db50a10ff04a34",
+      "preservedFile": "muscat-nasa-response.json",
+      "retrievedAt": "2026-11-10T21:10:54.584223+00:00",
+      "returnedGeometry": {
+        "type": "Point",
+        "coordinates": [
+          58.735,
+          23.595,
+          181.35
+        ]
+      },
+      "header": {
+        "title": "NASA/POWER Source Native Resolution Monthly and Annual",
+        "api": {
+          "version": "v2.10.0",
+          "name": "POWER Monthly and Annual API"
+        },
+        "sources": [
+          "MERRA2",
+          "POWER"
+        ],
+        "fill_value": -999,
+        "time_standard": "LST",
+        "start": "20000101",
+        "end": "20251231"
+      },
+      "reportedUnits": {
+        "T2M": "C",
+        "RH2M": "%",
+        "PRECTOTCORR_SUM": "mm/day"
+      },
+      "series": [
+        {
+          "year": 2000,
+          "value": 28.14
+        },
+        {
+          "year": 2001,
+          "value": 28.26
+        },
+        {
+          "year": 2002,
+          "value": 28.42
+        },
+        {
+          "year": 2003,
+          "value": 28.04
+        },
+        {
+          "year": 2004,
+          "value": 28.36
+        },
+        {
+          "year": 2005,
+          "value": 28.19
+        },
+        {
+          "year": 2006,
+          "value": 28.25
+        },
+        {
+          "year": 2007,
+          "value": 28.05
+        },
+        {
+          "year": 2008,
+          "value": 27.99
+        },
+        {
+          "year": 2009,
+          "value": 28.6
+        },
+        {
+          "year": 2010,
+          "value": 28.2
+        },
+        {
+          "year": 2011,
+          "value": 28.34
+        },
+        {
+          "year": 2012,
+          "value": 28.58
+        },
+        {
+          "year": 2013,
+          "value": 27.89
+        },
+        {
+          "year": 2014,
+          "value": 27.88
+        },
+        {
+          "year": 2015,
+          "value": 28.81
+        },
+        {
+          "year": 2016,
+          "value": 28.42
+        },
+        {
+          "year": 2017,
+          "value": 28.66
+        },
+        {
+          "year": 2018,
+          "value": 28.83
+        },
+        {
+          "year": 2019,
+          "value": 28.36
+        },
+        {
+          "year": 2020,
+          "value": 28.01
+        },
+        {
+          "year": 2021,
+          "value": 29.05
+        },
+        {
+          "year": 2022,
+          "value": 29.08
+        },
+        {
+          "year": 2023,
+          "value": 29.16
+        },
+        {
+          "year": 2024,
+          "value": 28.62
+        },
+        {
+          "year": 2025,
+          "value": 28.89
+        }
+      ],
+      "ols": {
+        "n": 26,
+        "valid": true,
+        "start": 2000,
+        "end": 2025,
+        "mean": 28.42615384615385,
+        "slope": 0.02978461538461536,
+        "perDecade": 0.2978461538461536,
+        "intercept": -31.515384615384566,
+        "pValue": 0.0010283544374492342,
+        "significant": true,
+        "standardError": 0.007976099515987291,
+        "ci95": [
+          0.01332275506616721,
+          0.04624647570306351
+        ],
+        "rSquared": 0.36749722194381107,
+        "observed": [
+          {
+            "year": 2000,
+            "value": 28.14
+          },
+          {
+            "year": 2001,
+            "value": 28.26
+          },
+          {
+            "year": 2002,
+            "value": 28.42
+          },
+          {
+            "year": 2003,
+            "value": 28.04
+          },
+          {
+            "year": 2004,
+            "value": 28.36
+          },
+          {
+            "year": 2005,
+            "value": 28.19
+          },
+          {
+            "year": 2006,
+            "value": 28.25
+          },
+          {
+            "year": 2007,
+            "value": 28.05
+          },
+          {
+            "year": 2008,
+            "value": 27.99
+          },
+          {
+            "year": 2009,
+            "value": 28.6
+          },
+          {
+            "year": 2010,
+            "value": 28.2
+          },
+          {
+            "year": 2011,
+            "value": 28.34
+          },
+          {
+            "year": 2012,
+            "value": 28.58
+          },
+          {
+            "year": 2013,
+            "value": 27.89
+          },
+          {
+            "year": 2014,
+            "value": 27.88
+          },
+          {
+            "year": 2015,
+            "value": 28.81
+          },
+          {
+            "year": 2016,
+            "value": 28.42
+          },
+          {
+            "year": 2017,
+            "value": 28.66
+          },
+          {
+            "year": 2018,
+            "value": 28.83
+          },
+          {
+            "year": 2019,
+            "value": 28.36
+          },
+          {
+            "year": 2020,
+            "value": 28.01
+          },
+          {
+            "year": 2021,
+            "value": 29.05
+          },
+          {
+            "year": 2022,
+            "value": 29.08
+          },
+          {
+            "year": 2023,
+            "value": 29.16
+          },
+          {
+            "year": 2024,
+            "value": 28.62
+          },
+          {
+            "year": 2025,
+            "value": 28.89
+          }
+        ]
+      },
+      "hac": {
+        "valid": true,
+        "n": 26,
+        "start": 2000,
+        "end": 2025,
+        "lag": 2,
+        "slope": 0.02978461538461536,
+        "perDecade": 0.2978461538461536,
+        "standardError": 0.007367920178313707,
+        "pValue": 0.0004732607324190885,
+        "ci95": [
+          0.014577975526403606,
+          0.04499125524282711
+        ],
+        "significant": true,
+        "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+        "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+      },
+      "bandwidthSensitivity": [
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 0,
+          "slope": 0.02978461538461536,
+          "perDecade": 0.2978461538461536,
+          "standardError": 0.0070810455466031015,
+          "pValue": 0.00031251264420161163,
+          "ci95": [
+            0.015170055666158694,
+            0.04439917510307203
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 1,
+          "slope": 0.02978461538461536,
+          "perDecade": 0.2978461538461536,
+          "standardError": 0.007472263261520181,
+          "pValue": 0.0005458454959045641,
+          "ci95": [
+            0.014362621987057931,
+            0.045206608782172794
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 2,
+          "slope": 0.02978461538461536,
+          "perDecade": 0.2978461538461536,
+          "standardError": 0.007367920178313707,
+          "pValue": 0.0004732607324190885,
+          "ci95": [
+            0.014577975526403606,
+            0.04499125524282711
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 3,
+          "slope": 0.02978461538461536,
+          "perDecade": 0.2978461538461536,
+          "standardError": 0.006876051116731007,
+          "pValue": 0.00022726741675649194,
+          "ci95": [
+            0.015593143375113467,
+            0.04397608739411726
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 4,
+          "slope": 0.02978461538461536,
+          "perDecade": 0.2978461538461536,
+          "standardError": 0.00672129002790768,
+          "pValue": 0.00017635646816106167,
+          "ci95": [
+            0.015912554563731918,
+            0.043656676205498804
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        }
+      ],
+      "mannKendall": {
+        "valid": true,
+        "n": 26,
+        "s": 129,
+        "variance": 2056.3333333333335,
+        "z": 2.8447424438872875,
+        "pValue": 0.004444862190089379,
+        "significant": true,
+        "omitted": 0,
+        "method": "Mann–Kendall, tie-adjusted asymptotic normal, no continuity correction",
+        "limitations": "Assumes independent observations. NOT autocorrelation-adjusted. Missing-data selection can bias results."
+      },
+      "diagnostics": {
+        "valid": true,
+        "observations": 26,
+        "olsPerDecade": 0.2978461538461536,
+        "theilSenPerDecade": 0.3058823529411762,
+        "lag1Residual": 0.027724359202200045,
+        "leaveOneOutMin": 0.2637286324786322,
+        "leaveOneOutMax": 0.33337606837606837,
+        "mostInfluentialYear": 2020,
+        "maxChangePerDecade": 0.035529914529914775,
+        "possibleSerialCorrelation": false,
+        "sensitivityWarning": false,
+        "notes": "Diagnostics are descriptive. No autocorrelation correction or replacement of the original NASA annual data is made."
+      }
+    },
+    {
+      "point": {
+        "id": "buraimi",
+        "lat": 24.2486,
+        "lon": 55.7931,
+        "start": 2000,
+        "end": 2025
+      },
+      "url": "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M%2CRH2M%2CPRECTOTCORR_SUM&community=AG&longitude=55.7931&latitude=24.2486&format=JSON&start=2000&end=2025",
+      "sha256": "20590d6082bba33c6bfcec21f6d3b7004cd914b6969847d585a67ca96781e6a4",
+      "preservedFile": "buraimi-nasa-response.json",
+      "retrievedAt": "2026-11-10T21:10:54.625479+00:00",
+      "returnedGeometry": {
+        "type": "Point",
+        "coordinates": [
+          55.793,
+          24.249,
+          257.71
+        ]
+      },
+      "header": {
+        "title": "NASA/POWER Source Native Resolution Monthly and Annual",
+        "api": {
+          "version": "v2.10.0",
+          "name": "POWER Monthly and Annual API"
+        },
+        "sources": [
+          "MERRA2",
+          "POWER"
+        ],
+        "fill_value": -999,
+        "time_standard": "LST",
+        "start": "20000101",
+        "end": "20251231"
+      },
+      "reportedUnits": {
+        "T2M": "C",
+        "RH2M": "%",
+        "PRECTOTCORR_SUM": "mm/day"
+      },
+      "series": [
+        {
+          "year": 2000,
+          "value": 28.75
+        },
+        {
+          "year": 2001,
+          "value": 28.76
+        },
+        {
+          "year": 2002,
+          "value": 28.75
+        },
+        {
+          "year": 2003,
+          "value": 28.8
+        },
+        {
+          "year": 2004,
+          "value": 28.96
+        },
+        {
+          "year": 2005,
+          "value": 28.74
+        },
+        {
+          "year": 2006,
+          "value": 28.75
+        },
+        {
+          "year": 2007,
+          "value": 28.76
+        },
+        {
+          "year": 2008,
+          "value": 28.41
+        },
+        {
+          "year": 2009,
+          "value": 28.73
+        },
+        {
+          "year": 2010,
+          "value": 29.16
+        },
+        {
+          "year": 2011,
+          "value": 28.72
+        },
+        {
+          "year": 2012,
+          "value": 29.02
+        },
+        {
+          "year": 2013,
+          "value": 28.35
+        },
+        {
+          "year": 2014,
+          "value": 28.54
+        },
+        {
+          "year": 2015,
+          "value": 29.2
+        },
+        {
+          "year": 2016,
+          "value": 28.59
+        },
+        {
+          "year": 2017,
+          "value": 29.07
+        },
+        {
+          "year": 2018,
+          "value": 29.49
+        },
+        {
+          "year": 2019,
+          "value": 29.13
+        },
+        {
+          "year": 2020,
+          "value": 29
+        },
+        {
+          "year": 2021,
+          "value": 29.9
+        },
+        {
+          "year": 2022,
+          "value": 29.46
+        },
+        {
+          "year": 2023,
+          "value": 29.76
+        },
+        {
+          "year": 2024,
+          "value": 29.19
+        },
+        {
+          "year": 2025,
+          "value": 29.72
+        }
+      ],
+      "ols": {
+        "n": 26,
+        "valid": true,
+        "start": 2000,
+        "end": 2025,
+        "mean": 28.98884615384616,
+        "slope": 0.03579145299145297,
+        "perDecade": 0.3579145299145297,
+        "intercept": -43.041452991452935,
+        "pValue": 0.0001891020963806888,
+        "significant": true,
+        "standardError": 0.008127126989230692,
+        "ci95": [
+          0.01901788728821145,
+          0.05256501869469449
+        ],
+        "rSquared": 0.4469379226044745,
+        "observed": [
+          {
+            "year": 2000,
+            "value": 28.75
+          },
+          {
+            "year": 2001,
+            "value": 28.76
+          },
+          {
+            "year": 2002,
+            "value": 28.75
+          },
+          {
+            "year": 2003,
+            "value": 28.8
+          },
+          {
+            "year": 2004,
+            "value": 28.96
+          },
+          {
+            "year": 2005,
+            "value": 28.74
+          },
+          {
+            "year": 2006,
+            "value": 28.75
+          },
+          {
+            "year": 2007,
+            "value": 28.76
+          },
+          {
+            "year": 2008,
+            "value": 28.41
+          },
+          {
+            "year": 2009,
+            "value": 28.73
+          },
+          {
+            "year": 2010,
+            "value": 29.16
+          },
+          {
+            "year": 2011,
+            "value": 28.72
+          },
+          {
+            "year": 2012,
+            "value": 29.02
+          },
+          {
+            "year": 2013,
+            "value": 28.35
+          },
+          {
+            "year": 2014,
+            "value": 28.54
+          },
+          {
+            "year": 2015,
+            "value": 29.2
+          },
+          {
+            "year": 2016,
+            "value": 28.59
+          },
+          {
+            "year": 2017,
+            "value": 29.07
+          },
+          {
+            "year": 2018,
+            "value": 29.49
+          },
+          {
+            "year": 2019,
+            "value": 29.13
+          },
+          {
+            "year": 2020,
+            "value": 29
+          },
+          {
+            "year": 2021,
+            "value": 29.9
+          },
+          {
+            "year": 2022,
+            "value": 29.46
+          },
+          {
+            "year": 2023,
+            "value": 29.76
+          },
+          {
+            "year": 2024,
+            "value": 29.19
+          },
+          {
+            "year": 2025,
+            "value": 29.72
+          }
+        ]
+      },
+      "hac": {
+        "valid": true,
+        "n": 26,
+        "start": 2000,
+        "end": 2025,
+        "lag": 2,
+        "slope": 0.03579145299145297,
+        "perDecade": 0.3579145299145297,
+        "standardError": 0.007741394798144225,
+        "pValue": 0.00010820413244810151,
+        "ci95": [
+          0.019813999402568436,
+          0.051768906580337504
+        ],
+        "significant": true,
+        "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+        "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+      },
+      "bandwidthSensitivity": [
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 0,
+          "slope": 0.03579145299145297,
+          "perDecade": 0.3579145299145297,
+          "standardError": 0.007121652234081849,
+          "pValue": 0.000038945786138913096,
+          "ci95": [
+            0.021093085189116435,
+            0.050489820793789504
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 1,
+          "slope": 0.03579145299145297,
+          "perDecade": 0.3579145299145297,
+          "standardError": 0.007037644756796794,
+          "pValue": 0.00003345798625763959,
+          "ci95": [
+            0.02126646810065106,
+            0.05031643788225488
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 2,
+          "slope": 0.03579145299145297,
+          "perDecade": 0.3579145299145297,
+          "standardError": 0.007741394798144225,
+          "pValue": 0.00010820413244810151,
+          "ci95": [
+            0.019813999402568436,
+            0.051768906580337504
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 3,
+          "slope": 0.03579145299145297,
+          "perDecade": 0.3579145299145297,
+          "standardError": 0.008126193616533568,
+          "pValue": 0.00018885897534824604,
+          "ci95": [
+            0.019019813674778507,
+            0.05256309230812743
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        },
+        {
+          "valid": true,
+          "n": 26,
+          "start": 2000,
+          "end": 2025,
+          "lag": 4,
+          "slope": 0.03579145299145297,
+          "perDecade": 0.3579145299145297,
+          "standardError": 0.008647064971684595,
+          "pValue": 0.0003704952206489512,
+          "ci95": [
+            0.017944788034089065,
+            0.05363811794881687
+          ],
+          "significant": true,
+          "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+          "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy."
+        }
+      ],
+      "mannKendall": {
+        "valid": true,
+        "n": 26,
+        "s": 127,
+        "variance": 2053.6666666666665,
+        "z": 2.802455620861503,
+        "pValue": 0.005071640390132993,
+        "significant": true,
+        "omitted": 0,
+        "method": "Mann–Kendall, tie-adjusted asymptotic normal, no continuity correction",
+        "limitations": "Assumes independent observations. NOT autocorrelation-adjusted. Missing-data selection can bias results."
+      },
+      "diagnostics": {
+        "valid": true,
+        "observations": 26,
+        "olsPerDecade": 0.3579145299145297,
+        "theilSenPerDecade": 0.3099999999999987,
+        "lag1Residual": 0.05095567012453147,
+        "leaveOneOutMin": 0.3192423019259599,
+        "leaveOneOutMax": 0.3787692307692305,
+        "mostInfluentialYear": 2021,
+        "maxChangePerDecade": 0.038672227988569785,
+        "possibleSerialCorrelation": false,
+        "sensitivityWarning": false,
+        "notes": "Diagnostics are descriptive. No autocorrelation correction or replacement of the original NASA annual data is made."
+      }
+    }
+  ],
+  "pairedDifference": {
+    "valid": true,
+    "n": 26,
+    "start": 2000,
+    "end": 2025,
+    "lag": 2,
+    "slope": 0.006006837606837604,
+    "perDecade": 0.060068376068376034,
+    "standardError": 0.004523082109923313,
+    "pValue": 0.19665715180288157,
+    "ci95": [
+      -0.00332834505395857,
+      0.015342020267633778
+    ],
+    "significant": false,
+    "method": "Newey–West HAC, Bartlett, n/(n-2), approximate t(n-2)",
+    "limitations": "Short annual series; bandwidth-sensitive approximation. Assumes a meaningful linear trend and weakly dependent errors. Not proof of causality or source accuracy.",
+    "direction": "B minus A",
+    "series": [
+      {
+        "year": 2000,
+        "value": 0.6099999999999994
+      },
+      {
+        "year": 2001,
+        "value": 0.5
+      },
+      {
+        "year": 2002,
+        "value": 0.3299999999999983
+      },
+      {
+        "year": 2003,
+        "value": 0.7600000000000016
+      },
+      {
+        "year": 2004,
+        "value": 0.6000000000000014
+      },
+      {
+        "year": 2005,
+        "value": 0.5499999999999972
+      },
+      {
+        "year": 2006,
+        "value": 0.5
+      },
+      {
+        "year": 2007,
+        "value": 0.7100000000000009
+      },
+      {
+        "year": 2008,
+        "value": 0.4200000000000017
+      },
+      {
+        "year": 2009,
+        "value": 0.129999999999999
+      },
+      {
+        "year": 2010,
+        "value": 0.9600000000000009
+      },
+      {
+        "year": 2011,
+        "value": 0.379999999999999
+      },
+      {
+        "year": 2012,
+        "value": 0.4400000000000013
+      },
+      {
+        "year": 2013,
+        "value": 0.46000000000000085
+      },
+      {
+        "year": 2014,
+        "value": 0.6600000000000001
+      },
+      {
+        "year": 2015,
+        "value": 0.39000000000000057
+      },
+      {
+        "year": 2016,
+        "value": 0.16999999999999815
+      },
+      {
+        "year": 2017,
+        "value": 0.41000000000000014
+      },
+      {
+        "year": 2018,
+        "value": 0.6600000000000001
+      },
+      {
+        "year": 2019,
+        "value": 0.7699999999999996
+      },
+      {
+        "year": 2020,
+        "value": 0.9899999999999984
+      },
+      {
+        "year": 2021,
+        "value": 0.8499999999999979
+      },
+      {
+        "year": 2022,
+        "value": 0.38000000000000256
+      },
+      {
+        "year": 2023,
+        "value": 0.6000000000000014
+      },
+      {
+        "year": 2024,
+        "value": 0.5700000000000003
+      },
+      {
+        "year": 2025,
+        "value": 0.8299999999999983
+      }
+    ]
+  },
+  "snapshotComparisons": [
+    {
+      "metric": "T2M",
+      "tolerance": 0.01,
+      "matched": 26,
+      "total": 26,
+      "rows": [
+        {
+          "year": 2000,
+          "value": 28.14,
+          "reference": 28.14,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2001,
+          "value": 28.26,
+          "reference": 28.26,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2002,
+          "value": 28.42,
+          "reference": 28.42,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2003,
+          "value": 28.04,
+          "reference": 28.04,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2004,
+          "value": 28.36,
+          "reference": 28.36,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2005,
+          "value": 28.19,
+          "reference": 28.19,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2006,
+          "value": 28.25,
+          "reference": 28.25,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2007,
+          "value": 28.05,
+          "reference": 28.05,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2008,
+          "value": 27.99,
+          "reference": 27.99,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2009,
+          "value": 28.6,
+          "reference": 28.6,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2010,
+          "value": 28.2,
+          "reference": 28.2,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2011,
+          "value": 28.34,
+          "reference": 28.34,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2012,
+          "value": 28.58,
+          "reference": 28.58,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2013,
+          "value": 27.89,
+          "reference": 27.89,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2014,
+          "value": 27.88,
+          "reference": 27.88,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2015,
+          "value": 28.81,
+          "reference": 28.81,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2016,
+          "value": 28.42,
+          "reference": 28.42,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2017,
+          "value": 28.66,
+          "reference": 28.66,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2018,
+          "value": 28.83,
+          "reference": 28.83,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2019,
+          "value": 28.36,
+          "reference": 28.36,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2020,
+          "value": 28.01,
+          "reference": 28.01,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2021,
+          "value": 29.05,
+          "reference": 29.05,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2022,
+          "value": 29.08,
+          "reference": 29.08,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2023,
+          "value": 29.16,
+          "reference": 29.16,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2024,
+          "value": 28.62,
+          "reference": 28.62,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2025,
+          "value": 28.89,
+          "reference": 28.89,
+          "difference": 0,
+          "match": true
+        }
+      ]
+    },
+    {
+      "metric": "RH2M",
+      "tolerance": 0.01,
+      "matched": 26,
+      "total": 26,
+      "rows": [
+        {
+          "year": 2000,
+          "value": 52.19,
+          "reference": 52.19,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2001,
+          "value": 51.22,
+          "reference": 51.22,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2002,
+          "value": 50.73,
+          "reference": 50.73,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2003,
+          "value": 53.29,
+          "reference": 53.29,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2004,
+          "value": 50.79,
+          "reference": 50.79,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2005,
+          "value": 52.53,
+          "reference": 52.53,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2006,
+          "value": 51.69,
+          "reference": 51.69,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2007,
+          "value": 52.8,
+          "reference": 52.8,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2008,
+          "value": 50.36,
+          "reference": 50.36,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2009,
+          "value": 50.42,
+          "reference": 50.42,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2010,
+          "value": 52.47,
+          "reference": 52.47,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2011,
+          "value": 51.45,
+          "reference": 51.45,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2012,
+          "value": 49.38,
+          "reference": 49.38,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2013,
+          "value": 53.43,
+          "reference": 53.43,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2014,
+          "value": 52.61,
+          "reference": 52.61,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2015,
+          "value": 50.05,
+          "reference": 50.05,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2016,
+          "value": 51.85,
+          "reference": 51.85,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2017,
+          "value": 49.77,
+          "reference": 49.77,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2018,
+          "value": 49.72,
+          "reference": 49.72,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2019,
+          "value": 52.93,
+          "reference": 52.93,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2020,
+          "value": 54.22,
+          "reference": 54.22,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2021,
+          "value": 50.27,
+          "reference": 50.27,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2022,
+          "value": 51.89,
+          "reference": 51.89,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2023,
+          "value": 52.38,
+          "reference": 52.38,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2024,
+          "value": 58.89,
+          "reference": 58.89,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2025,
+          "value": 50.76,
+          "reference": 50.76,
+          "difference": 0,
+          "match": true
+        }
+      ]
+    },
+    {
+      "metric": "PRECTOTCORR_SUM",
+      "tolerance": 0.01,
+      "matched": 26,
+      "total": 26,
+      "rows": [
+        {
+          "year": 2000,
+          "value": 122.42,
+          "reference": 122.42,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2001,
+          "value": 51.34,
+          "reference": 51.34,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2002,
+          "value": 58.83,
+          "reference": 58.83,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2003,
+          "value": 69.72,
+          "reference": 69.72,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2004,
+          "value": 67.19,
+          "reference": 67.19,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2005,
+          "value": 92.08,
+          "reference": 92.08,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2006,
+          "value": 120.11,
+          "reference": 120.11,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2007,
+          "value": 133.56,
+          "reference": 133.56,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2008,
+          "value": 61.17,
+          "reference": 61.17,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2009,
+          "value": 99.41,
+          "reference": 99.41,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2010,
+          "value": 317.74,
+          "reference": 317.74,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2011,
+          "value": 103.52,
+          "reference": 103.52,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2012,
+          "value": 109.31,
+          "reference": 109.31,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2013,
+          "value": 140.09,
+          "reference": 140.09,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2014,
+          "value": 132.48,
+          "reference": 132.48,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2015,
+          "value": 114.02,
+          "reference": 114.02,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2016,
+          "value": 94.42,
+          "reference": 94.42,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2017,
+          "value": 119.96,
+          "reference": 119.96,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2018,
+          "value": 50.15,
+          "reference": 50.15,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2019,
+          "value": 118.96,
+          "reference": 118.96,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2020,
+          "value": 231.66,
+          "reference": 231.66,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2021,
+          "value": 59.08,
+          "reference": 59.08,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2022,
+          "value": 108.97,
+          "reference": 108.97,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2023,
+          "value": 46.02,
+          "reference": 46.02,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2024,
+          "value": 1285.33,
+          "reference": 1285.33,
+          "difference": 0,
+          "match": true
+        },
+        {
+          "year": 2025,
+          "value": 41.06,
+          "reference": 41.06,
+          "difference": 0,
+          "match": true
+        }
+      ]
+    }
+  ],
+  "precipitation": {
+    "sourceUnit": "mm/day",
+    "annual2024": 1285.33,
+    "sumMonthly2024": 1285.3300000000002,
+    "dailyAugust": {
+      "units": "mm/day",
+      "days": 31,
+      "sum": 1089.9,
+      "monthlyReported": 1089.9,
+      "independentGroundValidation": false
+    },
+    "interpretation": "API units conflict with accumulated values and GIS metadata. No conversion or physical-accuracy claim. Precipitation supplementary inference is withheld."
+  },
+  "limitations": [
+    "Source agreement is not independent station validation.",
+    "HAC inference is approximate for 26 observations and bandwidth-sensitive.",
+    "Same grid source can induce correlated errors across points.",
+    "No national/governorate average or causal attribution."
+  ]
+}
