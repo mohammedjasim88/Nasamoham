@@ -1,0 +1,10 @@
+[
+  "src/App.tsx",
+  "src/components/EarthGlobe.tsx",
+  "src/components/OmanMap.tsx",
+  "src/components/PremiumHome.css",
+  "src/components/VerificationLab.css",
+  "src/components/VerificationLab.tsx",
+  "src/styles.css",
+  "tests/cinematic-home.test.mjs"
+]

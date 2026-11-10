@@ -1,0 +1,8 @@
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.openfreemap.org https://*.openstreetmap.org https://*.maptiler.com https://*.cartocdn.com; connect-src 'self' https://*.openfreemap.org https://*.maptiler.com https://*.openstreetmap.org https://*.cartocdn.com; font-src 'self' data: https://fonts.gstatic.com https://*.openfreemap.org https://*.maptiler.com; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests

@@ -1,0 +1,175 @@
+{
+  "name": "Oman Earth Intelligence v2.0.1 TypeScript Fix",
+  "files": [
+    {
+      "file": ".env.example",
+      "bytes": 104,
+      "sha256": "080221f15221ec378e8e47add38aa36a4cc06f97194bfcac682c73fec7a042fb"
+    },
+    {
+      "file": ".gitignore",
+      "bytes": 67,
+      "sha256": "f603f2d8a4cd1440e658c4527fe3461a461cb37df051412baa2eaa69854d1399"
+    },
+    {
+      "file": "README.md",
+      "bytes": 9097,
+      "sha256": "ffd89b53137c388188d197d2499d153d30a7394c52b8af9144cb07f7fe8c9ffd"
+    },
+    {
+      "file": "deploy_windows.bat",
+      "bytes": 568,
+      "sha256": "fa8b44895344b3a431ff05bfeb82498b5e6f8bdaa8495fee45f2e824b61f835f"
+    },
+    {
+      "file": "docs/BUILD_FIX_V2_0_1_AR.md",
+      "bytes": 1722,
+      "sha256": "a368a3f772b48a22319a7fcd74a249461e6d0ea9faf440cd604b67c6ba3a8ef1"
+    },
+    {
+      "file": "docs/PROFESSIONAL_AI_WEB_DESIGN_BRIEF_AR_EN.md",
+      "bytes": 10647,
+      "sha256": "7f48adcca0a920c84397901cf12c4109b433ed426f341d025529ec03f1ff78e2"
+    },
+    {
+      "file": "docs/QA_AND_LIMITATIONS_AR.md",
+      "bytes": 5175,
+      "sha256": "cb30770631096f1473ed659e0c7d13573ba810131f63ac580d3078925465f9c6"
+    },
+    {
+      "file": "index.html",
+      "bytes": 557,
+      "sha256": "6bd0d77fc9808af3d0fcf2de2f37aa8aeb789c58eb946cc8b0c325701850739d"
+    },
+    {
+      "file": "package.json",
+      "bytes": 725,
+      "sha256": "33e02be27bc341a96a1c4e581d1f7717bdf50bb117629948d6ec36f1adc02ba0"
+    },
+    {
+      "file": "public/_headers",
+      "bytes": 761,
+      "sha256": "c2633228c9715b2f2360eb7abef2d3c268aeb3b5e7a0a278c819b8d579687e4f"
+    },
+    {
+      "file": "public/data/muscat-east.json",
+      "bytes": 9104,
+      "sha256": "0ebf6bcdadce4aa74ede2ce3ac6d3c435aef1f645a98a0048e13569f10bae12d"
+    },
+    {
+      "file": "public/data/muscat-west.json",
+      "bytes": 9103,
+      "sha256": "526c24ff037fc2150264733921974b127e627d0d522938e2c0a040fe7b93fb75"
+    },
+    {
+      "file": "public/data/salalah-rh.json",
+      "bytes": 1784,
+      "sha256": "b5b3dee49c38a885919829d9a6e6b411bb27dcb54196b8bacc250729b3e85ebc"
+    },
+    {
+      "file": "sources/muscat-east-original.csv",
+      "bytes": 7461,
+      "sha256": "358894968fbbf951dc4ddd20b5a39e79784e865501ee22b207063316bd68a201"
+    },
+    {
+      "file": "sources/muscat-west-original.csv",
+      "bytes": 7460,
+      "sha256": "52dc92f972f4f2a13c2b1bd40816452c5162c24d6575b342d533416fd345b9d6"
+    },
+    {
+      "file": "sources/salalah-rh-original.csv",
+      "bytes": 449,
+      "sha256": "6a81c7810bfd7651975ccf56f713d72f0ee5356fc1d0f6464ba751958710a44d"
+    },
+    {
+      "file": "src/App.tsx",
+      "bytes": 28973,
+      "sha256": "6e4f727fc7c901ca312e2aa4425802cbe68d93fd705fe082dbadebd3ec802d89"
+    },
+    {
+      "file": "src/components/OmanMap.tsx",
+      "bytes": 9346,
+      "sha256": "f88eb09afe148f0f12801a7647c61e89750f89d428818524d367198d40d62fda"
+    },
+    {
+      "file": "src/components/TrendChart.tsx",
+      "bytes": 4476,
+      "sha256": "0e074d17a1c7493d651f068c90f9c61db4ee6f45b199b5e0753485e9d2af9da4"
+    },
+    {
+      "file": "src/lib/evidence.ts",
+      "bytes": 5424,
+      "sha256": "cc6286fdf9410646d9a64c1e2a58593348f53adb57c058cb424204594939135d"
+    },
+    {
+      "file": "src/lib/locations.ts",
+      "bytes": 2246,
+      "sha256": "c16499ae9f2d51b4ea7ba2127195f085129bd9ee951a9ecd9f6a2f803753b638"
+    },
+    {
+      "file": "src/lib/statistics.mjs",
+      "bytes": 5466,
+      "sha256": "bb61ab4321427f0c5396199362d620f338c8209adf3bf3ab5edabcb8ebb2a09c"
+    },
+    {
+      "file": "src/main.tsx",
+      "bytes": 1038,
+      "sha256": "444d14a4af0deff00c4ed6abda6cd39bd2ce73a2e3b2c778e44c71cd03324ca9"
+    },
+    {
+      "file": "src/styles.css",
+      "bytes": 27880,
+      "sha256": "e301aaa8c9cfc0a4ad61fdbf949e1f49f966b87a247bb4896fd9dde465412198"
+    },
+    {
+      "file": "src/vite-env.d.ts",
+      "bytes": 163,
+      "sha256": "0f4c1719b90c9bc6f65df14633adbe9d39b1d0707da687321fd43177aa9b550c"
+    },
+    {
+      "file": "start_windows.bat",
+      "bytes": 445,
+      "sha256": "aed28f4d7b924fad79e798e21b734fc96841bcb6f4bf11f899681a5d1f2829b8"
+    },
+    {
+      "file": "tests/build-fix.test.mjs",
+      "bytes": 959,
+      "sha256": "090a3b029f0e0d236e0ec3fbf0481e897d46f080cb9fd9495ffd209c99b94aed"
+    },
+    {
+      "file": "tests/science.test.mjs",
+      "bytes": 3032,
+      "sha256": "4d75a7abad22b377e7ec323bf4db26d1776e99e9423cfc30431327d492a72dd9"
+    },
+    {
+      "file": "tests/structure.test.mjs",
+      "bytes": 2914,
+      "sha256": "8cab9322f00b07519a2471469ac8526fbbd9c7ddd1e022d0c456da255965c487"
+    },
+    {
+      "file": "tsconfig.json",
+      "bytes": 481,
+      "sha256": "802ff0c700393952e93a8e15831de77d6af45b04814eee2f0818d2561dce9e3d"
+    },
+    {
+      "file": "vite.config.ts",
+      "bytes": 225,
+      "sha256": "078c8f9ab51d58f24f7959716e3bae3e9f82d7125f1e78574fe5efb0dc9998f7"
+    },
+    {
+      "file": "worker/index.mjs",
+      "bytes": 8695,
+      "sha256": "bf721b18bf2e79b31fe8c40998dc184c32a63c050f84220e06a159b736a26d31"
+    },
+    {
+      "file": "worker/nasa.mjs",
+      "bytes": 2360,
+      "sha256": "72096afa8d930f26df8d79a027e2b0072f11b2a34c8b1bdbc8f0086b6c0b5ce0"
+    },
+    {
+      "file": "wrangler.jsonc",
+      "bytes": 513,
+      "sha256": "c2ce18c02c846cac61f0c00f4d80a871e747b9a71487d00fcc7f08e39d64f57c"
+    }
+  ]
+}

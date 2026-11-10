@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-11-04",
+  "production": {
+    "id": "2813c029-cea6-4402-9a7b-6e0bffd90938",
+    "number": 16,
+    "deploymentId": "f551c958-5818-45ac-97af-87b43e8085f9",
+    "traffic": 100,
+    "createdOn": "2026-11-04T05:56:25.604342Z"
+  },
+  "preview": {
+    "id": "4b943252-81aa-41d9-b7be-4697851e1caf",
+    "number": 18,
+    "url": "https://4b943252-oman-earth-intelligence-practice.muhammed-10alajmi.workers.dev/"
+  },
+  "sameBindings": true,
+  "sameRuntime": true,
+  "productionWorkerDownloadContainsExactPreviewModule": true,
+  "notes": "Worker API download is multipart; envelope/module filename affects etag. Exact 37,617-character validated module is present in current production download. Only preview versions were uploaded in this iteration; no production deployment mutation."
+}

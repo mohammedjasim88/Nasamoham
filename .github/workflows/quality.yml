@@ -1,0 +1,33 @@
+name: Quality and scientific integrity
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Repository safety, NASA tests, TypeScript and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Check tracked files for obvious secrets and unwanted artifacts
+        run: node scripts/repo_safety_check.mjs
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Scientific integrity, unit tests, TypeScript, build and bundle budget
+        run: npm run qa

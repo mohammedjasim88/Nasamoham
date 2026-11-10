@@ -1,0 +1,301 @@
+{
+  "preview": "https://a6842c40-oman-earth-intelligence-practice.muhammed-10alajmi.workers.dev",
+  "passed": 13,
+  "total": 13,
+  "results": [
+    {
+      "path": "/",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 200,
+      "actual": "200",
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://*.openfreemap.org https://*.openstreetmap.org https://*.maptiler.com https://*.cartocdn.com; connect-src 'self' https://*.openfreemap.org https://*.maptiler.com https://*.openstreetmap.org https://*.cartocdn.com; font-src 'self' data: https://fonts.gstatic.com https://*.openfreemap.org https://*.maptiler.com; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {},
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/status",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 200,
+      "actual": "200",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "ready": true
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/status",
+      "method": "POST",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 405,
+      "actual": "405",
+      "headers": {
+        "allow": "GET",
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "METHOD_NOT_ALLOWED",
+        "code": "METHOD_NOT_ALLOWED"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/status",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": true,
+      "expected": 403,
+      "actual": "403",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "ORIGIN_NOT_ALLOWED",
+        "code": "ORIGIN_NOT_ALLOWED"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/power?lat=23&lon=58&extra=blocked",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 400,
+      "actual": "400",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "UNSUPPORTED_QUERY",
+        "code": "UNSUPPORTED_QUERY"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/power?lat=23&lat=24&lon=58",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 400,
+      "actual": "400",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "UNSUPPORTED_QUERY",
+        "code": "UNSUPPORTED_QUERY"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/boundaries?level=invalid",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 400,
+      "actual": "400",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "INVALID_BOUNDARY_LEVEL",
+        "code": "INVALID_BOUNDARY_LEVEL"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/not-real",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 404,
+      "actual": "404",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "UNKNOWN_ENDPOINT",
+        "code": "UNKNOWN_ENDPOINT"
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/power?lat=23.5946&lon=58.7351&start=2000&end=2025",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 200,
+      "actual": "200",
+      "headers": {
+        "cache-control": "public, max-age=600, s-maxage=21600",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "annualRows": 26
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/verification?lat=23.5946&lon=58.7351&start=2000&end=2025&metric=T2M",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 200,
+      "actual": "200",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "cached": false,
+        "annualRows": 26
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/boundaries?level=governorates",
+      "method": "GET",
+      "bodyBytes": 0,
+      "foreignOrigin": false,
+      "expected": 200,
+      "actual": "200",
+      "headers": {
+        "cache-control": "public, max-age=300, s-maxage=86400",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "polygons": 11
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/ask",
+      "method": "POST",
+      "bodyBytes": 2,
+      "foreignOrigin": false,
+      "expected": 501,
+      "actual": "501",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "Cloudflare Workers AI is not enabled. Use the local Evidence Explainer.",
+        "modelEnabled": false
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "path": "/api/ask",
+      "method": "POST",
+      "bodyBytes": 2049,
+      "foreignOrigin": false,
+      "expected": 413,
+      "actual": "413",
+      "headers": {
+        "cache-control": "no-store",
+        "strict-transport-security": "max-age=31536000",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "summary": {
+        "error": "PAYLOAD_TOO_LARGE",
+        "code": "PAYLOAD_TOO_LARGE"
+      },
+      "passed": true,
+      "errors": []
+    }
+  ]
+}

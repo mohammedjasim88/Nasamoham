@@ -1,0 +1,34 @@
+{
+  "deployment": {
+    "id": "997d08ce-de4b-4c45-86c5-6bb68fc234b6",
+    "source": "api",
+    "strategy": "percentage",
+    "author_email": "muhammed.10alajmi@gmail.com",
+    "annotations": {
+      "workers/message": "Security hardening validated: 121 tests, science 11/11, build and preview checks pass. User approved with no paid services; Workers Free confirmed. Existing bindings preserved; AI remains disabled.",
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "0bb77cc4-311a-4a14-a4a0-a59932559ee9",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-11-03T21:22:27.753363Z"
+  },
+  "bindings": [
+    {
+      "name": "AI_RATE",
+      "type": "ratelimit"
+    },
+    {
+      "name": "ASSETS",
+      "type": "assets"
+    },
+    {
+      "name": "NASA_RATE",
+      "type": "ratelimit"
+    }
+  ],
+  "logpush": false
+}

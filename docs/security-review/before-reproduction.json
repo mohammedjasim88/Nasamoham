@@ -1,0 +1,25 @@
+[
+  {
+    "finding": "Status accepts unsupported POST",
+    "status": 200
+  },
+  {
+    "finding": "Unknown and duplicate query keys reach upstream and error details exposed",
+    "status": 502,
+    "sentinelReflected": true
+  },
+  {
+    "finding": "AI body fully buffered before size rejection",
+    "status": 413,
+    "chunksRead": 21,
+    "totalBytes": 5120
+  },
+  {
+    "finding": "API browser headers incomplete",
+    "headers": {
+      "csp": null,
+      "hsts": null,
+      "frame": null
+    }
+  }
+]

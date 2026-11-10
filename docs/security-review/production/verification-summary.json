@@ -1,0 +1,18 @@
+{
+  "passed": 13,
+  "total": 13,
+  "scope": "post-deployment production HTTP smoke",
+  "version": "0bb77cc4-311a-4a14-a4a0-a59932559ee9",
+  "powerAnnualRows": 26,
+  "verificationAnnualRows": 26,
+  "boundaryPolygons": 11,
+  "AIEnabled": false,
+  "browserReconciliation": "26/26 T2M Muscat East 2000-2025 within \u00b10.01",
+  "downloads": [
+    "nasa-evidence.zip",
+    "nasa-original.csv"
+  ],
+  "evidenceIntegrity": "ZIP CRC32 and SHA-256 PASS: 4 files, 1 location",
+  "mobile": "not verified",
+  "WebGL": "unavailable in cloud browser; coordinate fallback observed"
+}

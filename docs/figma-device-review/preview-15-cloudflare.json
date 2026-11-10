@@ -1,0 +1,11 @@
+{
+  "production": [
+    {
+      "version_id": "0bb77cc4-311a-4a14-a4a0-a59932559ee9",
+      "percentage": 100
+    }
+  ],
+  "bindingsUnchanged": true,
+  "headersUnchanged": true,
+  "routingUnchanged": true
+}

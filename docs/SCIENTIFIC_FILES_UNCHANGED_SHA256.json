@@ -1,0 +1,13 @@
+{
+  "src/lib/statistics.mjs": "9b1c64102fef93929496ed546042346578cc1dc61746cc2dade8b0bd159f7cb8",
+  "src/lib/evidence.ts": "99875bc1091795a9ab10d7b3fe32d93b155e2ba55c3568a5b7f5775471967c2b",
+  "src/lib/locations.ts": "fcb173f016eae7ec834c17d542209e10b6767d136e048b0cb54c34379b5e787a",
+  "worker/nasa.mjs": "279a6e7801087fb37b446afcb9d747765f82b086f44c0c0be4c4fd1761e6593b",
+  "worker/index.mjs": "04a4d7b9fc5d27205543c98db2202bfab65a5a241f7601d947e4ef6ff1caea6f",
+  "sources/muscat-east-original.csv": "358894968fbbf951dc4ddd20b5a39e79784e865501ee22b207063316bd68a201",
+  "sources/muscat-west-original.csv": "52dc92f972f4f2a13c2b1bd40816452c5162c24d6575b342d533416fd345b9d6",
+  "sources/salalah-rh-original.csv": "6a81c7810bfd7651975ccf56f713d72f0ee5356fc1d0f6464ba751958710a44d",
+  "public/data/muscat-east.json": "0ebf6bcdadce4aa74ede2ce3ac6d3c435aef1f645a98a0048e13569f10bae12d",
+  "public/data/muscat-west.json": "526c24ff037fc2150264733921974b127e627d0d522938e2c0a040fe7b93fb75",
+  "public/data/salalah-rh.json": "b5b3dee49c38a885919829d9a6e6b411bb27dcb54196b8bacc250729b3e85ebc"
+}

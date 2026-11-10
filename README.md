@@ -1,19 +1,71 @@
-# Oman Earth Intelligence — NASA Space Apps engineering repository
+# Oman Earth Intelligence v3.5 — Pro Experience
 
-Private development repository for the Oman Earth Intelligence React / TypeScript / Vite / MapLibre / Cloudflare Workers project.
+**Latest version:** premium interface, global quick navigation, visible scientific context, lighter non-map pages, mobile refinements, and source-preserving quality checks.
 
-> **Import status — 10 November 2026:** The complete source archive has **not yet been committed** to this repository. This is an initial safeguarded repository scaffold, not a deployable application.
+[Detailed bilingual release notes](docs/PRO_EXPERIENCE_RELEASE_v3_5_AR_EN.md)
 
-## Verified local snapshot
-- Prepared archive: `Oman_Earth_Intelligence_GitHub_Engineering_Upgrade.zip` (196 files).
-- Heuristic repository safety check: 168 text files scanned, no signature-based alerts.
-- Local Node tests: 136 passed, 1 failed out of 137 attempted; the failure was `ERR_MODULE_NOT_FOUND` for the not-yet-installed `three` dependency.
-- No remote full build or GitHub Actions validation has completed for this repository.
-- The existing Cloudflare production application is **not connected to deployments from this repository** and has not been changed.
+## Quick start on Windows
 
-## Next safe step
-Import the original **extracted** archive into this repository, preserving the nested paths such as `src/`, `worker/`, `tests/`, `public/`, `scripts/` and `.github/`. Exclude `node_modules/`, `dist/`, `.env`, `.dev.vars`, credentials, and other ignored files.
+```powershell
+npm.cmd install
+npm.cmd run audit:science
+npm.cmd test
+npm.cmd run build
+npm.cmd run audit:bundle
+node scripts/local_node_preview.mjs
+```
 
-After the complete source has arrived, verify the included `.github/workflows/quality.yml` pipeline passes, then perform scientific/data and responsive UI review in isolated branches. The included manual Playwright browser workflow is optional. **Do not deploy to production without explicit approval.**
+For browser tests: `npx.cmd playwright install chromium webkit` then `npm.cmd run test:e2e`. For publication (only after successful checks): `npx.cmd wrangler deploy`.
 
-The private source archive is retained separately; this README documents repository status but is not a substitute for the source files.
+**Scientific integrity:** eleven source, analysis and NASA files retain their original SHA-256 hashes. This does not mean every source value has been independently validated for every location.
+
+---
+
+# Oman Earth Intelligence v3.4 — Hackathon Readiness
+
+**Climate analysis for Oman using NASA POWER, with transparent source verification.**
+
+This iteration expands v3.3 with eight QA workstreams while keeping the NASA source records and original OLS trend computation unchanged. The cinematic intro, climate explorer, annual trend chart, location comparison, NASA Verification Lab, and evidence archive remain available.
+
+## Install / Build / Deploy (Windows PowerShell)
+
+```powershell
+npm.cmd install
+npm.cmd test
+npm.cmd run build
+npm.cmd run audit:bundle
+npx.cmd wrangler deploy
+```
+
+## Browser acceptance suite
+
+```powershell
+npx.cmd playwright install chromium webkit
+npm.cmd run test:e2e
+```
+
+The Playwright tests use a local Wrangler Worker on `127.0.0.1:8787`. A green Node unit test run **does not** imply the iPhone UI or NASA availability are verified.
+
+## Remote read-only diagnostics
+
+```powershell
+node scripts/verify_live.mjs https://oman-earth-intelligence-practice.muhammed-10alajmi.workers.dev
+node scripts/audit_live_sources.mjs https://oman-earth-intelligence-practice.muhammed-10alajmi.workers.dev
+```
+
+See [`docs/HACKATHON_READINESS_v3_4_AR_EN.md`](docs/HACKATHON_READINESS_v3_4_AR_EN.md) for scope, tests, precautions and manual QA.
+
+## Scientific integrity
+
+- NASA POWER point-grid estimates are not equivalent to ground-station weather or governorate spatial averages.
+- OLS significance is not corrected for serial correlation; the new Theil–Sen, lag-1 and leave-one-out checks are descriptive diagnostics.
+- Precipitation units and the 2024 anomaly require contextual examination.
+- Verification Lab compares fresh NASA annual `YYYY13` fields against website exports without changing values. ZIP evidence retains original JSON for audit.
+
+## Copyright / map sources
+
+NASA POWER historical meteorological data; NASA Blue Marble Earth imagery; Oman NCSI administrative geographic service; OpenFreeMap / OpenStreetMap. External licence and attribution requirements continue to apply.
+
+## v3.5.1 TypeScript build fix
+
+The NASA Verification Lab evidence archive function now has explicit JSDoc typing for the optional uploaded CSV. This fixes the `TS2322` build error in `VerificationLab.tsx` when passing a file or `null`. See [Arabic build-fix notes](docs/TYPESCRIPT_BUILD_FIX_v3_5_1_AR.md). No NASA data or scientific calculation was changed.

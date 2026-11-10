@@ -1,0 +1,2 @@
+PASS: ZIP CRC32 and SHA-256 integrity checks (4 evidence files, 1 location(s)).
+Saved verification result: matched. This does not authenticate NASA or certify ground observations.

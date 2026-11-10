@@ -1,0 +1,29 @@
+{
+  "testedVersion": "154c2598-6d4a-42d9-9fd1-b292b079df2d",
+  "testedURL": "https://154c2598-oman-earth-intelligence-practice.muhammed-10alajmi.workers.dev/",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "isMobile": true,
+    "hasTouch": true,
+    "deviceScaleFactor": 1
+  },
+  "environment": "Cloudflare Browser Rendering: Chromium mobile emulation, NOT a physical phone",
+  "observedRenderState": "ready",
+  "canvas": {
+    "width": 390,
+    "height": 255,
+    "engine": "three.js r181"
+  },
+  "visualObservation": "NASA textured 3D Earth and NCSI overlay rendered; longitude alignment defect found",
+  "physicalPhoneTest": "NOT PERFORMED: no physical device connected",
+  "actualTouchDragTest": "NOT PERFORMED",
+  "newBuildBrowserVerification": "PENDING: asset-upload session rejected by automatic approval review",
+  "newBuildTests": {
+    "passed": 127,
+    "failed": 0,
+    "scienceUnchanged": 11,
+    "productionBuild": "pass, 9.04 seconds",
+    "bundleBudget": "pass"
+  }
+}
