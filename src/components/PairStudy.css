@@ -1,0 +1,37 @@
+.pair-study{display:grid;gap:16px;margin-top:16px}
+.pair-study .pair-analysis,.pair-study .pair-chart-panel{min-width:0;scroll-margin-block-start:150px}
+.pair-back{margin-bottom:12px}
+.pair-question{padding:12px;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.pair-summary,.pair-location-comparison{font-size:14px;line-height:1.9;white-space:pre-line;overflow-wrap:anywhere}
+.pair-context{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pair-context span{display:grid;gap:5px;min-width:120px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);font-size:12px}
+.pair-context b{color:var(--muted);font-size:10px}
+.pair-integrity{padding:12px;border-inline-start:3px solid var(--gold);border-radius:8px;background:rgba(217,152,57,.07);color:var(--gold);font-size:12px;line-height:1.7}
+.pair-chart-legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:8px;color:var(--muted);font-size:11px}
+.pair-chart-legend span{display:inline-flex;align-items:center;gap:8px}
+.pair-chart-legend i{width:10px;height:10px;border-radius:50%;background:var(--cyan)}
+.pair-chart-legend .pair-legend-b{border-radius:1px;background:var(--gold);transform:rotate(45deg)}
+.pair-chart svg{display:block;width:100%;max-height:300px;overflow:visible}
+.pair-grid{stroke:var(--border);stroke-width:1;stroke-dasharray:4 4}
+.pair-axis-label{fill:var(--subtle);font-size:11px}
+.pair-point{cursor:pointer;stroke:var(--panel);stroke-width:2}
+.pair-point-a{fill:var(--cyan)}
+.pair-point-b{fill:var(--gold)}
+.pair-point:focus-visible{outline:none;stroke:var(--text);stroke-width:3}
+.pair-inspection,.pair-no-values{min-height:24px;color:var(--muted);font-size:12px;line-height:1.7}
+.pair-value-table-wrap{max-width:100%;max-height:420px;overflow:auto;overscroll-behavior:contain}
+.pair-value-table thead th{position:sticky;top:0;z-index:1;background:var(--panel)}
+.pair-value-table{font-variant-numeric:tabular-nums}
+.pair-value-table{width:100%;border-collapse:collapse;direction:ltr;font-size:12px}
+.pair-value-table caption{text-align:start;padding:10px 0;color:var(--muted)}
+.pair-value-table th,.pair-value-table td{padding:11px;text-align:start;border-bottom:1px solid var(--border);vertical-align:top}
+.pair-value-table th small{font-weight:400;color:var(--muted)}
+.pair-citations{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:16px}
+.pair-citations article{display:grid;align-content:start;gap:8px;padding:14px;border:1px solid var(--border);border-radius:11px;background:var(--panel2);font-size:11px;overflow-wrap:anywhere}
+.pair-citations article>span{color:var(--muted)}
+.pair-citations a{display:flex;align-items:center;gap:6px;color:var(--cyan);line-height:1.6}
+.pair-citations p{margin:4px 0 0;line-height:1.75;color:var(--muted);white-space:pre-line}
+.pair-analysis:focus,.pair-chart-panel:focus{outline:2px solid var(--cyan);outline-offset:3px}
+@media(max-width:600px){.pair-study .panel{padding:15px}.pair-context span{flex:1 1 40%}.pair-value-table th,.pair-value-table td{padding:8px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.pair-point{transition:none}}
+@media(max-width:600px){.pair-study .pair-analysis,.pair-study .pair-chart-panel{scroll-margin-block-start:96px}}

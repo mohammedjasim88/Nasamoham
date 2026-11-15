@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "appRoot": true
+  },
+  {
+    "path": "/api/status",
+    "status": 200,
+    "ready": true
+  },
+  {
+    "path": "/api/power?lat=70&lon=90&start=2000&end=2025",
+    "status": 400
+  },
+  {
+    "path": "/api/nothing-here",
+    "status": 404
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "worker": "oman-earth-intelligence-preview",
+  "deploymentId": "f14fcc5e-991b-4c94-94e4-6e1bbed3a126",
+  "versions": [
+    {
+      "version_id": "b375a401-9154-4f78-bd9b-2beff1b33821",
+      "percentage": 100
+    }
+  ],
+  "createdOn": "2026-11-15T15:38:33.29144Z",
+  "compatibilityDate": "2026-11-03",
+  "bindings": [
+    {
+      "name": "AI_RATE",
+      "namespace_id": "910242",
+      "simple": {
+        "limit": 20,
+        "period": 60
+      },
+      "type": "ratelimit"
+    },
+    {
+      "name": "ASSETS",
+      "type": "assets"
+    },
+    {
+      "name": "NASA_RATE",
+      "namespace_id": "910241",
+      "simple": {
+        "limit": 120,
+        "period": 60
+      },
+      "type": "ratelimit"
+    }
+  ]
+}

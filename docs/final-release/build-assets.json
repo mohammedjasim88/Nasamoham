@@ -1,0 +1,197 @@
+[
+  {
+    "path": "assets/ClimateInsights-CjFoos0B.js",
+    "sha256": "1ad563f9730c7b8855dd1b4b6a5ee017ec6cb0f2f4bd6c592b1e7ab7f16c18c2",
+    "bytes": 8235
+  },
+  {
+    "path": "assets/desert-horizon.svg",
+    "sha256": "7a19a5d59095744cc194ec99361c2ca2bc3e61acb93c5fb52168cb86403ce00a",
+    "bytes": 1195
+  },
+  {
+    "path": "assets/DeviceCheck-B393auMr.css",
+    "sha256": "f4194e7ebdb6fe129c5627bf199065fdc225c1c82085e97817bc3eec084ba224",
+    "bytes": 1050
+  },
+  {
+    "path": "assets/DeviceCheck-BoORXhlt.js",
+    "sha256": "1353235e360b06c3cae34186cedbbbc34b55f2203697a33466a02c83bbe2d112",
+    "bytes": 2662
+  },
+  {
+    "path": "assets/earth-first-frame.webp",
+    "sha256": "4f8c2d5aa13c394634602a86d9f2db29e76d35bd6b2c1446845ddca3b1776744",
+    "bytes": 56716
+  },
+  {
+    "path": "assets/EarthGlobe-DI3n-5lO.js",
+    "sha256": "a60062deeb002425ee3706155d2cfad75e27b31b0ca2db901f4e474f6678ae68",
+    "bytes": 507770
+  },
+  {
+    "path": "assets/echarts-runtime-Dz_lQzU0.js",
+    "sha256": "fb4d2938ea48893d836ed047140ab93e13614b3fd848150e59b1598f8562f882",
+    "bytes": 567570
+  },
+  {
+    "path": "assets/espeak-ng-Dni-keDM.wasm",
+    "sha256": "10d24bb7e4124e983aa9cd8cd96c52c8ea4b607d81956ec70846684e2827d532",
+    "bytes": 18485010
+  },
+  {
+    "path": "assets/index-oJfkegWz.js",
+    "sha256": "4cae28ebd60f19a310b5e3f14ee372f0da34ce98c07ef5c4437aa3752cf01d25",
+    "bytes": 362372
+  },
+  {
+    "path": "assets/index-vNG7g7Sr.css",
+    "sha256": "451b73e7c1664c43da33170988ce3c3f416eeab6166288d2880fb076b940d6eb",
+    "bytes": 97599
+  },
+  {
+    "path": "assets/loader-circle-Cn798sX4.js",
+    "sha256": "65a6334993c6d5cb38b3c5273832516dc99b1789a2dcd7c146ceededed32699b",
+    "bytes": 140
+  },
+  {
+    "path": "assets/local-ai.worker-3jJEIFsa.js",
+    "sha256": "8c3bbe28bd6ad7bc691587fdc37caa149c23ace9d26e0b9d09b7888c8ab8dc2c",
+    "bytes": 6133978
+  },
+  {
+    "path": "assets/maplibre-gl-worker-Bi68raVw.js",
+    "sha256": "2ea52e519e1460992d47b12d61f2ad0f40ade6905920fe617c982362352e07b9",
+    "bytes": 517152
+  },
+  {
+    "path": "assets/motion-features-Z4EpqPSv.js",
+    "sha256": "e64dc1060296511a44cd9f5c753d67245b93cf122fea58ec153478855fe200e5",
+    "bytes": 50494
+  },
+  {
+    "path": "assets/nasa-blue-marble.webp",
+    "sha256": "31514a439104ad388798ee377ee8a42994f51a0a9ff0d3e566902c97db2f53e1",
+    "bytes": 421028
+  },
+  {
+    "path": "assets/OmanMap--S9olhOP.css",
+    "sha256": "358786178dd083c76f41a12df6c7716d65f0c7e1ded974ed3959d1df1a9b43ae",
+    "bytes": 71505
+  },
+  {
+    "path": "assets/OmanMap-DBvWSUn-.js",
+    "sha256": "375478c960be0c4a49739d6e046a3ecf200e91bee526616b80e8fabaf39c5059",
+    "bytes": 1100764
+  },
+  {
+    "path": "assets/ort-wasm-simd-threaded-4byDm7i3.wasm",
+    "sha256": "06ba057753da3847e4c24f02d91ab133455b0817c69a44993a9a53a2146df9e3",
+    "bytes": 14264838
+  },
+  {
+    "path": "assets/ScientificAssistant-7BnYMyeb.js",
+    "sha256": "b26b3620737c9eedc0558c225140de843494387754f8847e09ae32c14b9369ba",
+    "bytes": 81977
+  },
+  {
+    "path": "assets/ScientificAssistant-CM7L_Wbr.css",
+    "sha256": "1d7afbf6b1423cb7596ed71597871428851edd81c01e9bf1ff320682b7e1a61a",
+    "bytes": 8499
+  },
+  {
+    "path": "assets/ScientificAssistant-D240l4fW.css",
+    "sha256": "441ca72393a3926c99bcfd9518eeb3e028e777846fc3e1269caddb6f9280ebc2",
+    "bytes": 3120
+  },
+  {
+    "path": "assets/ScientificAudit-DXRDerwk.js",
+    "sha256": "a76550a72b34cd12ec46fc0915f9039e541b1c0a86d991eddd15af948bf973e0",
+    "bytes": 9403
+  },
+  {
+    "path": "assets/ScientificAudit-_B0wWHA3.css",
+    "sha256": "c97b299844f159c75cbb9a1b7239b6a364af2209c023490f84f2987b97f93608",
+    "bytes": 2064
+  },
+  {
+    "path": "assets/speech-output.worker-CPdk3YO8.js",
+    "sha256": "106e990ac0b8692a9735b1d591f7a84716660db6fc13fae6cf0d44839849020e",
+    "bytes": 68979
+  },
+  {
+    "path": "assets/starfield.svg",
+    "sha256": "1933dba3bdcce83060a959baee99bb4953edadf839e10fc5e2f9bc0a9d01eba2",
+    "bytes": 19030
+  },
+  {
+    "path": "assets/subtle-clouds.webp",
+    "sha256": "ff3e0b0edf8fe705e65444600aade4769d1e3d3b5ea4785e51d4a5a6da22cf07",
+    "bytes": 53006
+  },
+  {
+    "path": "assets/trend-inference-yKFsfi_n.js",
+    "sha256": "707eaf3ecbf8dac31a9887ba4187a927ae12b1e70b76aca72938ebcdadc8e7a3",
+    "bytes": 3271
+  },
+  {
+    "path": "assets/VerificationLab-C86GmI3n.js",
+    "sha256": "ba45fa913fca6f947f8c0c5c8454fe3f6a2eb4ddcf2559c45cbeb3e9378e846e",
+    "bytes": 40265
+  },
+  {
+    "path": "assets/VerificationLab-CvS6JswV.css",
+    "sha256": "3baafaae10405578695f9b910572faeb8c758d550b39248f613a0f7267d40df0",
+    "bytes": 19124
+  },
+  {
+    "path": "assets/whisper.worker-B8JZVUyp.js",
+    "sha256": "9e214f9e91001674e2097dea6f04207ceeb07bdf97881504d246d7ef3d2e3a99",
+    "bytes": 511406
+  },
+  {
+    "path": "data/buraimi.json",
+    "sha256": "64af57c633943d1415f76d515f0e161a5995ffd182bcb162eae2da42a23e2690",
+    "bytes": 9349
+  },
+  {
+    "path": "data/muscat-east.json",
+    "sha256": "0ebf6bcdadce4aa74ede2ce3ac6d3c435aef1f645a98a0048e13569f10bae12d",
+    "bytes": 9104
+  },
+  {
+    "path": "data/muscat-west.json",
+    "sha256": "526c24ff037fc2150264733921974b127e627d0d522938e2c0a040fe7b93fb75",
+    "bytes": 9103
+  },
+  {
+    "path": "data/salalah-rh.json",
+    "sha256": "b5b3dee49c38a885919829d9a6e6b411bb27dcb54196b8bacc250729b3e85ebc",
+    "bytes": 1784
+  },
+  {
+    "path": "favicon.svg",
+    "sha256": "59580c2583050e6c68e383356871fb10022e0553770c1a717c795ddc12adff29",
+    "bytes": 444
+  },
+  {
+    "path": "index.html",
+    "sha256": "e156e364de3a756ed0ef0858590eb31e8137e23be50486a5fcc9a91c0e9af130",
+    "bytes": 1532
+  },
+  {
+    "path": "licenses/espeak-ng-GPL-3.0.txt",
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "bytes": 35149
+  },
+  {
+    "path": "licenses/espeak-ng-source.txt",
+    "sha256": "62cea198b2fde538562162dc193847ac6ba597392fb444baceca402682fb1ec7",
+    "bytes": 272
+  },
+  {
+    "path": "_headers",
+    "sha256": "941dd3275a0f0e7de3c50e93158f5661d4b36f58a7c2815419b18d4a88128fea",
+    "bytes": 1068
+  }
+]

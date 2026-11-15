@@ -1,0 +1,55 @@
+npx.cmd : [WebServer] (node:8988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+At line:2 char:1
++ npx.cmd playwright test --project=mobile-webkit --workers=1 --max-fai ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 47 tests using 1 worker
+
+(node:14020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"49c12133-7a46-4d2f-94dd-53cd3c2a9760"}
+  ok  1 [mobile-webkit] › e2e\ask-ai-dock.spec.mjs:30:1 › Ask AI stays available across sections and opens the source chart (10.3s)
+  ok  2 [mobile-webkit] › e2e\ask-ai-dock.spec.mjs:77:1 › Arabic transcript with spoken years receives an Arabic scientific summary and voice request (3.9s)
+  ok  3 [mobile-webkit] › e2e\ask-ai-dock.spec.mjs:89:1 › separated years open a cited pair-only chart without drawing a trend line (12.3s)
+  ok  4 [mobile-webkit] › e2e\assistant-voice.spec.mjs:74:1 › first-use disclosure is cancellable and microphone denial gives actionable feedback (5.7s)
+  ok  5 [mobile-webkit] › e2e\assistant-voice.spec.mjs:90:1 › English recording is timed, locally transcribed, editable and spoken in English (7.3s)
+  ok  6 [mobile-webkit] › e2e\assistant-voice.spec.mjs:118:1 › Arabic recording selects Arabic transcription and reply speech (6.5s)
+  ok  7 [mobile-webkit] › e2e\assistant-voice.spec.mjs:136:1 › recording cancellation releases the microphone without starting transcription (4.7s)
+  ok  8 [mobile-webkit] › e2e\assistant-voice.spec.mjs:149:1 › silent audio is rejected before any Whisper inference (4.8s)
+  ok  9 [mobile-webkit] › e2e\assistant-voice.spec.mjs:160:1 › cancelling transcription ignores late worker results and preserves a typed question (5.9s)
+  x  10 [mobile-webkit] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable en reply audio (16.9s)
+(node:14940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 [mobile-webkit] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable ar reply audio (15.3s)
+(node:2268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 12 [mobile-webkit] › e2e\assistant-voice.spec.mjs:187:1 › transcription failure retains the valid recording, identifies its stage and permits retry (4.9s)
+  ok 13 [mobile-webkit] › e2e\assistant-voice.spec.mjs:205:104 › audio decoding errors retry the retained recording without another microphone request (4.8s)
+  ok 14 [mobile-webkit] › e2e\assistant-voice.spec.mjs:205:104 › voice worker startup errors retry the retained recording without another microphone request (6.8s)
+  ok 15 [mobile-webkit] › e2e\assistant-voice.spec.mjs:218:1 › a worker that never replies reports its startup timeout and can be retried (6.3s)
+  ok 16 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:24:1 › four exact prompts retain location/year/metric context and open the same source-backed chart (10.6s)
+  ok 17 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:57:1 › chart navigation carries exact successful values without another NASA request (5.1s)
+  ok 18 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:68:1 › single-year analysis has functional analysis and chart actions (5.3s)
+  ok 19 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:76:1 › cancelled source requests never produce a stale answer or advance conversation (5.3s)
+  ok 20 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:92:1 › source errors preserve the question and offer retry; unsupported prompts send no requests (4.3s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"0cce26e3-81e3-4052-8afc-d7516be6ecac"}
+  ok 21 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:106:1 › conversation survives closing the dock and can be explicitly reset (18.1s)
+  ok 22 [mobile-webkit] › e2e\implemented-improvements.spec.mjs:120:1 › reduced-motion layout fits a small viewport after a result (4.2s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"b9998b89-8d37-4bad-b752-dcc6e208a55e"}
+  ok 23 [mobile-webkit] › e2e\site.spec.mjs:3:1 › intro opens promptly, navigation reaches all scientific sections (7.3s)
+  ok 24 [mobile-webkit] › e2e\site.spec.mjs:14:1 › NASA Verification Lab catches tampering in synthetic inputs (4.0s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"10ad07cf-913b-4649-ad14-8ce6b846441f"}
+  ok 25 [mobile-webkit] › e2e\site.spec.mjs:22:1 › mobile layout avoids horizontal page overflow and supports language switching (6.8s)
+  ok 26 [mobile-webkit] › e2e\site.spec.mjs:35:1 › unexpected API failure is surfaced rather than inventing readings (4.6s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"7c22b09f-7586-4c93-ad54-8aaf75fcd89c"}
+  x  27 [mobile-webkit] › e2e\site.spec.mjs:42:1 › quick navigator works from the intro and opens the independent NASA lab (15.5s)
+Testing stopped early after 3 maximum allowed failures.

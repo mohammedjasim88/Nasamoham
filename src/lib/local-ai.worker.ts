@@ -30,7 +30,7 @@ self.onmessage = async (event:MessageEvent<WorkerRequest>)=>{
       if(engine){await engine.unload();engine=null;modelName='';}
       engine=await CreateMLCEngine(input.modelId!,{
         initProgressCallback:status=>reply(input.id,'progress',status.text,Math.max(0,Math.min(1,status.progress??0))),
-      });
+      },{context_window_size:4096});
       modelName=input.modelId!;
       reply(input.id,'ready');
     }else if(input.action==='ask'){

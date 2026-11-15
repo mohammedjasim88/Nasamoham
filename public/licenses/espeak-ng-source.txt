@@ -1,0 +1,4 @@
+The fallback speech engine is eSpeak NG, distributed under GPL-3.0-or-later.
+Browser build: espeak-ng npm package, version 1.0.2.
+Source and build instructions: https://github.com/ianmarmour/espeak-ng.js
+Upstream synthesiser source: https://github.com/espeak-ng/espeak-ng

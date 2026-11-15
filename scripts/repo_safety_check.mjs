@@ -4,9 +4,10 @@
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('../', import.meta.url).pathname;
-const omitted = new Set(['node_modules', 'dist', '.git', '.wrangler', 'coverage', 'test-results', 'playwright-report']);
+const root = fileURLToPath(new URL('../', import.meta.url));
+const omitted = new Set(['node_modules', 'dist', '.git', '.wrangler', 'coverage', 'test-results', 'playwright-report', 'audit-results', 'release-artifacts']);
 const textExtensions = new Set(['.js','.mjs','.cjs','.ts','.tsx','.json','.jsonc','.html','.css','.scss','.md','.yml','.yaml','.toml','.txt','.svg','.py','.sh','.bat','.ps1','.xml','.csv','.gitignore']);
 const secretPatterns = [
   {name:'private key', re:/-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----/},

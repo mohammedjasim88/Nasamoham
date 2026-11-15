@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('intro opens promptly, navigation reaches all scientific sections',async({page})=>{
  await page.goto('/#home');
- await expect(page.getByRole('heading',{name:/Explore Oman.s Climate|استكشف مناخ/i})).toBeVisible();
+ await expect(page.getByRole('heading',{name:/A new perspective|منظور جديد/})).toBeVisible();
  await page.getByRole('button',{name:/Start Exploring|ابدأ الاستكشاف/i}).click();
  await expect(page).toHaveURL(/#explorer/);
  await expect(page.locator('#main-content')).toBeVisible();
@@ -28,7 +28,7 @@ test('mobile layout avoids horizontal page overflow and supports language switch
  const width=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,viewport:window.innerWidth}));
  expect(width.scroll).toBeLessThanOrEqual(width.viewport+2);
  await page.goto('/#verify');
- await page.locator('.lang-pill').click();
+ await expect(page.locator('html')).toHaveAttribute('dir','rtl');
  await expect(page.getByRole('heading',{name:/مختبر التحقق/})).toBeVisible();
 });
 

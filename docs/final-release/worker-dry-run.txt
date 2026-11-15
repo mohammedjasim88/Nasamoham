@@ -1,0 +1,12 @@
+
+ ⛅️ wrangler 4.157.0
+────────────────────
+✨ Read 42 files from the assets directory D:\MyProjects\Oman_Earth_STRIX_Test\dist
+Total Upload: 43.53 KiB / gzip: 12.98 KiB
+Your Worker has access to the following bindings:
+Binding                               Resource        
+env.NASA_RATE (120 requests/60s)      Rate Limit      
+env.AI_RATE (20 requests/60s)         Rate Limit      
+env.ASSETS                            Assets          
+
+--dry-run: exiting now.

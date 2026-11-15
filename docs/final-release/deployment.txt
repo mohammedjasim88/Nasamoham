@@ -1,0 +1,19 @@
+
+ ⛅️ wrangler 4.157.0 (update available 4.162.0)
+───────────────────────────────────────────────
+🌀 Building list of assets...
+✨ Read 42 files from the assets directory D:\MyProjects\Oman_Earth_STRIX_Test\dist
+🌀 Starting asset upload...
+No updated asset files to upload. Proceeding with deployment...
+Total Upload: 43.53 KiB / gzip: 12.98 KiB
+Worker Startup Time: 1 ms
+Your Worker has access to the following bindings:
+Binding                               Resource        
+env.NASA_RATE (120 requests/60s)      Rate Limit      
+env.AI_RATE (20 requests/60s)         Rate Limit      
+env.ASSETS                            Assets          
+
+Uploaded oman-earth-intelligence-preview (9.21 sec)
+Deployed oman-earth-intelligence-preview triggers (2.15 sec)
+  https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev
+Current Version ID: b375a401-9154-4f78-bd9b-2beff1b33821

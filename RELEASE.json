@@ -1,0 +1,26 @@
+{
+  "release": "final-2026-11-15",
+  "application": "Oman Earth Intelligence",
+  "sourceBaseCommit": "87c496dbc8f75ac14ed655066d764d488a7a4591",
+  "releaseBranch": "release/final-2026-11-15",
+  "repository": "https://github.com/mohammedjasim88/Nasamoham",
+  "target": "oman-earth-intelligence-preview",
+  "deployed": true,
+  "previewUrl": "https://oman-earth-intelligence-preview.muhammed-10alajmi.workers.dev/",
+  "deploymentId": "f14fcc5e-991b-4c94-94e4-6e1bbed3a126",
+  "workerVersionId": "b375a401-9154-4f78-bd9b-2beff1b33821",
+  "publicAssetsSha256Matched": 38,
+  "unitTests": {
+    "passed": 205,
+    "failed": 0
+  },
+  "browserChecks": {
+    "chromiumPassed": 90,
+    "chromiumSkipped": 4,
+    "webkitPassed": 24,
+    "webkitFailed": 3,
+    "webkitNotRun": 20
+  },
+  "readiness": "NOT READY for official NASA submission: outstanding WebKit failures, judge access, original-code licensing, prior-work eligibility and portal submission.",
+  "sourceNote": "Final local source preserved over the existing v3.9 Git history. See docs/FINAL_RELEASE_2026-11-15.md for actual verification scope."
+}

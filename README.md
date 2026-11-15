@@ -1,3 +1,26 @@
+# Final source release — 15 November 2026
+
+See [SUBMISSION_README.md](SUBMISSION_README.md) for current installation, deployment, credits and submission disclosures, and [the final verification report](docs/FINAL_RELEASE_2026-11-15.md) for measured outcomes. The source submission ZIP excludes generated `dist/`; recreate it with `npm run build`. Reports and ZIP descriptions below are historical.
+
+# Oman Earth Intelligence v3.9.1 — Ask AI
+
+Use **Ask AI** on the home page, Explorer, Trends, Compare, Data Quality, NASA Verification Lab or About. The full Scientific Assistant page also remains available. Type in Arabic or English, or choose the recording language and use **Record question**. Review the transcript before submitting. Replies are synthesized in a local worker with eSpeak-NG; browser/device voices and external speech services are not used.
+
+Try: **Compare Muscat and Al Buraimi temperature trends from two thousand to twenty twenty-five**. The answer uses NASA POWER records, estimates both per-decade slopes and reports the paired difference with a 95% Newey–West confidence interval. The Al Buraimi snapshot is derived from the original archived response in `docs/readiness-v39/`. The NASA Lab can independently fetch the source again.
+
+Whisper Tiny is selected on unknown or constrained devices; Base is selected when the browser reports at least 8 GiB device memory. After explicit consent, model weights download from Hugging Face and run locally in a browser worker via ONNX WebAssembly. Voice input requires microphone permission and HTTPS or localhost. Arabic/English accuracy and real-device speed have not been independently benchmarked. Browser tests mock microphone capture, transcription and audio playback; they are not real microphone or speech-quality tests.
+
+The local reply voice uses the existing `espeak-ng` 1.0.2 package (GPL-3.0-or-later), with its licence in `public/licenses/`; the voice is intentionally described as robotic. The ECharts trend/comparison views use modular Apache ECharts 6.1.0 (Apache-2.0), loaded on demand, while the existing SVG chart remains a loading/error fallback and the exact two-year point chart remains unchanged. Motion 14.13.0 (MIT) supplies reduced-motion-aware transitions and interactions. The ECharts runtime is a separate 564.50 kB / 191.73 kB gzipped production chunk; Motion's async feature chunk is 50.49 kB / 19.76 kB gzipped.
+
+## Run the release
+
+- Windows: run `npm.cmd ci`, `npm.cmd run qa`, then `npm.cmd run preview:node`. Open `http://127.0.0.1:8787`.
+- Linux: install with `ONNXRUNTIME_NODE_INSTALL_CUDA=skip npm ci`, then run the same npm scripts. The browser runtime uses WASM.
+- The ZIP includes `dist/`. For Cloudflare deployments to the configured preview Worker, use `DEPLOY_WINDOWS.cmd` with your existing Cloudflare account.
+- For automated browser checks, install the Playwright browsers and run `npm run test:e2e`.
+
+---
+
 # Oman Earth Intelligence v3.5 — Pro Experience
 
 **Latest version:** premium interface, global quick navigation, visible scientific context, lighter non-map pages, mobile refinements, and source-preserving quality checks.

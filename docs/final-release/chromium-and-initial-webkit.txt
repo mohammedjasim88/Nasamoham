@@ -1,0 +1,137 @@
+npx.cmd : [WebServer] (node:7888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+At line:2 char:1
++ npx.cmd playwright test --workers=1 --reporter=list *> verification-f ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 141 tests using 1 worker
+
+(node:3460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"f62a4fa0-5fca-45d2-94fd-247a7099237a"}
+  ok   1 [desktop-chromium] › e2e\ask-ai-dock.spec.mjs:30:1 › Ask AI stays available across sections and opens the source chart (7.8s)
+  ok   2 [desktop-chromium] › e2e\ask-ai-dock.spec.mjs:77:1 › Arabic transcript with spoken years receives an Arabic scientific summary and voice request (2.4s)
+  ok   3 [desktop-chromium] › e2e\ask-ai-dock.spec.mjs:89:1 › separated years open a cited pair-only chart without drawing a trend line (2.6s)
+  ok   4 [desktop-chromium] › e2e\assistant-voice.spec.mjs:74:1 › first-use disclosure is cancellable and microphone denial gives actionable feedback (1.3s)
+  ok   5 [desktop-chromium] › e2e\assistant-voice.spec.mjs:90:1 › English recording is timed, locally transcribed, editable and spoken in English (4.4s)
+  ok   6 [desktop-chromium] › e2e\assistant-voice.spec.mjs:118:1 › Arabic recording selects Arabic transcription and reply speech (3.1s)
+  ok   7 [desktop-chromium] › e2e\assistant-voice.spec.mjs:136:1 › recording cancellation releases the microphone without starting transcription (1.3s)
+  ok   8 [desktop-chromium] › e2e\assistant-voice.spec.mjs:149:1 › silent audio is rejected before any Whisper inference (1.3s)
+  ok   9 [desktop-chromium] › e2e\assistant-voice.spec.mjs:160:1 › cancelling transcription ignores late worker results and preserves a typed question (2.5s)
+  ok  10 [desktop-chromium] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable en reply audio (3.3s)
+  ok  11 [desktop-chromium] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable ar reply audio (2.7s)
+  ok  12 [desktop-chromium] › e2e\assistant-voice.spec.mjs:187:1 › transcription failure retains the valid recording, identifies its stage and permits retry (1.5s)
+  ok  13 [desktop-chromium] › e2e\assistant-voice.spec.mjs:205:104 › audio decoding errors retry the retained recording without another microphone request (1.4s)
+  ok  14 [desktop-chromium] › e2e\assistant-voice.spec.mjs:205:104 › voice worker startup errors retry the retained recording without another microphone request (1.3s)
+  ok  15 [desktop-chromium] › e2e\assistant-voice.spec.mjs:218:1 › a worker that never replies reports its startup timeout and can be retried (1.5s)
+  ok  16 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:24:1 › four exact prompts retain location/year/metric context and open the same source-backed chart (4.8s)
+  ok  17 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:57:1 › chart navigation carries exact successful values without another NASA request (1.8s)
+  ok  18 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:68:1 › single-year analysis has functional analysis and chart actions (1.8s)
+  ok  19 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:76:1 › cancelled source requests never produce a stale answer or advance conversation (995ms)
+  ok  20 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:92:1 › source errors preserve the question and offer retry; unsupported prompts send no requests (1.1s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"5dec19ae-3a43-4dee-9225-69cd46b40255"}
+  ok  21 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:106:1 › conversation survives closing the dock and can be explicitly reset (16.3s)
+  ok  22 [desktop-chromium] › e2e\implemented-improvements.spec.mjs:120:1 › reduced-motion layout fits a small viewport after a result (1.3s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"5fc5627a-b530-4ec7-862c-7be7e7863f55"}
+  ok  23 [desktop-chromium] › e2e\site.spec.mjs:3:1 › intro opens promptly, navigation reaches all scientific sections (3.1s)
+  ok  24 [desktop-chromium] › e2e\site.spec.mjs:14:1 › NASA Verification Lab catches tampering in synthetic inputs (1.1s)
+  -   25 [desktop-chromium] › e2e\site.spec.mjs:22:1 › mobile layout avoids horizontal page overflow and supports language switching
+  ok  26 [desktop-chromium] › e2e\site.spec.mjs:35:1 › unexpected API failure is surfaced rather than inventing readings (1.4s)
+  ok  27 [desktop-chromium] › e2e\site.spec.mjs:42:1 › quick navigator works from the intro and opens the independent NASA lab (1.6s)
+  ok  28 [desktop-chromium] › e2e\site.spec.mjs:52:1 › non-map routes provide a lightweight geographic shortcut rather than launching map canvas (1.7s)
+  ok  29 [desktop-chromium] › e2e\site.spec.mjs:61:1 › scientific context is visible and does not label unloaded source as verified (1.2s)
+  ok  30 [desktop-chromium] › e2e\trend-chart.spec.mjs:3:1 › ECharts trend view supports zoom, keyboard year inspection and accessible source values (2.6s)
+  ok  31 [desktop-chromium] › e2e\trend-chart.spec.mjs:33:1 › trend chart layout fits phone, tablet and desktop viewports (1.8s)
+  ok  32 [desktop-chromium] › e2e\trend-chart.spec.mjs:53:1 › location comparison keeps the two source series and exposes missing values (1.4s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"0f457990-7007-433d-8e97-0bdbb4773f4a"}
+  ok  33 [desktop-chromium] › e2e\v36.spec.mjs:3:1 › home loads with accessible NASA Earth controls (5.5s)
+  ok  34 [desktop-chromium] › e2e\v36.spec.mjs:16:1 › assistant answers a NASA provenance question and maintains evidence caveats (1.1s)
+  -   35 [desktop-chromium] › e2e\v36.spec.mjs:25:1 › mobile viewport remains usable without forced horizontal overflow
+  ok  36 [desktop-chromium] › e2e\v36.spec.mjs:32:1 › reduced-motion mode keeps visual without mandatory animation (529ms)
+  ok  37 [desktop-chromium] › e2e\v37-assistant.spec.mjs:3:1 › climate value question uses annual NASA evidence instead of glossary (1.0s)
+  ok  38 [desktop-chromium] › e2e\v37-assistant.spec.mjs:14:1 › NASA source question keeps deterministic project guidance (1.1s)
+  ok  39 [desktop-chromium] › e2e\v37-assistant.spec.mjs:20:1 › AI status states clearly that Cloudflare Workers AI is not used (613ms)
+  -   40 [desktop-chromium] › e2e\v37-assistant.spec.mjs:26:1 › mobile assistant fits viewport without horizontal scrolling
+  ok  41 [desktop-chromium] › e2e\v38-local-open-source-ai.spec.mjs:3:1 › open-source browser model loads only after explicit opt-in (1.4s)
+  ok  42 [desktop-chromium] › e2e\v38-local-open-source-ai.spec.mjs:17:1 › unsupported WebGPU gives honest fallback and verified NASA assistant stays usable (697ms)
+  ok  43 [desktop-chromium] › e2e\v38-local-open-source-ai.spec.mjs:27:1 › domain-only prompting: unrelated questions and numeric evidence are gated (740ms)
+  -   44 [desktop-chromium] › e2e\v38-local-open-source-ai.spec.mjs:37:1 › phone UI does not overflow with optional model controls
+  ok  45 [desktop-chromium] › e2e\v39-inference.spec.mjs:5:1 › HAC and rank inference render from real preserved NASA annual values (1.9s)
+  ok  46 [desktop-chromium] › e2e\v39-inference.spec.mjs:20:1 › Paired case study tests the difference, not two individual p-values (1.6s)
+  ok  47 [desktop-chromium] › e2e\v39-inference.spec.mjs:33:1 › Short interval withholds approximate inference (1.1s)
+(node:9772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"88229801-7a3d-4948-a4ba-43be2d4563e9"}
+  ok  48 [mobile-chromium] › e2e\ask-ai-dock.spec.mjs:30:1 › Ask AI stays available across sections and opens the source chart (4.2s)
+  ok  49 [mobile-chromium] › e2e\ask-ai-dock.spec.mjs:77:1 › Arabic transcript with spoken years receives an Arabic scientific summary and voice request (2.6s)
+  ok  50 [mobile-chromium] › e2e\ask-ai-dock.spec.mjs:89:1 › separated years open a cited pair-only chart without drawing a trend line (3.7s)
+  ok  51 [mobile-chromium] › e2e\assistant-voice.spec.mjs:74:1 › first-use disclosure is cancellable and microphone denial gives actionable feedback (4.3s)
+  ok  52 [mobile-chromium] › e2e\assistant-voice.spec.mjs:90:1 › English recording is timed, locally transcribed, editable and spoken in English (6.9s)
+  ok  53 [mobile-chromium] › e2e\assistant-voice.spec.mjs:118:1 › Arabic recording selects Arabic transcription and reply speech (4.9s)
+  ok  54 [mobile-chromium] › e2e\assistant-voice.spec.mjs:136:1 › recording cancellation releases the microphone without starting transcription (3.1s)
+  ok  55 [mobile-chromium] › e2e\assistant-voice.spec.mjs:149:1 › silent audio is rejected before any Whisper inference (3.0s)
+  ok  56 [mobile-chromium] › e2e\assistant-voice.spec.mjs:160:1 › cancelling transcription ignores late worker results and preserves a typed question (4.5s)
+  ok  57 [mobile-chromium] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable en reply audio (4.8s)
+  ok  58 [mobile-chromium] › e2e\assistant-voice.spec.mjs:175:31 › real bundled eSpeak-NG produces playable ar reply audio (5.0s)
+  ok  59 [mobile-chromium] › e2e\assistant-voice.spec.mjs:187:1 › transcription failure retains the valid recording, identifies its stage and permits retry (3.4s)
+  ok  60 [mobile-chromium] › e2e\assistant-voice.spec.mjs:205:104 › audio decoding errors retry the retained recording without another microphone request (3.1s)
+  ok  61 [mobile-chromium] › e2e\assistant-voice.spec.mjs:205:104 › voice worker startup errors retry the retained recording without another microphone request (3.3s)
+  ok  62 [mobile-chromium] › e2e\assistant-voice.spec.mjs:218:1 › a worker that never replies reports its startup timeout and can be retried (1.8s)
+  ok  63 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:24:1 › four exact prompts retain location/year/metric context and open the same source-backed chart (10.2s)
+  ok  64 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:57:1 › chart navigation carries exact successful values without another NASA request (3.1s)
+  ok  65 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:68:1 › single-year analysis has functional analysis and chart actions (2.9s)
+  ok  66 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:76:1 › cancelled source requests never produce a stale answer or advance conversation (2.0s)
+  ok  67 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:92:1 › source errors preserve the question and offer retry; unsupported prompts send no requests (2.5s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"b2c380cf-a2be-42f3-a816-2b1ef2885196"}
+  ok  68 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:106:1 › conversation survives closing the dock and can be explicitly reset (12.8s)
+  ok  69 [mobile-chromium] › e2e\implemented-improvements.spec.mjs:120:1 › reduced-motion layout fits a small viewport after a result (1.3s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"c8469487-b53f-4dfe-99b2-99a7400043ce"}
+  ok  70 [mobile-chromium] › e2e\site.spec.mjs:3:1 › intro opens promptly, navigation reaches all scientific sections (3.3s)
+  ok  71 [mobile-chromium] › e2e\site.spec.mjs:14:1 › NASA Verification Lab catches tampering in synthetic inputs (1.2s)
+  ok  72 [mobile-chromium] › e2e\site.spec.mjs:22:1 › mobile layout avoids horizontal page overflow and supports language switching (1.7s)
+  ok  73 [mobile-chromium] › e2e\site.spec.mjs:35:1 › unexpected API failure is surfaced rather than inventing readings (1.5s)
+  ok  74 [mobile-chromium] › e2e\site.spec.mjs:42:1 › quick navigator works from the intro and opens the independent NASA lab (1.3s)
+  ok  75 [mobile-chromium] › e2e\site.spec.mjs:52:1 › non-map routes provide a lightweight geographic shortcut rather than launching map canvas (3.9s)
+  ok  76 [mobile-chromium] › e2e\site.spec.mjs:61:1 › scientific context is visible and does not label unloaded source as verified (2.3s)
+  ok  77 [mobile-chromium] › e2e\trend-chart.spec.mjs:3:1 › ECharts trend view supports zoom, keyboard year inspection and accessible source values (2.9s)
+  ok  78 [mobile-chromium] › e2e\trend-chart.spec.mjs:33:1 › trend chart layout fits phone, tablet and desktop viewports (3.0s)
+  ok  79 [mobile-chromium] › e2e\trend-chart.spec.mjs:53:1 › location comparison keeps the two source series and exposes missing values (1.6s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"83907002-4368-4a41-82d2-54c2d3f0efd2"}
+  ok  80 [mobile-chromium] › e2e\v36.spec.mjs:3:1 › home loads with accessible NASA Earth controls (5.0s)
+  ok  81 [mobile-chromium] › e2e\v36.spec.mjs:16:1 › assistant answers a NASA provenance question and maintains evidence caveats (2.8s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"f0fc1e55-8cec-4f63-92b1-39f84722ba62"}
+  ok  82 [mobile-chromium] › e2e\v36.spec.mjs:25:1 › mobile viewport remains usable without forced horizontal overflow (2.0s)
+[WebServer] 
+{"event":"api_security","route":"/api/boundaries","status":503,"requestId":"f1f07749-7b91-4fbb-888c-63198eafd3d9"}
+  ok  83 [mobile-chromium] › e2e\v36.spec.mjs:32:1 › reduced-motion mode keeps visual without mandatory animation (1.0s)
+  ok  84 [mobile-chromium] › e2e\v37-assistant.spec.mjs:3:1 › climate value question uses annual NASA evidence instead of glossary (1.8s)
+  ok  85 [mobile-chromium] › e2e\v37-assistant.spec.mjs:14:1 › NASA source question keeps deterministic project guidance (2.9s)
+  ok  86 [mobile-chromium] › e2e\v37-assistant.spec.mjs:20:1 › AI status states clearly that Cloudflare Workers AI is not used (1.5s)
+  ok  87 [mobile-chromium] › e2e\v37-assistant.spec.mjs:26:1 › mobile assistant fits viewport without horizontal scrolling (1.7s)
+  ok  88 [mobile-chromium] › e2e\v38-local-open-source-ai.spec.mjs:3:1 › open-source browser model loads only after explicit opt-in (2.5s)
+  ok  89 [mobile-chromium] › e2e\v38-local-open-source-ai.spec.mjs:17:1 › unsupported WebGPU gives honest fallback and verified NASA assistant stays usable (1.7s)
+  ok  90 [mobile-chromium] › e2e\v38-local-open-source-ai.spec.mjs:27:1 › domain-only prompting: unrelated questions and numeric evidence are gated (1.4s)
+  ok  91 [mobile-chromium] › e2e\v38-local-open-source-ai.spec.mjs:37:1 › phone UI does not overflow with optional model controls (1.6s)
+  ok  92 [mobile-chromium] › e2e\v39-inference.spec.mjs:5:1 › HAC and rank inference render from real preserved NASA annual values (2.4s)
+  ok  93 [mobile-chromium] › e2e\v39-inference.spec.mjs:20:1 › Paired case study tests the difference, not two individual p-values (2.5s)
+  ok  94 [mobile-chromium] › e2e\v39-inference.spec.mjs:33:1 › Short interval withholds approximate inference (1.6s)
+(node:14924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   95 [mobile-webkit] › e2e\ask-ai-dock.spec.mjs:30:1 › Ask AI stays available across sections and opens the source chart (13.7s)
+(node:3532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   96 [mobile-webkit] › e2e\ask-ai-dock.spec.mjs:77:1 › Arabic transcript with spoken years receives an Arabic scientific summary and voice request (1.0m)
+(node:14916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

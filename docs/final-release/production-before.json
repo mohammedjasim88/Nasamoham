@@ -1,0 +1,30 @@
+{
+  "worker": "oman-earth-intelligence-practice",
+  "compatibilityDate": "2026-11-03",
+  "bindings": [
+    {
+      "name": "AI_RATE",
+      "namespace_id": "910242",
+      "simple": {
+        "limit": 20,
+        "period": 60
+      },
+      "type": "ratelimit"
+    },
+    {
+      "name": "ASSETS",
+      "type": "assets"
+    },
+    {
+      "name": "NASA_RATE",
+      "namespace_id": "910241",
+      "simple": {
+        "limit": 120,
+        "period": 60
+      },
+      "type": "ratelimit"
+    }
+  ],
+  "deploymentId": "f551c958-5818-45ac-97af-87b43e8085f9",
+  "rollbackVersionId": "2813c029-cea6-4402-9a7b-6e0bffd90938"
+}

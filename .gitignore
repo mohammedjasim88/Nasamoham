@@ -1,23 +1,26 @@
 node_modules/
 dist/
+.git/
 .wrangler/
+.agents/
+.codex/
+.aws/
 .env
 .env.*
 !.env.example
-.DS_Store
-
-# Local secrets and machine-specific state
 .dev.vars
 .dev.vars.*
-!.dev.vars.example
 *.pem
 *.p12
 *.pfx
-
-# Test results and reports
+*.key
+*.log
+*.tsbuildinfo
 coverage/
 test-results/
 playwright-report/
-*.log
-*.tsbuildinfo
+audit-results/
+release-artifacts/
 release/
+.DS_Store
+Thumbs.db

@@ -39,12 +39,11 @@ function numericRows(items) {
   return items.slice(0, 2).map(item => {
     const point = item?.point || {};
     const values = item?.result?.series || [];
-    const rows = values.slice(0, 32).map(entry => `${Number(entry.year)}: ${entry.value === null || !Number.isFinite(entry.value) ? 'MISSING' : Number(entry.value).toFixed(2)}`).join('; ');
+    const rows = values.slice(0, 46).map(entry => `${Number(entry.year)}: ${entry.value === null || !Number.isFinite(entry.value) ? 'MISSING' : Number(entry.value).toFixed(2)}`).join('; ');
     return [
       `Point: ${String(point.en || point.ar || '').slice(0, 70)} (lat ${point.lat}, lon ${point.lon})`,
       `Data source: ${String(item?.data?.source || 'NASA POWER historical data').slice(0, 180)}`,
       `Snapshot: ${item?.data?.isSnapshot ? 'supplied checked historical file' : 'live NASA POWER proxy'}`,
-      `Computed interpretation: ${String(item?.paragraph || '').slice(0, 1600)}`,
       `Checked annual records (${values.length} available rows): ${rows}`,
       `Reference: ${String(item?.sourceUrl || '').slice(0, 440)}`,
     ].join('\n');

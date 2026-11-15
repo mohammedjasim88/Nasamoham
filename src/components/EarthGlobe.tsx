@@ -26,7 +26,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
   let gl:WebGL2RenderingContext|null=null;
   try{gl=canvas.getContext('webgl2',{alpha:true,antialias:true});}catch{setStatus('fallback');return;}
   if(!gl){setStatus('fallback');return;}
-  let disposed=false,frame=0,last=0,lastRender=0,active=true,dragging=false,hovering=false,pausedUntil=0;
+  let disposed=false,frame=0,last=0,lastRender=0,active=true,contextAvailable=true,dragging=false,hovering=false,pausedUntil=0;
   const compactGpu=window.matchMedia('(max-width: 790px)').matches;
   // Mobile renders fewer geometry triangles and frames; surface texture remains unchanged.
   const minFrameMs=1000/(compactGpu?30:45);
@@ -136,9 +136,10 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
    }
   };
   const animate=(now:number)=>{
+   frame=0;
    if(disposed)return;
-   frame=requestAnimationFrame(animate);
    if(!active||document.hidden){last=now;return;}
+   frame=requestAnimationFrame(animate);
    if(lastRender&&now-lastRender<minFrameMs)return;
    const dt=last?Math.min(.06,(now-last)/1000):0;
    last=now;lastRender=now;
@@ -198,10 +199,16 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
    camera.position.z=THREE.MathUtils.clamp(camera.position.z+Math.sign(event.deltaY)*.32,5.2,8);
    pausedUntil=performance.now()+5000;if(reducedMotion)renderStill();
   };
-  const handleContextLost=(event:Event)=>{event.preventDefault();setStatus('fallback');active=false;cancelAnimationFrame(frame);};
+  const handleContextLost=(event:Event)=>{event.preventDefault();setStatus('fallback');contextAvailable=false;active=false;cancelAnimationFrame(frame);frame=0;};
   const handleEnter=()=>{hovering=true;};
   const handleLeave=()=>{hovering=false;};
-  const observer=new IntersectionObserver(entries=>{active=!!entries[0]?.isIntersecting;},{threshold:0.04});observer.observe(canvas);
+  const syncAnimation=()=>{
+   if(!active||document.hidden||!contextAvailable){cancelAnimationFrame(frame);frame=0;return;}
+   if(reducedMotion){renderStill();return;}
+   if(!frame){last=0;frame=requestAnimationFrame(animate);}
+  };
+  const observer=new IntersectionObserver(entries=>{active=!!entries[0]?.isIntersecting;syncAnimation();},{threshold:0.04});observer.observe(canvas);
+  document.addEventListener('visibilitychange',syncAnimation);
   const resizer=new ResizeObserver(resize);if(canvas.parentElement)resizer.observe(canvas.parentElement);
   canvas.addEventListener('webglcontextlost',handleContextLost);
   canvas.addEventListener('pointerdown',handleDown);canvas.addEventListener('pointermove',handleMove);
@@ -214,6 +221,7 @@ export default function EarthGlobe({focusSignal=0,lang='en',onRenderState,onRend
   return ()=>{
    disposed=true;abort.abort();controllerRef.current=null;
    cancelAnimationFrame(frame);observer.disconnect();resizer.disconnect();
+   document.removeEventListener('visibilitychange',syncAnimation);
    canvas.removeEventListener('webglcontextlost',handleContextLost);
    canvas.removeEventListener('pointerdown',handleDown);canvas.removeEventListener('pointermove',handleMove);
    canvas.removeEventListener('pointerup',handleUp);canvas.removeEventListener('pointercancel',handleUp);

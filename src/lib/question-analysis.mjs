@@ -1,12 +1,15 @@
 /** Deterministic annual-data questions. No model, external tools, or generated measurements. */
 import {metricSeries,checkQuality,linearTrend,mean} from './statistics.mjs';
+import {normaliseSpokenYears} from './spoken-years.mjs';
+import {neweyWestTrend,pairedTrendDifference} from './trend-inference.mjs';
+import {displayMetricUnit} from './scientific-units.mjs';
 export const normaliseQuestion=s=>String(s).replace(/[٠-٩]/g,c=>String(c.charCodeAt(0)-0x660)).replace(/[۰-۹]/g,c=>String(c.charCodeAt(0)-0x6f0)).normalize('NFKC').replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase();
 const problem=(code,ar,en)=>({ok:false,code,message:{ar,en}});
 /** Verified site knowledge, served locally without API fees or fabricated NASA values.
  * Return null for numeric climate questions so the ordinary evidence pipeline handles them.
  */
 export function siteAnswer(question, lang='en') {
- const q=normaliseQuestion(question).trim();
+ const q=normaliseSpokenYears(normaliseQuestion(question)).trim();
  if(!q||q.length>600||/(?<!\d)(?:19|20)\d{2}(?!\d)/.test(q))return null;
  // Questions requesting climate values, comparisons or trends belong to the
  // numerical evidence pipeline even when they omit the year (use selected years).
@@ -14,7 +17,8 @@ export function siteAnswer(question, lang='en') {
  const metricWords=/temperature|humidity|precipitation|rainfall|\bt2m\b|\brh2m\b|prectotcorr|حرار|رطوب|هطول|امطار|مطر/;
  const numberIntent=/\b(?:what (?:is|was|were) (?:humidity|temperature|rainfall|precipitation) (?:in|at) |how (?:was|were) |what (?:is|was|were) the |how (?:hot|humid|much) |give me|show me|compare|analyse|analyze|trend|difference|average of|value of|average|mean)\b|كم (?:بلغ|كانت|كان|مقدار)|ما (?:هي|هو|كانت|كان) |اعطني|اعرض|قارن|حلل|قيمه|متوسط/;
  const informationIntent=/مصدر|من اين|من وين|كيف.*تحقق|كيف.*استخدم|ما معني|ما هو.*(?:t2m|rh2m)|\bsource\b|\bapi key\b|\bwhere.*\bdata\b|\bverify\b|\baccuracy\b|\bhow to\b|\bwhat is (?:t2m|rh2m|prectotcorr)/;
- if(metricWords.test(q)&&numberIntent.test(q)&&!informationIntent.test(q))return null;
+ const followUp=/\b(?:now|same|instead|also|what about)\b|نفس|بدلا|وماذا|والرطوب|والحرار|والامطار/;
+ if(metricWords.test(q)&&(numberIntent.test(q)||followUp.test(q))&&!informationIntent.test(q))return null;
  const entries=[
   {id:'source',test:/ناسا|nasa|مصدر|من وين|من اين|المعلومات|source|api key|مفتاح.*api|بيانات.*جات|data.*from/,
    ar:'تأتي القراءات التاريخية من خدمة NASA POWER العامة لبيانات المناخ، ويطلب الخادم القيم بحسب خط العرض وخط الطول والفترة. لا يحتاج هذا المسار إلى NASA API key في إعدادات المشروع الحالية. البيانات تقديرات شبكية تاريخية وليست قياسات محطة أرضية أو طقساً مباشراً. يمكنك فحص طلب المصدر الأصلي من التحليل أو مختبر التحقق.',
@@ -59,12 +63,14 @@ export function siteAnswer(question, lang='en') {
 }
 
 export function planQuestion(question,context,points){
- const q=normaliseQuestion(question).trim();
+ const q=normaliseSpokenYears(normaliseQuestion(question)).trim();
  if(!q||q.length>600)return problem('QUESTION_LENGTH','اكتب سؤالاً من 1 إلى 600 حرف.','Enter a question of 1–600 characters.');
  if(/اليوم|غدا|بكره|لحظي|توقع|forecast|tomorrow|today|real.time|live weather/.test(q))return problem('HISTORICAL_ONLY','المتاح بيانات سنوية تاريخية حتى 2025، وليس طقساً مباشراً أو توقعات.','Only historical annual data through 2025 is supported, not live weather or forecasts.');
  if(/شهري|شهريا|يناير|فبراير|مارس|ابريل|مايو|يونيو|يوليو|اغسطس|سبتمبر|اكتوبر|نوفمبر|ديسمبر|monthly|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b|daily|يومي/.test(q))return problem('ANNUAL_ONLY','هذا التحليل يستخدم القيم السنوية. حدّد سنة أو فترة سنوية؛ التحليل الشهري غير مدعوم هنا.','This analysis uses annual values. Monthly/daily questions are not supported here.');
  if(/متوسط.*(?:كل عمان|سلطنه عمان|جميع المحافظات)|national average|whole oman/.test(q))return problem('POINT_ONLY','البيانات تخص نقاطاً مرجعية، ولا تسمح بحساب متوسط عُمان كلها.','Reference points do not establish a national average.');
- const metricMatches=[['T2M',/t2m|حرار|temperature/],['RH2M',/rh2m|رطوب|humidity/],['PRECTOTCORR_SUM',/prectotcorr|امطار|مطر|هطول|rain|precipitation/]].filter(([,re])=>re.test(q));
+ if(/\b(?:wind|pressure|solar|radiation|snow|co2|sea level|uv)\b|رياح|ضغط جوي|اشعاع|ثلوج|ثاني اكسيد/.test(q))return problem('UNSUPPORTED_METRIC','هذا المسار يدعم الحرارة والرطوبة والهطول فقط. لا توجد بيانات لهذا المتغير هنا.','This analysis supports only temperature, humidity and precipitation. This variable is not available here.');
+ if(/\b(?:why|caus(?:e|ed|es)|because)\b|لماذا|ليش|سبب/.test(q))return problem('CAUSALITY_UNSUPPORTED','القيم السنوية وحدها لا تحدد سبب التغير. اطلب مقارنة القيم أو الاتجاه دون استنتاج سببي.','Annual values alone cannot establish the cause of a change. Ask for a value comparison or trend instead.');
+ const metricMatches=[['T2M',/\bt2m\b|حرار|temperature|\b(?:hot|hotter|warming|warmed|cooler)\b/],['RH2M',/\brh2m\b|رطوب|humidity|\bhumid\b/],['PRECTOTCORR_SUM',/prectotcorr|امطار|مطر|هطول|\brain(?:fall)?\b|precipitation/]].filter(([,re])=>re.test(q));
  if(metricMatches.length>1)return problem('ONE_METRIC','حدّد متغيراً واحداً في كل سؤال: الحرارة أو الرطوبة أو الهطول.','Choose one variable per question: temperature, humidity or precipitation.');
  if(!metricMatches.length&&!/قارن|مقارن|اتجاه|تغير|حلل|تحليل|compare|trend|analyse|analyze|change|مصدر|source/.test(q))return problem('UNSUPPORTED_QUESTION','أستطيع تحليل الحرارة والرطوبة والهطول ومقارنة السنوات والمواقع المتاحة.','Ask about climate values, annual periods or supported reference locations.');
  const metric=metricMatches[0]?.[0]||context.metric;
@@ -72,11 +78,20 @@ export function planQuestion(question,context,points){
  if(years.length>2)return problem('TOO_MANY_YEARS','استخدم فترة واحدة أو عامين منفصلين في السؤال نفسه.','Use one period or two individual years per question.');
  const requested=years.map(y=>Number(y[0]));
  if(requested.some(y=>y<1981||y>2025))return problem('YEAR_RANGE','السنوات المدعومة حالياً 1981–2025؛ لا أقدّر السنوات خارج هذا النطاق.','Supported years are 1981–2025; values outside this range are not estimated.');
- let mode='period',start=context.start,end=context.end;
+ const trendIntent=/اتجاه|احترار|احترت|ارتفاع|ارتفع|انخفاض|انخفض|تغير|تغيّر|\b(?:trends?|warm(?:ed|ing)|cool(?:ed|ing)|slopes?|per decade|changed|increase[ds]?|decrease[ds]?)\b/.test(q);
+ const duration=q.match(/(?:\b(?:last|past|over)\s+(?:the\s+)?|(?:اخر|خلال|على مدى)\s+)(\d{1,2})\s*(?:years?\b|سنوات|سنه|عاما|عام)/);
+ let mode=context.mode||'period',start=context.start,end=context.end;
+ if(!years.length&&duration){
+  const count=Number(duration[1]);
+  if(count<1||end-count+1<1981)return problem('YEAR_RANGE','الفترة المطلوبة خارج نطاق 1981–2025.','The requested duration is outside the 1981–2025 coverage.');
+  start=end-count+1;
+  mode='period';
+  if(count===1)mode='single';
+ }
  if(years.length===1){mode='single';start=end=requested[0];}
  if(years.length===2){
   [start,end]=requested;const join=q.slice(years[0].index+4,years[1].index);
-  if(/الي|حتي|\bto\b|through|[-–—]/.test(join)||/\bbetween\s+(?:the\s+years?\s+)?$/.test(q.slice(0,years[0].index)))mode='period';
+  if(/الي|حتي|لين|\bto\b|through|[-–—]/.test(join)||/\bbetween\s+(?:the\s+years?\s+)?$/.test(q.slice(0,years[0].index)))mode='period';
   else if(/و|\band\b|\bvs\b|versus|مقابل/.test(join))mode='pair';
   else return problem('AMBIGUOUS_YEARS','هل تقصد فترة «من 2000 إلى 2005» أم «عامَي 2000 و2005 فقط»؟','Specify a period (from 2000 to 2005) or two years only (2000 and 2005).');
   if(start>end)return problem('REVERSED_YEARS','اكتب السنة الأقدم أولاً؛ لن أعكس طلبك بصمت.','Write the earlier year first; the request will not be silently reversed.');
@@ -87,15 +102,22 @@ export function planQuestion(question,context,points){
  for(const [id,re]of aliases)if(re.test(q))locations.push(id);
  const genericMuscat=/مسقط|muscat/.test(q)&&!locations.some(id=>id.startsWith('muscat'));
  if(genericMuscat)locations.unshift(context.pointId?.startsWith('muscat')?context.pointId:'muscat-east');
+ const placeMatch=id=>id.startsWith('muscat')?q.search(/مسقط|muscat/):q.search(aliases.find(([alias])=>alias===id)[1]);
+ locations.sort((a,b)=>placeMatch(a)-placeMatch(b));
  if(!locations.length&&/(?:\boman\b|عمان|السلطنه)/.test(q))return problem('POINT_ONLY','لا يمكن اعتبار نقطة واحدة متوسط سلطنة عُمان. اختر مدينة أو نقطة عينة محددة.','A single reference point is not an Oman-wide average. Choose a supported city or sample point.');
- if(/دبي|باريس|لندن|dubai|paris|london/.test(q))return problem('UNSUPPORTED_LOCATION','هذا الموقع غير متاح ضمن نقاط عُمان المدعومة.','That place is outside the supported Oman reference locations.');
+ if(/دبي|باريس|لندن|\b(?:dubai|paris|london)\b/.test(q))return problem('UNSUPPORTED_LOCATION','هذا الموقع غير متاح ضمن نقاط عُمان المدعومة.','That place is outside the supported Oman reference locations.');
+ const namedComparison=q.match(/\bcompare\s+([a-z][a-z '-]*?)\s+(?:and|with|versus|vs)\s+([a-z][a-z '-]*?)(?=\s+(?:temperature|humidity|rainfall|rain|precipitation|from|in|for|over|during|trends?)\b|[?.!,]|$)/);
+ if(namedComparison&&namedComparison.slice(1).some(name=>!aliases.some(([,re])=>re.test(name))&&!/\bmuscat\b/.test(name)))return problem('UNKNOWN_LOCATION','لم أتعرف على أحد الموقعين. استخدم اسماً من قائمة المواقع المرجعية.','One of the comparison locations was not recognised. Use a name from the reference-point list.');
  const explicitPlace=q.match(/(?:^|\s)(?:في|in)\s+([^\s،,.]+)/)?.[1];
  const scopeWords=/^(?:عام|سنه|الفتره|البيانات|الموقع|النقطه|درجه|بدايه|نهايه|the|year|period|temperature|\d+)$/;
  if(!locations.length&&explicitPlace&&!scopeWords.test(explicitPlace))return problem('UNKNOWN_LOCATION','لم أتعرف على الموقع في السؤال. استخدم اسم موقع من قائمة المواقع المرجعية.','The place was not recognised. Use a location from the reference-point list.');
  if(locations.length>2)return problem('TOO_MANY_LOCATIONS','أستطيع مقارنة موقعين كحد أقصى في كل سؤال.','Compare at most two locations per question.');
- if(!locations.length)locations=[context.pointId];
+ if(!locations.length){
+  locations=[context.pointId];
+  if(context.secondPointId&&(/قارن|مقارن|الموقعين|النقطتين|نفس|بدلا|وماذا|\b(?:compare|comparison|both|difference|same|instead|now|also)\b/.test(q)||context.fromConversation))locations.push(context.secondPointId);
+ }
  if(locations.some(id=>!points.some(p=>p.id===id)))return problem('INVALID_LOCATION','الموقع المرجعي غير متاح.','The reference point is unavailable.');
- return {ok:true,metric,start,end,mode,locations,usedContextYears:years.length===0,usedContextMetric:metricMatches.length===0,usedContextLocation:!genericMuscat&&!aliases.some(([,re])=>re.test(q)),genericMuscat};
+ return {ok:true,metric,start,end,mode,locations,trendIntent,usedContextYears:years.length===0&&!duration,usedContextMetric:metricMatches.length===0,usedContextLocation:!genericMuscat&&!aliases.some(([,re])=>re.test(q)),genericMuscat};
 }
 export function analyseAnnual(data,plan,point){
  if(!data||!Array.isArray(data.years)||!Number.isFinite(data.latitude)||!Number.isFinite(data.longitude)||Math.abs(data.latitude-point.lat)>1e-6||Math.abs(data.longitude-point.lon)>1e-6)throw new Error('SOURCE_COORDINATE_MISMATCH');
@@ -108,8 +130,11 @@ export function analyseAnnual(data,plan,point){
  return {series,count:valid.length,requestedCount:series.length,missing:series.filter(r=>r.value===null).map(r=>r.year),invalid:quality.invalid.filter(r=>series.some(v=>v.year===r.year)).map(r=>r.year),first,last,delta:first!==null&&last!==null?last-first:null,mean:values.length?mean(values):null,min:values.length?Math.min(...values):null,max:values.length?Math.max(...values):null,trend:plan.mode==='period'?linearTrend(series):null};
 }
 const num=(v,d=2)=>v===null||!Number.isFinite(v)?'—':v.toFixed(d);
+const inferenceUnavailable=(result,ar)=>String(result.reason).includes('Degenerate')?
+ (ar?'لا يمكن تقدير عدم اليقين بثقة لأن تباين البواقي ضئيل جداً؛ لا يُستنتج اختبار دلالة.':'Residual variance is too small to estimate uncertainty reliably; no significance claim is made.'):
+ (ar?'لا يمكن تقدير فترة ثقة: يلزم عشر سنوات سنوية صالحة ومتتالية على الأقل دون فجوات.':'A confidence interval needs at least ten valid consecutive annual observations without gaps.');
 export function analysisParagraph(data,plan,point,result,lang='ar'){
- const ar=lang==='ar',unit=plan.metric==='T2M'?'°C':plan.metric==='RH2M'?'%':ar?'وحدة المصدر قيد المراجعة':'source units under review',deltaUnit=plan.metric==='RH2M'?(ar?'نقطة مئوية':'percentage points'):unit;
+ const ar=lang==='ar',unit=displayMetricUnit(plan.metric,data.reportedUnits?.[plan.metric],plan.metric==='T2M'?'°C':plan.metric==='RH2M'?'%':ar?'وحدة المصدر قيد المراجعة':'source units under review'),deltaUnit=plan.metric==='RH2M'?(ar?'نقطة مئوية':'percentage points'):unit;
  const place=ar?point.ar:point.en,metric=plan.metric==='T2M'?(ar?'درجة الحرارة':'air temperature'):plan.metric==='RH2M'?(ar?'الرطوبة النسبية':'relative humidity'):(ar?'الهطول':'precipitation');
  const source=ar?(data.isSnapshot?'الملف التاريخي المرفق والموسوم بأنه NASA POWER':'استجابة NASA POWER عبر الخادم'):(data.isSnapshot?'the supplied historical file labelled NASA POWER':'the server-retrieved NASA POWER response');
  const at=`${point.lat.toFixed(4)}°N, ${point.lon.toFixed(4)}°E`;
@@ -134,9 +159,43 @@ export function analysisParagraph(data,plan,point,result,lang='ar'){
 export function locationComparison(plan,items,lang='ar'){
  if(items.length!==2)return '';
  const ar=lang==='ar',[a,b]=items,unit=plan.metric==='T2M'?'°C':plan.metric==='RH2M'?(ar?'نقطة مئوية':'percentage points'):(ar?'وحدة المصدر قيد المراجعة':'source units under review');
- const shared=a.result.series.map((r,i)=>({year:r.year,a:r.value,b:b.result.series[i]?.year===r.year?b.result.series[i].value:null})).filter(r=>r.a!==null&&r.b!==null);
+ const units=items.map(item=>displayMetricUnit(plan.metric,item.data?.reportedUnits?.[plan.metric],unit));
+ if(units[0]!==units[1])return ar?'وحدات المصدرين مختلفة؛ لا يمكن حساب فرق بينهما قبل التحقق من الوحدات.':'Source units differ; a between-location difference cannot be calculated until units are verified.';
+ const byYear=new Map(b.result.series.map(row=>[row.year,row.value]));
+ const shared=a.result.series.map(r=>({year:r.year,a:r.value,b:byYear.get(r.year)??null})).filter(r=>Number.isFinite(r.a)&&Number.isFinite(r.b));
  if(!shared.length)return ar?'لا توجد سنوات صالحة مشتركة؛ لا يمكن حساب فرق موثوق بين الموقعين.':'There are no shared valid years, so a between-location difference cannot be calculated.';
+ if(plan.mode==='period'&&plan.trendIntent){
+  const pair=pairedTrendDifference(a.result.series,b.result.series);
+  if(!pair.valid)return inferenceUnavailable(pair,ar);
+  const bounds=pair.ci95.map(value=>num(value*10,3)).join(ar?' إلى ':' to ');
+  const first=ar?a.point.ar:a.point.en,second=ar?b.point.ar:b.point.en;
+  const uncertainty=ar?(pair.significant?'فترة الثقة تستبعد الصفر.':'فترة الثقة تشمل الصفر، لذلك لا يثبت التحليل اختلاف الاتجاهين عند مستوى 5%.'):(pair.significant?'The interval excludes zero.':'The interval includes zero, so the trend difference is not statistically established at the 5% level.');
+  return ar?`الفرق بين الاتجاهين (${second} ناقص ${first}) هو ${num(pair.perDecade,3)} ${unit} لكل عقد، بناءً على ${pair.n} سنة مشتركة. فترة الثقة 95% لكل عقد من ${bounds}. ${uncertainty}`:`The trend difference (${second} minus ${first}) is ${num(pair.perDecade,3)} ${unit} per decade across ${pair.n} shared years. The 95% confidence interval per decade is ${bounds}. ${uncertainty}`;
+ }
  const identical=shared.every(r=>r.a===r.b),delta=mean(shared.map(r=>r.a-r.b));
  const names=ar?`${a.point.ar} ناقص ${b.point.ar}`:`${a.point.en} minus ${b.point.en}`;
  return (ar?`باستخدام السنوات الصالحة المشتركة فقط (${shared.length})، متوسط الفرق السنوي بين النقطتين (${names}) هو ${num(delta)} ${unit}. `:`Using only shared valid years (${shared.length}), the mean annual difference (${names}) is ${num(delta)} ${unit}. `)+(identical?(ar?'القيم متطابقة في السنوات المشتركة؛ لا تمثل مشاهدتين مستقلتين. ':'Values are identical in the shared years; they are not independent observations. '):'')+(ar?'المقارنة نقطية؛ اختلاف الإحداثيات لا يثبت استقلال الخليتين الشبكيتين.':'This is a point comparison; different coordinates do not prove independent grid cells.');
+}
+
+export function scientificSummary(plan,items,comparison,lang='ar'){
+ const ar=lang==='ar';
+ const unit=plan.metric==='T2M'?(ar?'درجة مئوية':'degrees Celsius'):plan.metric==='RH2M'?(ar?'نقطة مئوية':'percentage points'):(ar?'من وحدات المصدر قيد المراجعة':'in source units under review');
+ const valueUnit=plan.metric==='RH2M'?(ar?'بالمئة':'percent'):unit;
+ const range=plan.start===plan.end?String(plan.start):ar?`من ${plan.start} إلى ${plan.end}`:`from ${plan.start} to ${plan.end}`;
+ const values=items.map(({point,result})=>{
+  const name=ar?point.ar:point.en;
+  if(!result.count)return ar?`${name}، لا توجد قراءات صالحة.`:`${name} has no valid values.`;
+  if(plan.mode==='single')return ar?`القيمة السنوية في ${name} بلغت ${num(result.first)} ${valueUnit}.`:`The annual value for ${name} was ${num(result.first)} ${valueUnit}.`;
+  if(plan.mode==='pair')return (ar?`${name}، قيمة ${plan.start} هي ${num(result.first)}، وقيمة ${plan.end} هي ${num(result.last)} ${valueUnit}.`:`${name} was ${num(result.first)} in ${plan.start} and ${num(result.last)} ${valueUnit}.`)+(ar?' هذه مقارنة عامين فقط ولا تثبت اتجاهاً.':' This compares two years only and does not establish a trend.');
+  const trend=neweyWestTrend(result.series);
+  const average=ar?`متوسط ${name} هو ${num(result.mean)} ${plan.metric==='RH2M'?'بالمئة':unit}.`:`The mean for ${name} was ${num(result.mean)} ${plan.metric==='RH2M'?'percent':unit}.`;
+  const endpoints=result.delta===null?(ar?'إحدى قيمتي البداية والنهاية مفقودة.':'An endpoint value is missing.'):(ar?`الفرق السنوي بين ${plan.start} و${plan.end} في ${name} هو ${num(result.delta)} ${unit} (${result.delta>0?'زيادة':result.delta<0?'انخفاض':'دون تغير'}).`:`The ${plan.end}-minus-${plan.start} annual difference for ${name} is ${num(result.delta)} ${unit} (${result.delta>0?'increase':result.delta<0?'decrease':'no change'}).`);
+  const coverage=result.missing?.length?(ar?` ${result.count} من ${result.requestedCount} سنة صالحة؛ القيم المفقودة لم تُملأ.`:` ${result.count} of ${result.requestedCount} years are valid; missing values were not filled.`):'';
+  if(!trend.valid)return (plan.trendIntent?endpoints:average)+' '+inferenceUnavailable(trend,ar)+coverage;
+  const bounds=trend.ci95.map(value=>num(value*10,3)).join(ar?' إلى ':' to ');
+  const change=ar?`الاتجاه المقدّر ${num(trend.perDecade,3)} ${unit} لكل عقد، وفترة الثقة 95% لكل عقد من ${bounds}.`:`The estimated trend was ${num(trend.perDecade,3)} ${unit} per decade, with a 95% confidence interval per decade of ${bounds}.`;
+  return (plan.trendIntent?endpoints+' '+change.replace(ar?'الاتجاه':'The estimated trend',ar?`اتجاه ${name}`:`The estimated trend for ${name}`):average+' '+change)+coverage;
+ });
+ const paired=plan.trendIntent&&plan.mode==='period'?comparison:'';
+ return [ar?`بحسب بيانات ناسا باور، ${range}.`:`Using NASA POWER data, ${range}.`,...values,paired].filter(Boolean).join(' ');
 }

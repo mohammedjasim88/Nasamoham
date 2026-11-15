@@ -4,7 +4,7 @@ const dir=new URL('../dist/assets/',import.meta.url);
 let files;
 try{files=await readdir(dir);}catch{console.error('dist/assets missing; run npm run build.');process.exit(2);}
 const measured=[];
-for(const file of files){if(!/\.(js|css)$/.test(file))continue;const kb=(await stat(new URL(file,dir))).size/1024;measured.push({file,kb:Math.round(kb)});}
+for(const file of files){const bytes=(await stat(new URL(file,dir))).size;if(bytes>25*1024*1024){console.error(`Workers static asset exceeds 25 MiB: ${file}`);process.exitCode=1;}if(!/\.(js|css)$/.test(file))continue;measured.push({file,kb:Math.round(bytes/1024)});}
 console.table(measured);
 let html;
 try{html=await readFile(new URL('../dist/index.html',import.meta.url),'utf8');}catch{console.error('dist/index.html missing');process.exit(2);}

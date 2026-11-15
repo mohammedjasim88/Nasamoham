@@ -13,6 +13,7 @@ let serial=0;
 let activeModel='';
 let loading:Promise<string>|null=null;
 let generating=false;
+let session=0;
 
 export function supportsLocalWebGPU(): boolean {
   if(typeof navigator==='undefined'||typeof Worker==='undefined'||!globalThis.isSecureContext)return false;
@@ -27,6 +28,7 @@ export async function checkLocalGPU():Promise<boolean> {
 }
 
 function resetWorker(){
+  session++;
   worker?.terminate();worker=null;activeModel='';
   for(const item of pending.values())item.reject(new Error('SESSION_TERMINATED'));
   pending.clear();
@@ -55,7 +57,9 @@ function send(action:'load'|'ask',data:Record<string,unknown>,onProgress?:(fract
 
 export async function loadLocalAI(modelId:string,onProgress:(fraction:number,text:string)=>void):Promise<void>{
   if(!OPEN_MODELS.some(model=>model.id===modelId))throw new Error('MODEL_NOT_ALLOWED');
+  const attempt=session;
   if(!await checkLocalGPU())throw new Error('WEBGPU_UNAVAILABLE');
+  if(attempt!==session)throw new Error('SESSION_TERMINATED');
   if(worker&&activeModel===modelId)return;
   if(loading||generating)throw new Error('MODEL_BUSY');
   resetWorker();
@@ -63,20 +67,22 @@ export async function loadLocalAI(modelId:string,onProgress:(fraction:number,tex
   worker.onmessage=onWorkerReply;
   worker.onerror=()=>resetWorker();
   loading=send('load',{modelId},onProgress);
-  try{await loading;activeModel=modelId;}
-  catch(error){resetWorker();throw error;}
-  finally{loading=null;}
+  const operation=loading,activeSession=session;
+  try{await operation;if(activeSession===session)activeModel=modelId;}
+  catch(error){if(activeSession===session)resetWorker();throw error;}
+  finally{if(loading===operation)loading=null;}
 }
 export function localAIModel():string{return activeModel;}
 export async function askLocalAI(messages:ChatMessage[]):Promise<string>{
   if(!activeModel||!worker)throw new Error('MODEL_NOT_LOADED');
   if(generating)throw new Error('MODEL_BUSY');
   generating=true;
+  const activeSession=session;
   try{
     const text=await send('ask',{messages});
     if(!text.trim())throw new Error('EMPTY_AI_RESPONSE');
     return text.slice(0,3500);
-  }finally{generating=false;}
+  }finally{if(activeSession===session)generating=false;}
 }
 export function stopLocalGeneration():void{
   try{worker?.postMessage({id:++serial,action:'stop'});}catch{/* released */}

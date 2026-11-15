@@ -3,6 +3,7 @@ import {verificationQuery,verifyFromNasa,originalCsvFromNasa,safeNasaCsvName} fr
 import {linearTrend,metricSeries,checkQuality} from '../src/lib/statistics.mjs';
 import {assessGeoJson} from './geo-check.mjs';
 import {applyRateControl} from './rate-control.mjs';
+import {serveVoiceModel} from './voice-model.mjs';
 import {safeUpstream,verificationFetch,readAskPayload,validateApiRequest,securityError,secureApiResponse,logSecurityResult,runEvidenceAi,SecurityError} from './security.mjs';
 
 const NASA_TIMEOUT_MS=16000;
@@ -129,7 +130,7 @@ export default {async fetch(request,env,ctx){
  const route=new URL(request.url).pathname;
  if(!route.startsWith('/api/')&&route!=='/api')return env.ASSETS.fetch(request);
  const requestId=crypto.randomUUID();let response;
- try{validateApiRequest(request);response=await handleRequest(request,env,ctx);}
+ try{if(route.startsWith('/api/voice-model/'))response=await serveVoiceModel(request,ctx);else{validateApiRequest(request);response=await handleRequest(request,env,ctx);}}
  catch(error){response=securityError(error);}
  response=secureApiResponse(response,request,requestId);
  logSecurityResult(request,response,requestId);

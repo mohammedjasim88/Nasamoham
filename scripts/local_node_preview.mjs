@@ -16,6 +16,7 @@ const PORT = Number(process.env.PORT || 8787);
 const HOST = '127.0.0.1';
 const MIME = {
   '.html': 'text/html; charset=utf-8',
+  '.wasm': 'application/wasm',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -47,8 +48,23 @@ async function assetsFetch(request) {
   }
   try {
     const content = await readFile(file);
+    // Exercise the production CSP/permissions policy locally; Cloudflare applies _headers itself.
+    const staticHeaders={};
+    try{
+      for(const line of (await readFile(resolve(dist,'_headers'),'utf8')).split(/\r?\n/)){
+        if(!/^\s+[^:]+:/.test(line))continue;
+        const text=line.trim(),colon=text.indexOf(':');staticHeaders[text.slice(0,colon)]=text.slice(colon+1).trim();
+      }
+    }catch{/* Optional for older releases without a static header file. */}
+    // This loopback preview is HTTP; WebKit otherwise upgrades its assets to HTTPS.
+    // Keep the deployed _headers policy intact for Cloudflare's HTTPS origin.
+    if(url.protocol==='http:' && staticHeaders['Content-Security-Policy']){
+      staticHeaders['Content-Security-Policy']=staticHeaders['Content-Security-Policy']
+        .split(';').map(rule=>rule.trim()).filter(rule=>rule!=='upgrade-insecure-requests').join('; ');
+    }
     return new Response(content, {
       headers: {
+        ...staticHeaders,
         'Content-Type': MIME[extname(file).toLowerCase()] || 'application/octet-stream',
         'Cache-Control': 'no-cache',
         'X-Content-Type-Options': 'nosniff',

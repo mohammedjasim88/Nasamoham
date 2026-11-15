@@ -8,7 +8,7 @@ export const POINTS:Point[]=[
  {id:'nizwa',ar:'نزوى',en:'Nizwa',governorate:'Ad Dakhliyah',lat:22.9333,lon:57.5333},
  {id:'sur',ar:'صور',en:'Sur',governorate:'Ash Sharqiyah South',lat:22.5667,lon:59.5294},
  {id:'khasab',ar:'خصب',en:'Khasab',governorate:'Musandam',lat:26.1799,lon:56.2477},
- {id:'buraimi',ar:'البريمي',en:'Al Buraimi',governorate:'Al Buraymi',lat:24.2486,lon:55.7931},
+ {id:'buraimi',ar:'البريمي',en:'Al Buraimi',governorate:'Al Buraymi',lat:24.2486,lon:55.7931,sample:'/data/buraimi.json',sampleNote:'NASA POWER API response preserved in the v3.9 evidence archive'},
  {id:'ibri',ar:'عبري',en:'Ibri',governorate:'Ad Dhahirah',lat:23.2257,lon:56.5157},
  {id:'rustaq',ar:'الرستاق',en:'Rustaq',governorate:'Al Batinah South',lat:23.3908,lon:57.4244},
  {id:'ibra',ar:'إبراء',en:'Ibra',governorate:'Ash Sharqiyah North',lat:22.6906,lon:58.5334},

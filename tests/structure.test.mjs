@@ -19,7 +19,7 @@ test('the app uses React, MapLibre, separate data controls and reduced-motion CS
  assert.match(get('src/App.tsx'),/download|Export CSV|تصدير CSV/i);
 });
 test('Cloudflare asset routing isolates API and preserves SPA',()=>{
- const text=get('wrangler.jsonc');assert.match(text,/"\/api\/\*"/);assert.match(text,/single-page-application/);assert.match(text,/oman-earth-intelligence-practice/);
+ const text=get('wrangler.jsonc');assert.match(text,/"\/api\/\*"/);assert.match(text,/single-page-application/);assert.match(text,/oman-earth-intelligence-preview/);
 });
 test('Worker returns usable status JSON',async()=>{const res=await worker.fetch(new Request('https://example.com/api/status'),{ASSETS:{fetch:()=>new Response('')}},{waitUntil:()=>{}});assert.equal(res.status,200);const body=await res.json();assert.equal(body.ready,true);assert.equal(body.liveVerified,false);});
 test('Worker rejects unknown API path',async()=>{const res=await worker.fetch(new Request('https://example.com/api/unavailable'),{ASSETS:{fetch:()=>new Response('')}},{waitUntil:()=>{}});assert.equal(res.status,404);});

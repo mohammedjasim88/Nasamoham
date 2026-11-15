@@ -1,0 +1,6 @@
+PASS Governorates structural geometry NCSI 11 polygons; bbox 52.00000000000006,16.650262848000068,59.839432059000046,26.507428381000068
+PASS Wilayats structural geometry NCSI 63 polygons
+PASS NASA independent Muscat test 26 annual NASA observations retrieved, year 2000 T2M matched baseline
+
+3/3 live external-source checks passed.
+IMPORTANT: These are real upstream calls. Availability and map visual alignment still require device review.

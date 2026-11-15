@@ -20,6 +20,6 @@ test('Vite ImportMetaEnv type is provided',()=>{
 
 test('TrendChart checks the active record exists before plotting',()=>{
  const chart=read('src/components/TrendChart.tsx');
- assert.match(chart,/a!=null&&a\.value!=null/);
- assert.doesNotMatch(chart,/a\?\.value!==null&&<g>/);
+ assert.match(chart,/a\?\.value!=null&&Number\.isFinite\(a\.value\)/);
+ assert.doesNotMatch(chart,/activeYear!==null&&a\.value!=null/);
 });

@@ -1,6 +1,6 @@
 {
   "schema": "oei/readiness-case/v39",
-  "generatedAt": "2026-11-10T21:18:09.120Z",
+  "generatedAt": "2026-11-10T21:21:50.995Z",
   "sourceCommitBase": "e461633ce1bb58b05007197dccfe33e18f5673cf",
   "metric": "T2M",
   "unit": "C",

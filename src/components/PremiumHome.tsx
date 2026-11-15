@@ -1,4 +1,6 @@
 import {lazy,Suspense,useEffect,useRef,useState} from 'react';
+import {useReducedMotion} from 'motion/react';
+import * as m from 'motion/react-m';
 import {ArrowDown,ArrowRight,BarChart3,ChevronDown,Database,GitCompareArrows,Globe2,Info,Layers3,MapPinned,Menu,Search,Moon,Play,ShieldCheck,Sun,X} from 'lucide-react';
 import './PremiumHome.css';
 import HomeSnapshot from './HomeSnapshot';
@@ -8,8 +10,8 @@ const EarthGlobe=lazy(()=>import('./EarthGlobe'));
 type Destination='home'|'explorer'|'quality'|'trends'|'compare'|'verify'|'about';
 type Props={lang:'en'|'ar';theme:'dark'|'light';onLanguage:()=>void;onTheme:()=>void;onNavigate:(target:Destination)=>void;onOpenCommand:()=>void};
 const strings={
- en:{brand:'Oman Earth Intelligence',subtitle:'NASA POWER · Climate Explorer',home:'Home',explorer:'Explorer',data:'Data',analysis:'Analysis',about:'About',verify:'Verify NASA Data',eyebrow:'OMAN · FROM A NEW PERSPECTIVE',headlineOne:"A new perspective",headlineTwo:"on Oman’s climate.",intro:'Explore the places you know. Discover the patterns you cannot see. Historical NASA POWER data, made clear.',cards:['Interactive Maps','NASA Climate Data','Trend Analysis','Location Comparison'],start:'Start Exploring',explore:'Explore Climate Data',by:'Powered by NASA POWER',source:'Historical gridded climate data · not live weather',scroll:'Scroll to learn more',hint:'Drag the globe to explore · Arrow keys also work',value:'SCIENCE, NOT GUESSWORK',explain:'The interactive dashboard preserves source information, allows location-level comparisons and keeps scientific limitations visible.',method:'See the scientific data',provenance:'NASA Blue Marble imagery · geographic boundaries from Oman NCSI when available.',label:'Open',menu:'Open navigation',close:'Close navigation'},
- ar:{brand:'ذكاء الأرض العُماني',subtitle:'NASA POWER · مستكشف المناخ',home:'الرئيسية',explorer:'المستكشف',data:'البيانات',analysis:'التحليل',about:'عن المشروع',verify:'التحقق من NASA',eyebrow:'OMAN · FROM A NEW PERSPECTIVE',headlineOne:'منظور جديد',headlineTwo:'لمناخ سلطنة عُمان.',intro:'اكتشف البيانات التاريخية لدرجات الحرارة والرطوبة والهطول من NASA POWER عبر خرائط تفاعلية وتحليل مرئي ومعلومات علمية عن عُمان.',cards:['الخرائط التفاعلية','بيانات ناسا المناخية','تحليل الاتجاهات','مقارنة المواقع'],start:'ابدأ الاستكشاف',explore:'عرض سجلات البيانات',by:'مدعوم ببيانات NASA POWER',source:'بيانات مناخية شبكية تاريخية · وليست طقسًا مباشرًا',scroll:'مرر لمعرفة المزيد',hint:'اسحب الكرة لتدويرها · تعمل مفاتيح الأسهم أيضًا',value:'العلم بدل التخمين',explain:'تحافظ لوحة التحليل على مصادر البيانات وتتيح المقارنة بين المواقع وتوضح القيود العلمية.',method:'اعرض البيانات العلمية',provenance:'صور NASA Blue Marble · حدود عُمان من NCSI عند توفرها.',label:'فتح',menu:'فتح القائمة',close:'إغلاق القائمة'}
+ en:{brand:'Oman Earth Intelligence',subtitle:'NASA POWER · Climate Explorer',home:'Home',explorer:'Explorer',data:'Data',analysis:'Analysis',about:'About',verify:'Verify NASA Data',eyebrow:'OMAN · FROM A NEW PERSPECTIVE',headlineOne:"A new perspective",headlineTwo:"on Oman’s climate.",intro:'Explore the places you know. Discover the patterns you cannot see. Historical NASA POWER data, made clear.',cards:['Interactive Maps','NASA Climate Data','Trend Analysis','Location Comparison'],start:'Start Exploring',explore:'Explore Climate Data',by:'Powered by NASA POWER',source:'Historical gridded climate data · not live weather',scroll:'Scroll to learn more',hint:'Drag the globe to explore · Arrow keys also work',value:'SCIENCE, NOT GUESSWORK',journeyEyebrow:'EXPLORE → UNDERSTAND → VERIFY',journeyTitle:'Your curiosity. A scientific path.',journeyIntro:'Choose a place, follow its climate story, then inspect the evidence.',explain:'The interactive dashboard preserves source information, allows location-level comparisons and keeps scientific limitations visible.',method:'See the scientific data',provenance:'NASA Blue Marble imagery · geographic boundaries from Oman NCSI when available.',label:'Open',menu:'Open navigation',close:'Close navigation'},
+ ar:{brand:'ذكاء الأرض العُماني',subtitle:'NASA POWER · مستكشف المناخ',home:'الرئيسية',explorer:'المستكشف',data:'البيانات',analysis:'التحليل',about:'عن المشروع',verify:'التحقق من NASA',eyebrow:'عُمان · من منظور جديد',headlineOne:'منظور جديد',headlineTwo:'لمناخ سلطنة عُمان.',intro:'اكتشف البيانات التاريخية لدرجات الحرارة والرطوبة والهطول من NASA POWER عبر خرائط تفاعلية وتحليل مرئي ومعلومات علمية عن عُمان.',cards:['الخرائط التفاعلية','بيانات ناسا المناخية','تحليل الاتجاهات','مقارنة المواقع'],start:'ابدأ الاستكشاف',explore:'عرض سجلات البيانات',by:'مدعوم ببيانات NASA POWER',source:'بيانات مناخية شبكية تاريخية · وليست طقسًا مباشرًا',scroll:'مرر لمعرفة المزيد',hint:'اسحب الكرة لتدويرها · تعمل مفاتيح الأسهم أيضًا',value:'العلم بدل التخمين',journeyEyebrow:'استكشف ← افهم ← تحقّق',journeyTitle:'فضولك بداية الرحلة العلمية.',journeyIntro:'اختر مكاناً، تابع سجله المناخي، ثم افحص الدليل.',explain:'تحافظ لوحة التحليل على مصادر البيانات وتتيح المقارنة بين المواقع وتوضح القيود العلمية.',method:'اعرض البيانات العلمية',provenance:'صور NASA Blue Marble · حدود عُمان من NCSI عند توفرها.',label:'فتح',menu:'فتح القائمة',close:'إغلاق القائمة'}
 };
 const cards:[Destination,typeof MapPinned,string][]=[
  ['explorer',MapPinned,'01'],['quality',Layers3,'02'],['trends',BarChart3,'03'],['compare',GitCompareArrows,'04']
@@ -18,6 +20,17 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
  const t=strings[lang];const ar=lang==='ar';
  const [menuOpen,setMenuOpen]=useState(false),[launching,setLaunching]=useState(false),[focusSignal,setFocusSignal]=useState(0),[loadGlobe,setLoadGlobe]=useState(false);
  const [globeState,setGlobeState]=useState<'loading'|'ready'|'fallback'>('loading');
+ const [lowPower,setLowPower]=useState(true);
+ const reducedMotion=useReducedMotion();
+ useEffect(()=>{
+  const update=()=>{
+   const memory=(navigator as Navigator&{deviceMemory?:number}).deviceMemory;
+   setLowPower(window.matchMedia('(max-width: 520px)').matches||!Number.isFinite(memory)||memory!<=4);
+  };
+  update();
+  window.addEventListener('resize',update);
+  return()=>window.removeEventListener('resize',update);
+ },[]);
  const go=(target:Destination)=>{window.clearTimeout(launchTimer.current);setMenuOpen(false);setLaunching(false);onNavigate(target);};
  const launchTimer=useRef<number|undefined>(undefined);
  // The NASA Earth still is immediately visible; WebGL starts only after the first paint.
@@ -40,9 +53,13 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
   launchTimer.current=window.setTimeout(()=>go('explorer'),reduce?0:440);
  };
  const nav:[Destination,string][]=[['home',t.home],['explorer',t.explorer],['quality',t.data],['trends',t.analysis],['verify',t.verify],['about',t.about]];
- return <div className={`cinematic-home figma-home ${theme==='light'?'is-light':''} ${launching?'is-launching':''}`} dir={ar?'rtl':'ltr'}>
+ return <div className={`cinematic-home figma-home ${theme==='light'?'is-light':''} ${launching?'is-launching':''} ${lowPower?'is-low-power':''}`} dir={ar?'rtl':'ltr'}>
   <div className="cinematic-transition" aria-hidden="true"/>
-  <div className="cinematic-sky" aria-hidden="true"/>
+  <div className="cinematic-sky" aria-hidden="true">
+   <m.div className="cinematic-starfield" initial={false}
+    animate={reducedMotion===false&&!lowPower?{x:[0,-12,0],y:[0,-7,0]}:{x:0,y:0}}
+    transition={reducedMotion===false&&!lowPower?{duration:90,repeat:Infinity,ease:'linear'}:undefined}/>
+  </div>
   <div className="cinematic-horizon" aria-hidden="true"/>
   <header className="cinematic-topbar">
     <button className="cinematic-brand" onClick={()=>go('home')} type="button" aria-label={t.home}>
@@ -59,7 +76,7 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
     <div className="cinematic-top-actions">
       <button className="cinematic-command" type="button" onClick={onOpenCommand} aria-label={ar?'التنقل السريع':'Quick navigation'} title="Ctrl / ⌘ + K"><Search size={19}/><span>{ar?'بحث':'Explore'}</span></button>
       <button className="cinematic-theme" type="button" aria-label={theme==='dark'?(ar?'الوضع الفاتح':'Switch to light mode'):(ar?'الوضع الداكن':'Switch to dark mode')} onClick={onTheme}>{theme==='dark'?<Sun size={23}/>:<Moon size={23}/>}</button>
-      <div className="cinematic-language" aria-label="Language">
+      <div className="cinematic-language" aria-label={ar?'اللغة':'Language'}>
        <button type="button" className={lang==='en'?'selected':''} onClick={()=>lang!=='en'&&onLanguage()} aria-pressed={lang==='en'}>EN</button>
        <button type="button" className={lang==='ar'?'selected':''} onClick={()=>lang!=='ar'&&onLanguage()} aria-pressed={lang==='ar'}>AR</button>
       </div>
@@ -78,7 +95,8 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
       </div>
       <div className="cinematic-copy">
        <p className="cinematic-eyebrow"><span/>{t.eyebrow}</p>
-       <h1 id="cinematic-heading"><span>{t.headlineOne}</span><em>{t.headlineTwo}</em></h1>
+       <m.h1 id="cinematic-heading" initial={reducedMotion?false:{opacity:0,y:14}} animate={{opacity:1,y:0}}
+        transition={{duration:reducedMotion?0:.48,delay:reducedMotion?0:.1}}><span>{t.headlineOne}</span><em>{t.headlineTwo}</em></m.h1>
        <p className="cinematic-description">{t.intro}</p>
        <div className="cinematic-ctas">
         <button type="button" className="cinematic-primary" disabled={launching} onClick={launch} onPointerEnter={()=>{void import('./OmanMap');}} onFocus={()=>{void import('./OmanMap');}}><Play size={21} fill="currentColor"/><span>{launching?(ar?'الانتقال إلى عُمان…':'Entering Oman…'):t.start}</span><ArrowRight className="cinematic-arrow" size={24}/></button>
@@ -91,10 +109,13 @@ export default function PremiumHome({lang,theme,onLanguage,onTheme,onNavigate,on
     <div className="cinematic-scroll-indicator" aria-hidden="true"><span>{t.scroll}</span><ArrowDown size={18}/><ChevronDown size={18}/></div>
   </main>
   <section className="cinematic-next" aria-label={t.value}>
-    <div className="figma-journey"><p className="eyebrow">EXPLORE → UNDERSTAND → VERIFY</p><h2>{ar?'فضولك بداية الرحلة العلمية.':'Your curiosity. A scientific path.'}</h2><p>{ar?'اختر مكاناً، تابع سجله المناخي، ثم افحص الدليل.':'Choose a place, follow its climate story, then inspect the evidence.'}</p>       <div className="cinematic-features">
-        {cards.map(([dest,Icon,num],index)=><button key={dest} type="button" className="cinematic-feature" onClick={()=>go(dest)} aria-label={`${t.label}: ${t.cards[index]}`}>
+    <div className="figma-journey"><p className="eyebrow">{t.journeyEyebrow}</p><h2>{t.journeyTitle}</h2><p>{t.journeyIntro}</p>       <div className="cinematic-features">
+        {cards.map(([dest,Icon,num],index)=><m.button key={dest} type="button" className="cinematic-feature" onClick={()=>go(dest)} aria-label={`${t.label}: ${t.cards[index]}`}
+         initial={reducedMotion||lowPower?false:{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}}
+         transition={{duration:reducedMotion?0:.3,delay:reducedMotion?0:.14+index*.055}}
+         whileHover={reducedMotion||lowPower?undefined:{y:-4}} whileTap={reducedMotion||lowPower?undefined:{scale:.98}}>
          <Icon size={30} strokeWidth={1.8}/><strong>{t.cards[index]}</strong><span className="feature-no">{num}</span>
-        </button>)}
+        </m.button>)}
        </div>
 </div>
     <div className="cinematic-next-content"><p>{t.value}</p><h2>{t.by}</h2><span>{t.explain}</span><button onClick={()=>go('quality')}>{t.method}<ArrowRight size={17}/></button></div>
