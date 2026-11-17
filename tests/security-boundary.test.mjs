@@ -107,7 +107,7 @@ test('AI request has no tools or credentials, evidence is data, and output size 
  try{
   const AI={run:async(model,input,options)=>{captured={model,input,options};return {response:'Source-linked explanation'};}};
   const r=await worker.fetch(request('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ask)}),{AI,PRIVATE_TEST_SECRET:'DO_NOT_SERIALISE'},ctx);
-  assert.equal(r.status,200);assert.equal(captured.input.max_tokens,320);assert.equal(captured.input.messages.length,2);assert.equal(captured.options.rejectIfBusy,true);assert.equal(captured.input.tools,undefined);assert.doesNotMatch(JSON.stringify(captured),/DO_NOT_SERIALISE/);assert.ok(JSON.parse(captured.input.messages[1].content).evidence);assert.doesNotMatch(captured.input.messages[0].content,/28\.14/);
+  assert.equal(r.status,200);assert.equal(captured.input.max_completion_tokens,320);assert.equal(captured.input.messages.length,2);assert.equal(captured.options.rejectIfBusy,true);assert.equal(captured.input.tools,undefined);assert.doesNotMatch(JSON.stringify(captured),/DO_NOT_SERIALISE/);assert.ok(JSON.parse(captured.input.messages[1].content).evidence);assert.doesNotMatch(captured.input.messages[0].content,/28\.14/);
   const large=await worker.fetch(request('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ask)}),{AI:{run:async()=>({response:'x'.repeat(4097)})}},ctx);assert.equal(large.status,502);
  }finally{globalThis.fetch=previous;}
  await assert.rejects(runEvidenceAi({run:()=>new Promise(()=>{})},{},20),e=>e.code==='AI_TIMEOUT');
