@@ -112,9 +112,16 @@ export const verificationFetch=(url,options={})=>safeUpstream(url,{...options,ma
 export async function runEvidenceAi(binding,input,timeoutMs=15000){
   let timer;
   try{return await Promise.race([
-    binding.run('@cf/meta/llama-3.1-8b-instruct-fp8',input,{rejectIfBusy:true}),
+    binding.run('@cf/google/gemma-4-26b-a4b-it',input,{rejectIfBusy:true}),
     new Promise((_,reject)=>{timer=setTimeout(()=>reject(new SecurityError('AI_TIMEOUT',504)),timeoutMs);})
   ]);}finally{clearTimeout(timer);}
+}
+// Both legacy Workers AI and OpenAI-compatible chat completion shapes are supported.
+export function extractAiText(output){
+  const candidate=typeof output?.choices?.[0]?.message?.content==='string'
+    ? output.choices[0].message.content
+    : output?.response;
+  return typeof candidate==='string'?candidate.trim():'';
 }
 export function securityError(error){
   const status=error instanceof SecurityError?error.status:500;
